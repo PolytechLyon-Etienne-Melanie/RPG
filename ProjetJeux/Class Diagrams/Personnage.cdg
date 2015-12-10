@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="Personnage">
+  <ClassDiagramComponents>
+    <Class name="Personnage" package="" visibility="public" xPosition="419.0" yPosition="16.0">
+      <Fields>
+        <Field name="name" type="int" visibility="private"/>
+        <Field name="untitledField" type="Object" visibility="private"/>
+        <Field name="niveau" type="int" visibility="private"/>
+        <Field name="poidsMax" type="int" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="appliquerEffet" returnType="void" visibility="public"/>
+        <Method name="untitledMethod" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Controleur" package="" visibility="public" xPosition="104.0" yPosition="213.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="agir" returnType="Action" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="ControleurIA" package="" visibility="public" xPosition="-17.0" yPosition="354.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="ControleurHumain" package="" visibility="public" xPosition="224.0" yPosition="354.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Enum name="Caracteristique" package="" visibility="public" xPosition="746.0" yPosition="167.0">
+      <Literals>
+        <Literal name="FORCE"/>
+        <Literal name="DEXTERITE"/>
+        <Literal name="SANTE"/>
+        <Literal name="DEFENSE"/>
+      </Literals>
+    </Enum>
+    <Interface name="Capacite" package="" visibility="public" xPosition="67.0" yPosition="470.0">
+      <Methods>
+        <Method name="probaReussite" returnType="src" visibility="public">
+          <Argument type="src" name="Personnage"/>
+        </Method>
+      </Methods>
+    </Interface>
+    <Class name="Attaque" package="" visibility="public" xPosition="-91.0" yPosition="631.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Parade" package="" visibility="public" xPosition="104.0" yPosition="631.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Soin" package="" visibility="public" xPosition="299.0" yPosition="631.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <ImplementsRelation name="" source="Attaque" target="Capacite"/>
+    <HasRelation name="Possède" source="Personnage" target="Caracteristique" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
+    <ImplementsRelation name="" source="Parade" target="Capacite"/>
+    <HasRelation name="Controle" source="Controleur" target="Personnage" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <IsRelation name="" source="ControleurHumain" target="Controleur"/>
+    <ImplementsRelation name="" source="Soin" target="Capacite"/>
+    <IsRelation name="" source="ControleurIA" target="Controleur"/>
+  </ClassDiagramRelations>
+</ClassDiagram>
