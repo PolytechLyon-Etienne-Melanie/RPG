@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="GameBase">
+  <ClassDiagramComponents>
+    <Class name="Game" package="" visibility="public" xPosition="452.0" yPosition="267.0">
+      <Fields>
+        <Field name="story" type="StoryManager" visibility="private"/>
+        <Field name="currentMenu" type="Menu" visibility="private"/>
+        <Field name="console" type="ConsoleManager" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="StoryManager" package="" visibility="public" xPosition="788.0" yPosition="267.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="ConsoleManager" package="" visibility="public" xPosition="445.0" yPosition="484.0">
+      <Fields>
+        <Field name="commands" type="List&lt;Command&gt;" visibility="private"/>
+        <Field name="texts" type="List&lt;Text&gt;" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="addCommand" returnType="void" visibility="public">
+          <Argument type="Command" name="c"/>
+        </Method>
+        <Method name="deleteCommand" returnType="void" visibility="public">
+          <Argument type="Command" name="c"/>
+        </Method>
+        <Method name="addText" returnType="void" visibility="public">
+          <Argument type="Text" name="t"/>
+        </Method>
+        <Method name="deleteText" returnType="void" visibility="public">
+          <Argument type="Text" name="t"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Menu" package="" visibility="public" xPosition="86.0" yPosition="238.0">
+      <Fields>
+        <Field name="game" type="Game" visibility="private"/>
+        <Field name="commands" type="List&lt;Command&gt;" visibility="private"/>
+        <Field name="title" type="Text" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Interface name="CommandSender" package="" visibility="public" xPosition="426.0" yPosition="52.0">
+      <Methods>
+        <Method name="addCommand" returnType="void" visibility="public">
+          <Argument type="Command" name="c"/>
+        </Method>
+        <Method name="deleteCommand" returnType="void" visibility="public">
+          <Argument type="Command" name="c"/>
+        </Method>
+        <Method name="addText" returnType="void" visibility="public">
+          <Argument type="Text" name="t"/>
+        </Method>
+        <Method name="deleteText" returnType="void" visibility="public">
+          <Argument type="Text" name="t"/>
+        </Method>
+      </Methods>
+    </Interface>
+    <Class name="Command" package="" visibility="public" xPosition="365.0" yPosition="756.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Text" package="" visibility="public" xPosition="616.0" yPosition="756.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Dialogue" package="" visibility="public" xPosition="847.0" yPosition="756.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Interface name="EventObserver" package="" visibility="public" xPosition="103.0" yPosition="484.0">
+      <Methods/>
+    </Interface>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <HasRelation name="currentMenu" source="Game" target="Menu" type="Composition" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="Dialogue" target="Text"/>
+    <HasRelation name="desc" source="Command" target="Text" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="Command" target="Event"/>
+    <HasRelation name="console" source="Game" target="ConsoleManager" type="Composition" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="Menu" target="CommandSender"/>
+    <HasRelation name="eventobserver" source="Menu" target="EventObserver" type="Default" sourceCardinality="0..1" targetCardinality="0..*" collectionType="List"/>
+    <HasRelation name="commands" source="ConsoleManager" target="Command" type="Default" sourceCardinality="0..1" targetCardinality="0..*" collectionType="List"/>
+    <HasRelation name="texts" source="ConsoleManager" target="Text" type="Default" sourceCardinality="0..1" targetCardinality="0..*" collectionType="List"/>
+    <HasRelation name="story" source="Game" target="StoryManager" type="Composition" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="StoryManager" target="CommandSender"/>
+  </ClassDiagramRelations>
+</ClassDiagram>
