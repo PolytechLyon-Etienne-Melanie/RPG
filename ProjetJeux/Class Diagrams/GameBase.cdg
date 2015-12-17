@@ -23,16 +23,16 @@
       </Fields>
       <Constructors/>
       <Methods>
-        <Method name="addCommand" returnType="void" visibility="public">
+        <Method name="addCommand" returnType="Command" visibility="public">
           <Argument type="Command" name="c"/>
         </Method>
-        <Method name="deleteCommand" returnType="void" visibility="public">
+        <Method name="deleteCommand" returnType="Command" visibility="public">
           <Argument type="Command" name="c"/>
         </Method>
-        <Method name="addText" returnType="void" visibility="public">
+        <Method name="addText" returnType="Text" visibility="public">
           <Argument type="Text" name="t"/>
         </Method>
-        <Method name="deleteText" returnType="void" visibility="public">
+        <Method name="deleteText" returnType="Text" visibility="public">
           <Argument type="Text" name="t"/>
         </Method>
       </Methods>
@@ -48,16 +48,16 @@
     </Class>
     <Interface name="CommandSender" package="" visibility="public" xPosition="426.0" yPosition="52.0">
       <Methods>
-        <Method name="addCommand" returnType="void" visibility="public">
+        <Method name="addCommand" returnType="Command" visibility="public">
           <Argument type="Command" name="c"/>
         </Method>
-        <Method name="deleteCommand" returnType="void" visibility="public">
+        <Method name="deleteCommand" returnType="Command" visibility="public">
           <Argument type="Command" name="c"/>
         </Method>
-        <Method name="addText" returnType="void" visibility="public">
+        <Method name="addText" returnType="Text" visibility="public">
           <Argument type="Text" name="t"/>
         </Method>
-        <Method name="deleteText" returnType="void" visibility="public">
+        <Method name="deleteText" returnType="Text" visibility="public">
           <Argument type="Text" name="t"/>
         </Method>
       </Methods>
@@ -80,11 +80,17 @@
     <Interface name="EventObserver" package="" visibility="public" xPosition="103.0" yPosition="484.0">
       <Methods/>
     </Interface>
+    <Class name="Event" package="" visibility="public" xPosition="365.0" yPosition="889.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
   </ClassDiagramComponents>
   <ClassDiagramRelations>
     <HasRelation name="currentMenu" source="Game" target="Menu" type="Composition" sourceCardinality="0..1" targetCardinality="1..1"/>
     <IsRelation name="is" source="Dialogue" target="Text"/>
     <HasRelation name="desc" source="Command" target="Text" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="Command" target="Event"/>
     <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="Command" target="Event"/>
     <HasRelation name="console" source="Game" target="ConsoleManager" type="Composition" sourceCardinality="0..1" targetCardinality="1..1"/>
     <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="Menu" target="CommandSender"/>
