@@ -27,16 +27,22 @@
         </Method>
         <Method name="calculSanteMax" returnType="void" visibility="public"/>
         <Method name="initCaracteristique" returnType="void" visibility="public"/>
+        <Method name="oterArmure" returnType="Armure" visibility="public">
+          <Argument type="Armure" name="armure"/>
+        </Method>
+        <Method name="enleverArme" returnType="Arme" visibility="public">
+          <Argument type="Arme" name="arme"/>
+        </Method>
       </Methods>
     </Class>
-    <Class name="Controleur" package="" visibility="public" xPosition="393.0" yPosition="213.0">
+    <Class name="Controleur" package="" visibility="public" xPosition="393.0" yPosition="232.0">
       <Fields/>
       <Constructors/>
       <Methods>
         <Method name="agir" returnType="Action" visibility="public"/>
       </Methods>
     </Class>
-    <Class name="ControleurIA" package="" visibility="public" xPosition="121.0" yPosition="49.0">
+    <Class name="ControleurIA" package="" visibility="public" xPosition="104.0" yPosition="78.0">
       <Fields>
         <Field name="nom" type="string" visibility="private"/>
       </Fields>
@@ -50,19 +56,19 @@
       <Constructors/>
       <Methods/>
     </Class>
-    <Class name="Attaque" package="" visibility="public" xPosition="13.0" yPosition="612.0">
+    <Class name="Attaque" package="" visibility="public" xPosition="104.0" yPosition="420.0">
       <Fields/>
       <Constructors/>
       <Methods/>
     </Class>
-    <Class name="Soin" package="" visibility="public" xPosition="410.0" yPosition="612.0">
+    <Class name="Soin" package="" visibility="public" xPosition="104.0" yPosition="663.0">
       <Fields/>
       <Constructors/>
       <Methods>
         <Method name="rajoutVIe" returnType="void" visibility="public"/>
       </Methods>
     </Class>
-    <Interface name="Capacite" package="" visibility="public" xPosition="262.0" yPosition="385.0">
+    <Interface name="Capacite" package="" visibility="public" xPosition="393.0" yPosition="442.0">
       <Methods>
         <Method name="probaReussite" returnType="src" visibility="public">
           <Argument type="src" name="Personnage"/>
@@ -73,7 +79,7 @@
         </Method>
       </Methods>
     </Interface>
-    <Enum name="Caracteristique" package="" visibility="public" xPosition="1289.0" yPosition="16.0">
+    <Enum name="Caracteristique" package="" visibility="public" xPosition="1261.0" yPosition="32.0">
       <Literals>
         <Literal name="FORCE"/>
         <Literal name="DEXTERITE"/>
@@ -81,14 +87,14 @@
         <Literal name="DEFENSE"/>
       </Literals>
     </Enum>
-    <Class name="Arme" package="" visibility="public" xPosition="1235.0" yPosition="236.0">
+    <Class name="Arme" package="" visibility="public" xPosition="1348.0" yPosition="265.0">
       <Fields>
         <Field name="degat" type="float" visibility="private"/>
         <Field name="maniabilite" type="float" visibility="private"/>
       </Fields>
       <Constructors/>
       <Methods>
-        <Method name="Arme" returnType="float" visibility="public">
+        <Method name="Arme" returnType="void" visibility="public">
           <Argument type="string" name="nom"/>
           <Argument type="float" name="degat"/>
           <Argument type="float" name="maniabilite"/>
@@ -96,20 +102,20 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="Armure" package="" visibility="public" xPosition="789.0" yPosition="593.0">
+    <Class name="Armure" package="" visibility="public" xPosition="808.0" yPosition="681.0">
       <Fields>
         <Field name="resistance" type="float" visibility="private"/>
       </Fields>
       <Constructors/>
       <Methods>
-        <Method name="ajoutArmure" returnType="float" visibility="public">
+        <Method name="ajoutArmure" returnType="void" visibility="public">
           <Argument type="string" name="nom"/>
           <Argument type="float" name="resistance"/>
           <Argument type="float" name="poids"/>
         </Method>
       </Methods>
     </Class>
-    <Class name="Item" package="" visibility="public" xPosition="1289.0" yPosition="552.0">
+    <Class name="Item" package="" visibility="public" xPosition="1289.0" yPosition="562.0">
       <Fields>
         <Field name="nom" type="String" visibility="private"/>
         <Field name="poids" type="float" visibility="private"/>
@@ -128,17 +134,17 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="Consommable" package="" visibility="public" xPosition="1051.0" yPosition="842.0">
+    <Class name="Consommable" package="" visibility="public" xPosition="1311.0" yPosition="889.0">
       <Fields/>
       <Constructors/>
       <Methods>
-        <Method name="Consommable" returnType="float" visibility="public">
+        <Method name="Consommable" returnType="void" visibility="public">
           <Argument type="string" name="name"/>
           <Argument type="float" name="poids"/>
         </Method>
       </Methods>
     </Class>
-    <Class name="Action" package="" visibility="public" xPosition="631.0" yPosition="833.0">
+    <Class name="Action" package="" visibility="public" xPosition="562.0" yPosition="889.0">
       <Fields>
         <Field name="cible" type="Personnage" visibility="private"/>
         <Field name="src" type="Personnage" visibility="private"/>
@@ -146,7 +152,7 @@
       <Constructors/>
       <Methods/>
     </Class>
-    <Class name="Effet" package="" visibility="public" xPosition="1736.0" yPosition="443.0">
+    <Class name="Effet" package="" visibility="public" xPosition="1723.0" yPosition="562.0">
       <Fields>
         <Field name="c" type="Caracteristique" visibility="private"/>
         <Field name="valeur" type="int" visibility="private"/>
@@ -155,7 +161,7 @@
       <Constructors/>
       <Methods/>
     </Class>
-    <Class name="Equipe" package="" visibility="public" xPosition="589.0" yPosition="21.0">
+    <Class name="Equipe" package="" visibility="public" xPosition="551.0" yPosition="21.0">
       <Fields>
         <Field name="name" type="string" visibility="private"/>
         <Field name="nbMaxPerso" type="int" visibility="private"/>
@@ -170,7 +176,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="Parade" package="" visibility="public" xPosition="218.0" yPosition="612.0">
+    <Class name="Parade" package="" visibility="public" xPosition="104.0" yPosition="552.0">
       <Fields/>
       <Constructors/>
       <Methods/>
