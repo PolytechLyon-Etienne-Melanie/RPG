@@ -2,37 +2,78 @@
 
 <ClassDiagram name="Personnage">
   <ClassDiagramComponents>
-    <Class name="Personnage" package="" visibility="public" xPosition="419.0" yPosition="16.0">
+    <Class name="Personnage" package="" visibility="public" xPosition="858.0" yPosition="213.0">
       <Fields>
-        <Field name="name" type="int" visibility="private"/>
-        <Field name="untitledField" type="Object" visibility="private"/>
+        <Field name="name" type="string" visibility="private"/>
         <Field name="niveau" type="int" visibility="private"/>
         <Field name="poidsMax" type="int" visibility="private"/>
+        <Field name="santeMax" type="int" visibility="private"/>
       </Fields>
       <Constructors/>
       <Methods>
         <Method name="appliquerEffet" returnType="void" visibility="public"/>
-        <Method name="untitledMethod" returnType="void" visibility="public"/>
+        <Method name="equipeArme" returnType="Arme" visibility="public">
+          <Argument type="Arme" name="arme"/>
+        </Method>
+        <Method name="equipeArmure" returnType="Armure" visibility="public">
+          <Argument type="Armure" name="armure"/>
+        </Method>
+        <Method name="getPoidsInventaire" returnType="int" visibility="public"/>
+        <Method name="retirerAventaire" returnType="Item" visibility="public">
+          <Argument type="Item" name="obj"/>
+        </Method>
+        <Method name="ajouterAvantaire" returnType="Item" visibility="public">
+          <Argument type="Item" name="obj"/>
+        </Method>
+        <Method name="calculSanteMax" returnType="void" visibility="public"/>
+        <Method name="initCaracteristique" returnType="void" visibility="public"/>
       </Methods>
     </Class>
-    <Class name="Controleur" package="" visibility="public" xPosition="104.0" yPosition="213.0">
+    <Class name="Controleur" package="" visibility="public" xPosition="393.0" yPosition="213.0">
       <Fields/>
       <Constructors/>
       <Methods>
         <Method name="agir" returnType="Action" visibility="public"/>
       </Methods>
     </Class>
-    <Class name="ControleurIA" package="" visibility="public" xPosition="-17.0" yPosition="354.0">
+    <Class name="ControleurIA" package="" visibility="public" xPosition="121.0" yPosition="49.0">
+      <Fields>
+        <Field name="nom" type="string" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="ControleurHumain" package="" visibility="public" xPosition="104.0" yPosition="232.0">
+      <Fields>
+        <Field name="nom" type="string" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Attaque" package="" visibility="public" xPosition="13.0" yPosition="612.0">
       <Fields/>
       <Constructors/>
       <Methods/>
     </Class>
-    <Class name="ControleurHumain" package="" visibility="public" xPosition="224.0" yPosition="354.0">
+    <Class name="Soin" package="" visibility="public" xPosition="410.0" yPosition="612.0">
       <Fields/>
       <Constructors/>
-      <Methods/>
+      <Methods>
+        <Method name="rajoutVIe" returnType="void" visibility="public"/>
+      </Methods>
     </Class>
-    <Enum name="Caracteristique" package="" visibility="public" xPosition="746.0" yPosition="167.0">
+    <Interface name="Capacite" package="" visibility="public" xPosition="262.0" yPosition="385.0">
+      <Methods>
+        <Method name="probaReussite" returnType="src" visibility="public">
+          <Argument type="src" name="Personnage"/>
+        </Method>
+        <Method name="effet" returnType="Personnage" visibility="public">
+          <Argument type="Personnage" name="cible"/>
+          <Argument type="Personnage" name="src"/>
+        </Method>
+      </Methods>
+    </Interface>
+    <Enum name="Caracteristique" package="" visibility="public" xPosition="1289.0" yPosition="16.0">
       <Literals>
         <Literal name="FORCE"/>
         <Literal name="DEXTERITE"/>
@@ -40,36 +81,119 @@
         <Literal name="DEFENSE"/>
       </Literals>
     </Enum>
-    <Interface name="Capacite" package="" visibility="public" xPosition="67.0" yPosition="470.0">
+    <Class name="Arme" package="" visibility="public" xPosition="1235.0" yPosition="236.0">
+      <Fields>
+        <Field name="degat" type="float" visibility="private"/>
+        <Field name="maniabilite" type="float" visibility="private"/>
+      </Fields>
+      <Constructors/>
       <Methods>
-        <Method name="probaReussite" returnType="src" visibility="public">
-          <Argument type="src" name="Personnage"/>
+        <Method name="Arme" returnType="float" visibility="public">
+          <Argument type="string" name="nom"/>
+          <Argument type="float" name="degat"/>
+          <Argument type="float" name="maniabilite"/>
+          <Argument type="float" name="poids"/>
         </Method>
       </Methods>
-    </Interface>
-    <Class name="Attaque" package="" visibility="public" xPosition="-91.0" yPosition="631.0">
+    </Class>
+    <Class name="Armure" package="" visibility="public" xPosition="789.0" yPosition="593.0">
+      <Fields>
+        <Field name="resistance" type="float" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="ajoutArmure" returnType="float" visibility="public">
+          <Argument type="string" name="nom"/>
+          <Argument type="float" name="resistance"/>
+          <Argument type="float" name="poids"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Item" package="" visibility="public" xPosition="1289.0" yPosition="552.0">
+      <Fields>
+        <Field name="nom" type="String" visibility="private"/>
+        <Field name="poids" type="float" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="Item" returnType="float" visibility="public">
+          <Argument type="string" name="name"/>
+          <Argument type="float" name="poids"/>
+        </Method>
+        <Method name="getValeurEffet" returnType="Caracteristique" visibility="public">
+          <Argument type="Caracteristique" name="caract"/>
+        </Method>
+        <Method name="ajoutEffet" returnType="Effet" visibility="public">
+          <Argument type="Effet" name="effect"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Consommable" package="" visibility="public" xPosition="1051.0" yPosition="842.0">
       <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="Consommable" returnType="float" visibility="public">
+          <Argument type="string" name="name"/>
+          <Argument type="float" name="poids"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Action" package="" visibility="public" xPosition="631.0" yPosition="833.0">
+      <Fields>
+        <Field name="cible" type="Personnage" visibility="private"/>
+        <Field name="src" type="Personnage" visibility="private"/>
+      </Fields>
       <Constructors/>
       <Methods/>
     </Class>
-    <Class name="Parade" package="" visibility="public" xPosition="104.0" yPosition="631.0">
-      <Fields/>
+    <Class name="Effet" package="" visibility="public" xPosition="1736.0" yPosition="443.0">
+      <Fields>
+        <Field name="c" type="Caracteristique" visibility="private"/>
+        <Field name="valeur" type="int" visibility="private"/>
+        <Field name="permanent" type="int" visibility="private"/>
+      </Fields>
       <Constructors/>
       <Methods/>
     </Class>
-    <Class name="Soin" package="" visibility="public" xPosition="299.0" yPosition="631.0">
+    <Class name="Equipe" package="" visibility="public" xPosition="589.0" yPosition="21.0">
+      <Fields>
+        <Field name="name" type="string" visibility="private"/>
+        <Field name="nbMaxPerso" type="int" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="ajouterPerso" returnType="Personnage" visibility="public">
+          <Argument type="Personnage" name="perso"/>
+        </Method>
+        <Method name="retirerPerso" returnType="Personnage" visibility="public">
+          <Argument type="Personnage" name="perso"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Parade" package="" visibility="public" xPosition="218.0" yPosition="612.0">
       <Fields/>
       <Constructors/>
       <Methods/>
     </Class>
   </ClassDiagramComponents>
   <ClassDiagramRelations>
-    <ImplementsRelation name="" source="Attaque" target="Capacite"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="Parade" target="Capacite"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="Soin" target="Capacite"/>
+    <HasRelation name="entraine" source="Item" target="Effet" type="Default" sourceCardinality="0..1" targetCardinality="0..*" collectionType="List"/>
+    <HasRelation name="fait intervenir" source="Action" target="Consommable" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="a " source="Personnage" target="Item" type="Default" sourceCardinality="0..1" targetCardinality="0..*" collectionType="List"/>
+    <HasRelation name="dépend " source="Action" target="Capacite" type="Default" sourceCardinality="0..1" targetCardinality="0..*" collectionType="List"/>
+    <HasRelation name="porte" source="Personnage" target="Arme" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="est composée de" source="Equipe" target="Personnage" type="Composition" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
     <HasRelation name="Possède" source="Personnage" target="Caracteristique" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
-    <ImplementsRelation name="" source="Parade" target="Capacite"/>
+    <HasRelation name="possède" source="Personnage" target="Capacite" type="Default" sourceCardinality="0..1" targetCardinality="0..*" collectionType="List"/>
+    <IsRelation name="is" source="ControleurIA" target="Controleur"/>
+    <IsRelation name="is" source="ControleurHumain" target="Controleur"/>
+    <IsRelation name="is" source="Arme" target="Item"/>
+    <IsRelation name="is" source="Consommable" target="Item"/>
+    <IsRelation name="is" source="Armure" target="Item"/>
     <HasRelation name="Controle" source="Controleur" target="Personnage" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
-    <IsRelation name="" source="ControleurHumain" target="Controleur"/>
-    <ImplementsRelation name="" source="Soin" target="Capacite"/>
-    <IsRelation name="" source="ControleurIA" target="Controleur"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="Attaque" target="Capacite"/>
+    <HasRelation name="porte" source="Personnage" target="Armure" type="Default" sourceCardinality="0..1" targetCardinality="0..*" collectionType="List"/>
   </ClassDiagramRelations>
 </ClassDiagram>
