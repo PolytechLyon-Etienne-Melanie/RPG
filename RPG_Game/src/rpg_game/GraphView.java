@@ -40,7 +40,7 @@ public class GraphView
         
         g = new DirectedSparseMultigraph<MyNode, MyLink>();
         // Create some MyNode objects to use as vertices
-        /*n1 = new MyNode(); 
+        n1 = new MyNode(); 
         n2 = new MyNode(); 
         n3 = new MyNode();
         n4 = new MyNode(); 
@@ -54,7 +54,7 @@ public class GraphView
         g.addEdge(new MyLink(2.0, 48), n4, n2); // In a directed graph the
         g.addEdge(new MyLink(2.0, 48), n3, n1); // first node is the source
         g.addEdge(new MyLink(10.0, 48), n2, n5);// and the second the destination
-        */
+        
         capTransformer =
         new Transformer<MyLink, Double>(){
          public Double transform(MyLink link) {

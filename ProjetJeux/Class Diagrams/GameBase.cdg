@@ -2,24 +2,50 @@
 
 <ClassDiagram name="GameBase">
   <ClassDiagramComponents>
-    <Class name="Game" package="" visibility="public" xPosition="452.0" yPosition="267.0">
+    <Class name="Game" package="" visibility="public" isAbstract="true" xPosition="460.0" yPosition="240.0">
       <Fields>
         <Field name="story" type="StoryManager" visibility="private"/>
         <Field name="currentMenu" type="Menu" visibility="private"/>
         <Field name="console" type="ConsoleManager" visibility="private"/>
       </Fields>
       <Constructors/>
-      <Methods/>
+      <Methods>
+        <Method name="initGame" returnType="void" visibility="public"/>
+        <Method name="startGame" returnType="void" visibility="public"/>
+      </Methods>
     </Class>
-    <Class name="StoryManager" package="" visibility="public" xPosition="820.0" yPosition="238.0">
-      <Fields/>
-      <Constructors/>
-      <Methods/>
-    </Class>
-    <Class name="ConsoleManager" package="" visibility="public" xPosition="416.0" yPosition="480.0">
+    <Class name="StoryManager" package="" visibility="public" xPosition="796.0" yPosition="162.0">
       <Fields>
-        <Field name="commands" type="List&lt;Command&gt;" visibility="private"/>
-        <Field name="texts" type="List&lt;Text&gt;" visibility="private"/>
+        <Field name="graph" type="DirectedGraph" visibility="private"/>
+        <Field name="game" type="Game" visibility="private"/>
+        <Field name="event" type="StoryEvent" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="initStory" returnType="void" visibility="public"/>
+        <Method name="startStory" returnType="void" visibility="public"/>
+        <Method name="initStoryEvent" returnType="void" visibility="public"/>
+        <Method name="setStoryEvent" returnType="Node" visibility="public">
+          <Argument type="Node" name="n"/>
+        </Method>
+        <Method name="getNextStoryEvents" returnType="ArrayList&lt;StoryEvent&gt;" visibility="public"/>
+        <Method name="generateObserver" returnType="EventObserver" visibility="public">
+          <Argument type="StoryEvent" name="s"/>
+          <Argument type="StoryLink" name="l"/>
+        </Method>
+        <Method name="generateEndChoice" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="ConsoleManager" package="" visibility="public" xPosition="416.0" yPosition="488.0">
+      <Fields>
+        <Field name="commands" type="ArrayList&lt;Command&gt;" visibility="private"/>
+        <Field name="texts" type="ArrayList&lt;Text&gt;" visibility="private"/>
+        <Field name="writer" type="ConsoleWriter" visibility="private"/>
+        <Field name="reader" type="ConsoleReader" visibility="private"/>
+        <Field name="game" type="Game" visibility="private"/>
+        <Field name="onMainMenu" type="boolean" visibility="private"/>
+        <Field name="state" type="State" visibility="private"/>
+        <Field name="State" type="Enum" visibility="private"/>
       </Fields>
       <Constructors/>
       <Methods>
@@ -38,6 +64,10 @@
         <Method name="onCommand" returnType="String" visibility="public">
           <Argument type="String" name="com"/>
         </Method>
+        <Method name="executeCommand" returnType="void" visibility="public">
+          <Argument type="Command" name="com"/>
+        </Method>
+        <Method name="onWriterEnd" returnType="void" visibility="public"/>
       </Methods>
     </Class>
     <Class name="Menu" package="" visibility="public" xPosition="86.0" yPosition="238.0">
@@ -49,22 +79,33 @@
       <Constructors/>
       <Methods/>
     </Class>
-    <Class name="Command" package="" visibility="public" xPosition="365.0" yPosition="756.0">
-      <Fields/>
+    <Class name="Command" package="" visibility="public" xPosition="331.0" yPosition="903.0">
+      <Fields>
+        <Field name="desc" type="Text" visibility="private"/>
+        <Field name="com" type="String" visibility="private"/>
+      </Fields>
       <Constructors/>
       <Methods/>
     </Class>
-    <Class name="Text" package="" visibility="public" xPosition="616.0" yPosition="756.0">
-      <Fields/>
+    <Class name="Text" package="" visibility="public" xPosition="550.0" yPosition="903.0">
+      <Fields>
+        <Field name="text" type="String" visibility="private"/>
+      </Fields>
       <Constructors/>
-      <Methods/>
+      <Methods>
+        <Method name="getLines" returnType="ArrayList&lt;String&gt;" visibility="public"/>
+      </Methods>
     </Class>
-    <Class name="Dialogue" package="" visibility="public" xPosition="847.0" yPosition="756.0">
-      <Fields/>
+    <Class name="Dialogue" package="" visibility="public" xPosition="796.0" yPosition="903.0">
+      <Fields>
+        <Field name="dialogue" type="ArrayList&lt;String&gt;" visibility="private"/>
+      </Fields>
       <Constructors/>
-      <Methods/>
+      <Methods>
+        <Method name="getLines" returnType="ArrayList&lt;String&gt;" visibility="public"/>
+      </Methods>
     </Class>
-    <Class name="ConsoleEvent" package="" visibility="public" xPosition="103.0" yPosition="718.0">
+    <Class name="ConsoleEvent" package="" visibility="public" isAbstract="true" xPosition="103.0" yPosition="718.0">
       <Fields/>
       <Constructors/>
       <Methods>
@@ -72,32 +113,68 @@
         <Method name="onDone" returnType="void" visibility="public"/>
       </Methods>
     </Class>
-    <Class name="Personnage" package="" visibility="public" xPosition="774.0" yPosition="407.0">
+    <Class name="Personnage" package="" visibility="public" xPosition="701.0" yPosition="449.0">
       <Fields/>
       <Constructors/>
       <Methods/>
     </Class>
-    <Class name="StoryEvent" package="" visibility="public" xPosition="1056.0" yPosition="296.0">
+    <Class name="StoryEvent" package="" visibility="public" xPosition="1167.0" yPosition="307.0">
+      <Fields>
+        <Field name="events" type="ArrayList&lt;Event&gt;" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="DirectedGraph" package="" visibility="public" xPosition="1026.0" yPosition="44.0">
       <Fields/>
       <Constructors/>
       <Methods/>
     </Class>
-    <Class name="DirectedGraph" package="" visibility="public" xPosition="820.0" yPosition="85.0">
+    <Class name="Node" package="" visibility="public" isAbstract="true" xPosition="1263.0" yPosition="162.0">
       <Fields/>
       <Constructors/>
       <Methods/>
     </Class>
-    <Class name="Node" package="" visibility="public" xPosition="1056.0" yPosition="155.0">
+    <Class name="Edge" package="" visibility="public" isAbstract="true" xPosition="1263.0" yPosition="25.0">
       <Fields/>
       <Constructors/>
       <Methods/>
     </Class>
-    <Class name="Edge" package="" visibility="public" xPosition="1056.0" yPosition="34.0">
-      <Fields/>
+    <Class name="ConsoleWriter" package="" visibility="public" xPosition="758.0" yPosition="544.0">
+      <Fields>
+        <Field name="cons" type="Console" visibility="private"/>
+        <Field name="manager" type="ConsoleManager" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="writeLine" returnType="String" visibility="public">
+          <Argument type="String" name="l"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="ConsoleReader" package="" visibility="public" xPosition="758.0" yPosition="704.0">
+      <Fields>
+        <Field name="cons" type="Console" visibility="private"/>
+        <Field name="manager" type="ConsoleManager" visibility="private"/>
+      </Fields>
       <Constructors/>
       <Methods/>
     </Class>
-    <Interface name="CommandSender" package="" visibility="public" xPosition="426.0" yPosition="52.0">
+    <Class name="EventDialogue" package="" visibility="public" xPosition="1286.0" yPosition="430.0">
+      <Fields>
+        <Field name="dialogue" type="String" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="EventCombat" package="" visibility="public" xPosition="1484.0" yPosition="430.0">
+      <Fields>
+        <Field name="monsters" type="List" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Interface name="CommandSender" package="" visibility="public" xPosition="426.0" yPosition="34.0">
       <Methods>
         <Method name="addCommand" returnType="Command" visibility="public">
           <Argument type="Command" name="c"/>
@@ -114,46 +191,46 @@
       </Methods>
     </Interface>
     <Interface name="EventObserver" package="" visibility="public" xPosition="103.0" yPosition="445.0">
+      <Methods>
+        <Method name="onUpdate" returnType="void" visibility="public"/>
+        <Method name="onDone" returnType="void" visibility="public"/>
+      </Methods>
+    </Interface>
+    <Interface name="Event" package="" visibility="public" xPosition="1392.0" yPosition="322.0">
       <Methods/>
     </Interface>
-    <Class name="ConsoleWriter" package="" visibility="public" xPosition="746.0" yPosition="501.0">
+    <Class name="StoryLink" package="" visibility="public" xPosition="1535.0" yPosition="25.0">
       <Fields>
-        <Field name="cons" type="Console" visibility="private"/>
-      </Fields>
-      <Constructors/>
-      <Methods>
-        <Method name="writeLine" returnType="String" visibility="public">
-          <Argument type="String" name="l"/>
-        </Method>
-      </Methods>
-    </Class>
-    <Class name="ConsoleReader" package="" visibility="public" xPosition="746.0" yPosition="635.0">
-      <Fields>
-        <Field name="cons" type="Console" visibility="private"/>
+        <Field name="link" type="String" visibility="private"/>
       </Fields>
       <Constructors/>
       <Methods/>
     </Class>
   </ClassDiagramComponents>
   <ClassDiagramRelations>
-    <HasRelation name="commands" source="ConsoleManager" target="Command" type="Default" sourceCardinality="0..1" targetCardinality="0..*" collectionType="List"/>
-    <IsRelation name="is" source="Dialogue" target="Text"/>
-    <HasRelation name="observes" source="ConsoleEvent" target="EventObserver" type="Default" sourceCardinality="0..1" targetCardinality="0..*" collectionType="List"/>
-    <HasRelation name="texts" source="ConsoleManager" target="Text" type="Default" sourceCardinality="0..1" targetCardinality="0..*" collectionType="List"/>
-    <HasRelation name="desc" source="Command" target="Text" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
-    <HasRelation name="nodes" source="DirectedGraph" target="Node" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
-    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="StoryManager" target="CommandSender"/>
-    <IsRelation name="is" source="StoryEvent" target="Node"/>
-    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="Menu" target="CommandSender"/>
-    <HasRelation name="writer" source="ConsoleManager" target="ConsoleWriter" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
-    <HasRelation name="edge" source="DirectedGraph" target="Edge" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
-    <HasRelation name="graph" source="StoryManager" target="DirectedGraph" type="Composition" sourceCardinality="0..1" targetCardinality="1..1"/>
-    <HasRelation name="currentMenu" source="Game" target="Menu" type="Composition" sourceCardinality="0..1" targetCardinality="1..1"/>
-    <HasRelation name="console" source="Game" target="ConsoleManager" type="Composition" sourceCardinality="0..1" targetCardinality="1..1"/>
-    <HasRelation name="story" source="Game" target="StoryManager" type="Composition" sourceCardinality="0..1" targetCardinality="1..1"/>
-    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="Command" target="ConsoleEvent"/>
     <HasRelation name="reader" source="ConsoleManager" target="ConsoleReader" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
-    <HasRelation name="eventobserver" source="Menu" target="EventObserver" type="Default" sourceCardinality="0..1" targetCardinality="0..*" collectionType="List"/>
+    <HasRelation name="events" source="StoryEvent" target="Event" type="Default" sourceCardinality="0..1" targetCardinality="0..*" collectionType="ArrayList"/>
+    <HasRelation name="currentMenu" source="Game" target="Menu" type="Composition" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="StoryManager" target="CommandSender"/>
+    <HasRelation name="texts" source="ConsoleManager" target="Text" type="Default" sourceCardinality="0..1" targetCardinality="0..*" collectionType="List"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="EventDialogue" target="Event"/>
+    <HasRelation name="nodes" source="DirectedGraph" target="Node" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="EventCombat" target="Event"/>
     <HasRelation name="joueur" source="Game" target="Personnage" type="Composition" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="story" source="Game" target="StoryManager" type="Composition" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="graph" source="StoryManager" target="DirectedGraph" type="Composition" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="edge" source="DirectedGraph" target="Edge" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="Text" target="ConsoleEvent"/>
+    <HasRelation name="desc" source="Command" target="Text" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="console" source="Game" target="ConsoleManager" type="Composition" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="Dialogue" target="Text"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="Menu" target="CommandSender"/>
+    <IsRelation name="is" source="StoryEvent" target="Node"/>
+    <HasRelation name="writer" source="ConsoleManager" target="ConsoleWriter" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="eventobserver" source="Menu" target="EventObserver" type="Default" sourceCardinality="0..1" targetCardinality="0..*" collectionType="List"/>
+    <HasRelation name="observes" source="ConsoleEvent" target="EventObserver" type="Default" sourceCardinality="0..1" targetCardinality="0..*" collectionType="List"/>
+    <HasRelation name="commands" source="ConsoleManager" target="Command" type="Default" sourceCardinality="0..1" targetCardinality="0..*" collectionType="List"/>
+    <IsRelation name="is" source="StoryLink" target="Edge"/>
+    <IsRelation name="is" source="Command" target="ConsoleEvent"/>
   </ClassDiagramRelations>
 </ClassDiagram>
