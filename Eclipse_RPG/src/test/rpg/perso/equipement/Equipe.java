@@ -1,3 +1,4 @@
+package test.rpg.perso.equipement;
 public class Equipe {
 
     private string name;

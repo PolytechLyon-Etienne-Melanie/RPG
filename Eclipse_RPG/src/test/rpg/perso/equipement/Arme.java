@@ -1,3 +1,4 @@
+package test.rpg.perso.equipement;
 public class Arme extends Item {
 
     private float degat;

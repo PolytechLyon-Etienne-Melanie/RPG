@@ -1,3 +1,7 @@
+import test.rpg.perso.equipement.Arme;
+import test.rpg.perso.equipement.Armure;
+import test.rpg.perso.equipement.Item;
+
 public class Personnage {
 
     private string name;

@@ -1,3 +1,4 @@
+package test.rpg.perso.effet;
 public class Effet {
 
     private Caracteristique c;
