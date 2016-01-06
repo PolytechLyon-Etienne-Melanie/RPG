@@ -1,8 +1,23 @@
 package test.rpg.perso.equipement;
-public class Armure extends Item {
 
-    private float resistance;
+import test.rpg.perso.effet.Effet;
 
-    public void ajoutArmure(String nom, float resistance, float poids) {
-    }
+public class Armure extends Item 
+{
+	private float resistance;
+	
+    public Armure(String name, Effet caract, float poids)
+	{
+		super(name, caract, poids);
+	}
+    
+	public float getResistance()
+	{
+		return resistance;
+	}
+
+	public void setResistance(float resistance)
+	{
+		this.resistance = resistance;
+	}
 }

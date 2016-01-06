@@ -1,23 +1,53 @@
 package test.rpg.perso.equipement;
 
+import java.util.List;
+
 import test.rpg.perso.classe.Caracteristique;
 import test.rpg.perso.effet.Effet;
 
 public class Item {
 
     private String nom;
-
     private float poids;
+    private Effet effet;
 
-    public float Item(String name, float poids) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public Item(String name, Effet caract, float poids) {
+    	nom = name;
+    	this.poids = poids;
     }
 
-    public Caracteristique getValeurEffet(Caracteristique caract) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public Caracteristique getValeurEffet() 
+    {
+    	return effet.getC();
     }
 
-    public Effet ajoutEffet(Effet effect) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void setEffet(Effet effect) 
+    {
+    	effet = effect;
     }
+    
+    public Effet getEffet() 
+    {
+    	return effet;
+    }
+
+	public String getNom()
+	{
+		return nom;
+	}
+
+	public void setNom(String nom)
+	{
+		this.nom = nom;
+	}
+
+	public float getPoids()
+	{
+		return poids;
+	}
+
+	public void setPoids(float poids)
+	{
+		this.poids = poids;
+	}
 }

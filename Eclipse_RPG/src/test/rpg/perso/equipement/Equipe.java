@@ -15,4 +15,24 @@ public class Equipe {
     public Personnage retirerPerso(Personnage perso) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
+	public String getName()
+	{
+		return name;
+	}
+
+	public void setName(String name)
+	{
+		this.name = name;
+	}
+
+	public int getNbMaxPerso()
+	{
+		return nbMaxPerso;
+	}
+
+	public void setNbMaxPerso(int nbMaxPerso)
+	{
+		this.nbMaxPerso = nbMaxPerso;
+	}
 }
