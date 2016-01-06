@@ -1,7 +1,5 @@
 package test.rpg.perso.equipement;
 
-import java.util.List;
-
 import test.rpg.perso.classe.Caracteristique;
 import test.rpg.perso.effet.Effet;
 

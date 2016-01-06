@@ -4,12 +4,17 @@ import test.rpg.perso.effet.Effet;
 
 public class Arme extends Item 
 {
+	public static Arme[] list = new Arme[256];
+	private static int id = 0;
+	
 	private float degat;
     private float maniabilite;
     
-    public Arme(String name, Effet caract, float poids)
+    protected Arme(String name, Effet caract, float poids)
 	{
 		super(name, caract, poids);
+		list[id] = this;
+		id++;
 	}
 
     public float getDegat()
@@ -31,4 +36,6 @@ public class Arme extends Item
 	{
 		this.maniabilite = maniabilite;
 	}
+	
+	public Arme epee = new Arme("Epee", new Effet().setForce(5), 5);
 }
