@@ -5,7 +5,7 @@ public class Item {
 
     private float poids;
 
-    public float Item(string name, float poids) {
+    public float Item(String name, float poids) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 

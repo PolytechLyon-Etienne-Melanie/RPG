@@ -5,6 +5,6 @@ public class Arme extends Item {
 
     private float maniabilite;
 
-    public void Arme(string nom, float degat, float maniabilite, float poids) {
+    public void Arme(String nom, float degat, float maniabilite, float poids) {
     }
 }

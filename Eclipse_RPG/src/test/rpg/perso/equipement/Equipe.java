@@ -1,7 +1,7 @@
 package test.rpg.perso.equipement;
 public class Equipe {
 
-    private string name;
+    private String name;
 
     private int nbMaxPerso;
 
