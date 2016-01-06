@@ -1,4 +1,6 @@
-package test.rpg.perso;
+package test.rpg.perso.competence;
+
+import test.rpg.perso.Personnage;
 
 public interface Capacite {
 

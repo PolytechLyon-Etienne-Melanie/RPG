@@ -1,6 +1,5 @@
 package test.rpg.perso.competence;
 
-import test.rpg.perso.Capacite;
 import test.rpg.perso.Personnage;
 
 public class Parade implements Capacite {

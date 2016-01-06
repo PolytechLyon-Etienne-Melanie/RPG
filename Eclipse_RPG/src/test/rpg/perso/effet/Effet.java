@@ -1,6 +1,6 @@
 package test.rpg.perso.effet;
 
-import test.rpg.perso.Caracteristique;
+import test.rpg.perso.classe.Caracteristique;
 
 public class Effet {
 
