@@ -11,10 +11,10 @@ public class Classe {
 	private String nom;
 	private List<Capacite> capa;
 	
-	public Classe(String nom, int f, int dex, int s, int def)
+	public Classe(String nom, int f, int dex, int s, int def, int m)
 	{
 		this.nom = nom;
-		carac = new Caracteristique(f, dex, s, def);
+		carac = new Caracteristique(f, dex, s, def, m);
 		capa = new ArrayList<Capacite>();
 	}
 	

@@ -4,7 +4,7 @@ public class Assassin extends Classe
 {
 	public Assassin()
 	{
-		super("Assassin", 30, 50, 10, 10);
+		super("Assassin", 30, 50, 10, 10, 0);
 	}
 }
 

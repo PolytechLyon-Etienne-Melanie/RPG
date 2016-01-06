@@ -37,5 +37,17 @@ public class Arme extends Item
 		this.maniabilite = maniabilite;
 	}
 	
-	public Arme epee = new Arme("Epee", new Effet().setForce(5), 5);
+	public Arme epeeBase = new Arme("Adria", new Effet().setForce(2), 2);
+	public Arme epeeMoyenne = new Arme("Asmodan", new Effet().setForce(5), 6);
+	public Arme epeeAvancee = new Arme("Diablo", new Effet().setForce(10), 18);
+	
+	public Arme batonMagiqueBase = new Arme ("Cydaé", new Effet().setMagie(2),2);
+	public Arme batonMagiqueMoyen = new Arme ("Auriel", new Effet().setMagie(5),3);
+	public Arme batonMagiqueExpert = new Arme ("Tyraël", new Effet().setMagie(10),5);
+	
+	public Arme dagueBase = new Arme("Piquant d'Ambre", new Effet(2,3,0,0,0), 2);
+	public Arme dagueMoyenne = new Arme("Dague des sept étoiles", new Effet(4,6,0,0,0), 2);
+	public Arme dagueAvancee = new Arme("L'appel du Dragon", new Effet(8,12,0,0,0), 2);
+	
+		
 }

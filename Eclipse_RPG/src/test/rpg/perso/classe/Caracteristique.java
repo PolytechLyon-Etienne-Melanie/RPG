@@ -2,10 +2,18 @@ package test.rpg.perso.classe;
 
 public class Caracteristique {
 
-    private int force, dexterite, sante, defense;
+    private int force, dexterite, sante, defense, magie;
     
 	public int getForce() {
 		return force;
+	}
+
+	public int getMagie() {
+		return magie;
+	}
+
+	public void setMagie(int magie) {
+		this.magie = magie;
 	}
 
 	public void setForce(int force) {
@@ -36,11 +44,12 @@ public class Caracteristique {
 		this.defense = defense;
 	}
 
-	public Caracteristique(int f, int dex, int s, int def)
+	public Caracteristique(int f, int dex, int s, int def, int m)
 	{
 		force = f;
 		dexterite = dex;
 		sante = s;
 		defense = def;
+		magie = m;
 	}
 }

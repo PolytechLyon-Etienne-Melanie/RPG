@@ -13,7 +13,7 @@ public class Effet {
 	
 	public Effet()
 	{
-		this(0,0,0,0);
+		this(0,0,0,0,0);
 	}
 	
 	public Effet(Caracteristique c)
@@ -21,9 +21,9 @@ public class Effet {
 		this(-1, 0, c);
 	}
 	
-	public Effet(int f, int dex, int s, int def)
+	public Effet(int f, int dex, int s, int def, int m)
 	{
-		this(new Caracteristique(f, dex, s, def));
+		this(new Caracteristique(f, dex, s, def, m));
 	}
 	
     private Caracteristique c;
@@ -65,6 +65,12 @@ public class Effet {
 	public Effet setForce(int f)
 	{
 		c.setForce(f);
+		return this;
+	}
+	
+	public Effet setMagie(int f)
+	{
+		c.setMagie(f);
 		return this;
 	}
 }
