@@ -1,4 +1,7 @@
 package test.rpg.perso.equipement;
+
+import test.rpg.perso.Personnage;
+
 public class Equipe {
 
     private String name;
