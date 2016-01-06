@@ -1,0 +1,10 @@
+Liste des choses à faire :
+
+	- Créer des armes (cf modèle déjà créé)
+	- Créer des amures
+	- Créer des consommables
+	- Créer des compétences (différents types d'attaques suivant classe)
+
+	- Trouver une histoire
+	
+	-
