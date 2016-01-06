@@ -8,7 +8,39 @@ public class Personnage {
 
     private String name;
 
-    private int niveau;
+    public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getNiveau() {
+		return niveau;
+	}
+
+	public void setNiveau(int niveau) {
+		this.niveau = niveau;
+	}
+
+	public int getPoidsMax() {
+		return poidsMax;
+	}
+
+	public void setPoidsMax(int poidsMax) {
+		this.poidsMax = poidsMax;
+	}
+
+	public int getSanteMax() {
+		return santeMax;
+	}
+
+	public void setSanteMax(int santeMax) {
+		this.santeMax = santeMax;
+	}
+
+	private int niveau;
 
     private int poidsMax;
 
