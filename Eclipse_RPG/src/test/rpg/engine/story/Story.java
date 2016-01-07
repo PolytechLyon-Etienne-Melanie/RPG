@@ -1,11 +1,15 @@
 package test.rpg.engine.story;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import org.apache.commons.collections15.Factory;
 import org.apache.commons.collections15.Transformer;
 
 import edu.uci.ics.jung.graph.DirectedSparseMultigraph;
+import test.rpg.engine.console.printer.Log;
+import test.rpg.engine.exception.StoryEventNotFoundException;
 import test.rpg.engine.story.StoryEvent;
 import test.rpg.engine.story.StoryLink;
 
@@ -16,8 +20,9 @@ public class Story implements Serializable
 	 */
 	private static final long serialVersionUID = 5662645318936914681L;
 	private DirectedSparseMultigraph<StoryEvent, StoryLink> graph;
-	private int eventCount;
-	private int linkCount;
+	public int eventCount;
+	public int linkCount;
+	public int startEvent;
 
 	public transient Transformer<StoryLink, String> linkTransformer = new Transformer<StoryLink, String>()
 	{
@@ -44,6 +49,11 @@ public class Story implements Serializable
 	{
 		public StoryEvent create()
 		{
+			while(!isValidId(eventCount))
+			{
+				eventCount++;
+			}
+			Log.d(eventCount);
 			return new StoryEvent(eventCount++);
 		}
 	};
@@ -53,6 +63,14 @@ public class Story implements Serializable
 		setGraph(new DirectedSparseMultigraph<StoryEvent, StoryLink>());
 		eventCount = 0;
 		linkCount = 0;
+		startEvent = 0;
+	}
+	
+	public void setStartEvent(int i)
+	{
+		if(i < 0 || !isValidId(i))
+			i = 0;
+		startEvent = i;
 	}
 
 	public DirectedSparseMultigraph<StoryEvent, StoryLink> getGraph()
@@ -63,6 +81,30 @@ public class Story implements Serializable
 	public void setGraph(DirectedSparseMultigraph<StoryEvent, StoryLink> graph)
 	{
 		this.graph = graph;
+	}
+	
+	public boolean isValidId(int id)
+	{
+		ArrayList<StoryEvent> events = new ArrayList<StoryEvent>(getGraph().getVertices());
+		Iterator<StoryEvent> i = events.iterator();
+		int ID = -1;
+		StoryEvent event = null;
+
+		while (id != ID && i.hasNext())
+		{
+			event = i.next();
+			ID = event.getID();
+		}
+
+		if (ID == id)
+			return false;
+		else
+			return true;
+	}
+
+	public Integer getStartId()
+	{
+		return startEvent;
 	}
 }
 

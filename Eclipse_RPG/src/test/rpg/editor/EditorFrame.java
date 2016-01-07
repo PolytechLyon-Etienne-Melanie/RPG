@@ -3,6 +3,7 @@ package test.rpg.editor;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -19,6 +20,8 @@ import edu.uci.ics.jung.visualization.VisualizationViewer;
 import edu.uci.ics.jung.visualization.control.EditingModalGraphMouse;
 import edu.uci.ics.jung.visualization.control.ModalGraphMouse;
 import edu.uci.ics.jung.visualization.decorators.ToStringLabeller;
+import test.rpg.editor.dialog.IntPropertyDialog;
+import test.rpg.engine.console.printer.Log;
 import test.rpg.engine.story.Story;
 import test.rpg.engine.story.StoryEvent;
 import test.rpg.engine.story.StoryLink;
@@ -103,6 +106,25 @@ public class EditorFrame extends JFrame
 		});
 		mnNewMenu.add(mnNewMenuItem);
 		menuBar.add(mnNewMenu);
+		
+		JMenuItem mntmSetStart = new JMenuItem("Set Start");
+		ActionListener listener = new ActionListener()
+		{
+			private Frame frame;
+			ActionListener setFrame(Frame frame)
+			{
+				this.frame = frame;
+				return this;
+			}
+			public void actionPerformed(ActionEvent evt)
+			{
+				IntPropertyDialog intdiag = new IntPropertyDialog(frame, "Start ID", sgv.getStartId());
+				int id = intdiag.getValues();
+				sgv.setStartEvent(id);
+			}
+		}.setFrame(this);
+		mntmSetStart.addActionListener(listener);
+		mnNewMenu.add(mntmSetStart);
 
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -156,6 +178,7 @@ public class EditorFrame extends JFrame
 			try
 			{
 				s = StorySerializer.unserialize();
+				Log.d(s.eventCount);
 			} catch (IOException e1)
 			{
 				// TODO Auto-generated catch block
@@ -169,6 +192,7 @@ public class EditorFrame extends JFrame
 			if(s != null)
 			{
 				sgv = s;
+				Log.d(sgv.eventCount);
 				repaintGraph();
 			}
 		}

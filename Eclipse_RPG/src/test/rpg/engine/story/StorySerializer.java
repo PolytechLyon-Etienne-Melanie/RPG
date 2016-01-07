@@ -43,7 +43,7 @@ public class StorySerializer
 
 			 // ouverture d'un flux sur un fichier
 			ObjectOutputStream oos =  new ObjectOutputStream(new FileOutputStream(fichier)) ;
-
+			Log.d(s.eventCount);
 			 // sérialization de l'objet
 			oos.writeObject(s) ;
 			
@@ -91,6 +91,7 @@ public class StorySerializer
 	    	   s = (Story) f;
 	       ois.close();
 	       Log.d("end unserialize story");
+	       Log.d(s.eventCount);
 	       return s;
 	    }
 	    Log.d("end unserialize story (no story)");
