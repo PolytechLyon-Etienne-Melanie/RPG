@@ -9,15 +9,15 @@ public class EventCombat implements Event
 {
 	private String title;
 
-	private ArrayList<Entity> monsters;
+	private ArrayList<EventEntity> monsters;
 	
 	public EventCombat()
 	{
 		title = "Default Combat";
-		setMonsters(new ArrayList<Entity>());
+		setMonsters(new ArrayList<EventEntity>());
 	}
 	
-	public EventCombat(String s, List<Entity> m)
+	public EventCombat(String s, List<EventEntity> m)
 	{
 		title = s;
 		setMonsters(m);
@@ -28,14 +28,14 @@ public class EventCombat implements Event
 		return "Combat : " + title;
 	}
 
-	public ArrayList<Entity> getMonsters()
+	public ArrayList<EventEntity> getMonsters()
 	{
 		return monsters;
 	}
 
-	public void setMonsters(List<Entity> monsters)
+	public void setMonsters(List<EventEntity> monsters)
 	{
-		this.monsters = new ArrayList<Entity>(monsters);
+		this.monsters = new ArrayList<EventEntity>(monsters);
 	}
 	
 	public String getTitle()

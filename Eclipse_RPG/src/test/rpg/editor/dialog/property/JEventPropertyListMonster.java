@@ -5,10 +5,10 @@ import java.util.ArrayList;
 
 import test.rpg.editor.dialog.EntityPropertyDialog;
 import test.rpg.editor.dialog.PropertyDialog;
-import test.rpg.editor.dialog.StringPropertyDialog;
+import test.rpg.engine.story.event.EventEntity;
 import test.rpg.perso.Entity;
 
-public class JEventPropertyListMonster extends JEventPropertyList<Entity>
+public class JEventPropertyListMonster extends JEventPropertyList<EventEntity>
 {
 
 	public JEventPropertyListMonster(Frame frame)
@@ -16,20 +16,20 @@ public class JEventPropertyListMonster extends JEventPropertyList<Entity>
 		super(frame);
 	}
 
-	public JEventPropertyListMonster(Frame frame, ArrayList<Entity> monsters)
+	public JEventPropertyListMonster(Frame frame, ArrayList<EventEntity> monsters)
 	{
 		super(frame, monsters);
 	}
 
 	@Override
-	protected PropertyDialog<Entity> getAddDialog(Frame frame)
+	protected PropertyDialog<EventEntity> getAddDialog(Frame frame)
 	{
 		// TODO Auto-generated method stub
 		return new EntityPropertyDialog(frame);
 	}
 
 	@Override
-	protected PropertyDialog<Entity> getEditDialog(Frame frame, Entity s)
+	protected PropertyDialog<EventEntity> getEditDialog(Frame frame, EventEntity s)
 	{
 		return new EntityPropertyDialog(frame, s);
 	}

@@ -2,26 +2,23 @@ package test.rpg.editor.dialog;
 
 import java.awt.Frame;
 
+import test.rpg.editor.dialog.property.JEventPropertyCombo;
 import test.rpg.editor.dialog.property.JEventPropertyInt;
-import test.rpg.editor.dialog.property.JEventPropertyList;
-import test.rpg.editor.dialog.property.JEventPropertyListMonster;
 import test.rpg.editor.dialog.property.JEventPropertyString;
-import test.rpg.engine.story.event.EventCombat;
-import test.rpg.perso.Entity;
-import test.rpg.perso.classe.monstre.Rodeur;
+import test.rpg.engine.story.event.EventEntity;
 
-public class EntityPropertyDialog extends PropertyDialog<Entity>
+public class EntityPropertyDialog extends PropertyDialog<EventEntity>
 {
 	private JEventPropertyString name;
 	private JEventPropertyInt lvl;
-	private JEventPropertyString classe;
+	private JEventPropertyCombo<EventEntity.ClasseE> classe;
 	
 	public EntityPropertyDialog(Frame parent)
 	{
-		super(parent, new Entity(), "Monsre", true);
+		super(parent, new EventEntity(), "Monsre", true);
 	}
 
-	public EntityPropertyDialog(Frame frame, Entity e)
+	public EntityPropertyDialog(Frame frame, EventEntity e)
 	{
 		super(frame, e, "Monstre", false);
 	}
@@ -33,13 +30,13 @@ public class EntityPropertyDialog extends PropertyDialog<Entity>
 		this.addProperty("Nom", name);
 		lvl = new JEventPropertyInt(frame, value.getNiveau());
 		this.addProperty("Niveau", lvl);
-		/*classe = new JEventPropertyString(frame, value.getClasse());
-		this.addProperty("Classe", classe);*/
+		classe = new JEventPropertyCombo<EventEntity.ClasseE>(frame, EventEntity.ClasseE.class, value.getClasseE());
+		this.addProperty("Classe", classe);
 	}
 
 	@Override
-	protected Entity setValues()
+	protected EventEntity setValues()
 	{
-		return new Entity(name.getValue(), lvl.getValue(), new Rodeur());
+		return new EventEntity(name.getValue(), lvl.getValue(), EventEntity.ClasseE.RODEUR);
 	}
 }

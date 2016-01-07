@@ -1,11 +1,13 @@
 package test.rpg.perso;
 
+import java.io.Serializable;
+
 import test.rpg.perso.classe.Caracteristique;
 import test.rpg.perso.classe.Classe;
 import test.rpg.perso.classe.monstre.Rodeur;
 
-public class Entity {
-	
+public class Entity
+{
 	protected String nom;
 	protected int niveau;
 	protected int sante;

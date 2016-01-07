@@ -1,12 +1,13 @@
 package test.rpg.perso.classe;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import test.rpg.perso.competence.Capacite;
 
-public class Classe {
-	
+public class Classe
+{
 	private Caracteristique carac;
 	private String nom;
 	private List<Capacite> capa;
