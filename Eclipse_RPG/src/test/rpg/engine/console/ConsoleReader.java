@@ -18,8 +18,8 @@ public class ConsoleReader
 	{
 		this.manager = manager;
 
-		Command showall = new Command("Montrer toutes les commandes disponibles.", "showcommands");
-		Command quit = new Command("Quitter le jeu.", "quit");
+		Command showall = new Command(false, "Montrer toutes les commandes disponibles.", "showcommands");
+		Command quit = new Command(false, "Quitter le jeu.", "quit");
 
 		showall.addObserver(new EventObserver()
 		{

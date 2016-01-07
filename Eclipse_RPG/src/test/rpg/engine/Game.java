@@ -4,6 +4,7 @@ import test.rpg.engine.console.printer.Log;
 import test.rpg.engine.story.Story;
 import test.rpg.engine.story.StoryEvent;
 import test.rpg.engine.story.StoryManager;
+import test.rpg.menu.Menu;
 import test.rpg.menu.MenuLoading;
 import test.rpg.menu.MenuStory;
 

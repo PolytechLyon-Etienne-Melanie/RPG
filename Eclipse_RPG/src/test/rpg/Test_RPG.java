@@ -6,7 +6,7 @@
 package test.rpg;
 
 import test.rpg.engine.Game;
-import test.rpg.engine.Menu;
+import test.rpg.menu.Menu;
 
 /**
  *

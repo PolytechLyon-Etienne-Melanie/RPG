@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import test.rpg.engine.Game;
-import test.rpg.engine.Menu;
 import test.rpg.engine.console.event.Command;
 import test.rpg.engine.console.event.Dialogue;
 import test.rpg.engine.console.event.KeyObserver;

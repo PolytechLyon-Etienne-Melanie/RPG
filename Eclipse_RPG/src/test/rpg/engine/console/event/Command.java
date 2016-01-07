@@ -15,7 +15,7 @@ public class Command extends ConsoleEvent {
     
     public Command(String t, String com)
     {
-    	this(false, t, com);
+    	this(true, t, com);
     }
     
 	public Dialogue getDesc()
