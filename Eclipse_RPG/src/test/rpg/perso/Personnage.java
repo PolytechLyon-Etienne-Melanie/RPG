@@ -4,7 +4,7 @@ import test.rpg.perso.equipement.Arme;
 import test.rpg.perso.equipement.Armure;
 import test.rpg.perso.equipement.Item;
 
-public class Personnage {
+public abstract class Personnage {
 
     private String name;
 
