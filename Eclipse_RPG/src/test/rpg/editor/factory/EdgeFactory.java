@@ -10,15 +10,19 @@ import test.rpg.engine.story.StoryLink;
 
 public class EdgeFactory implements Factory<StoryLink>, Serializable
 {
-	private int edgeCount;
+	private static Story str;
 	
 	public EdgeFactory()
 	{
-		edgeCount = 0;
 	}
 	
 	public StoryLink create()
 	{
-		return new StoryLink(edgeCount++);
+		return new StoryLink(str.getNextLinkId());
+	}
+	
+	public static void setStory(Story s)
+	{
+		str = s;
 	}
 };

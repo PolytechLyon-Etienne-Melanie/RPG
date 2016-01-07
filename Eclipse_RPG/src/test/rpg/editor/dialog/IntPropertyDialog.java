@@ -3,7 +3,6 @@ package test.rpg.editor.dialog;
 import java.awt.Frame;
 
 import test.rpg.editor.dialog.property.JEventPropertyInt;
-import test.rpg.editor.dialog.property.JEventPropertyString;
 
 public class IntPropertyDialog extends PropertyDialog<Integer>
 {

@@ -11,6 +11,7 @@ import org.apache.commons.collections15.Transformer;
 import edu.uci.ics.jung.graph.DirectedSparseMultigraph;
 import test.rpg.editor.factory.EdgeFactory;
 import test.rpg.editor.factory.VertexFactory;
+import test.rpg.engine.console.printer.Log;
 
 public class Story implements Serializable
 {
@@ -84,9 +85,9 @@ public class Story implements Serializable
 		}
 
 		if (ID == id)
-			return false;
-		else
 			return true;
+		else
+			return false;
 	}
 
 	public Integer getStartId()

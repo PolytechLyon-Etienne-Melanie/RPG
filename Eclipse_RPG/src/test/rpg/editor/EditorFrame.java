@@ -93,6 +93,7 @@ public class EditorFrame extends JFrame
 		EditingModalGraphMouse gm = new EditingModalGraphMouse(vv.getRenderContext(), sgv.vertexFactory, sgv.edgeFactory);
 		vv.setGraphMouse(gm);
 		VertexFactory.setStory(sgv);
+		EdgeFactory.setStory(sgv);
 
 		JMenu modeMenu = gm.getModeMenu(); // Obtain mode menu from the mouse
 		modeMenu.setText("Mouse Mode");
@@ -157,6 +158,7 @@ public class EditorFrame extends JFrame
 	{
 		sgv = s;
 		VertexFactory.setStory(sgv);
+		EdgeFactory.setStory(sgv);
 		this.repaintGraph();
 	}
 	
@@ -190,7 +192,6 @@ public class EditorFrame extends JFrame
 			try
 			{
 				s = StorySerializer.unserialize();
-				Log.d(s.eventCount);
 			} catch (IOException e1)
 			{
 				// TODO Auto-generated catch block

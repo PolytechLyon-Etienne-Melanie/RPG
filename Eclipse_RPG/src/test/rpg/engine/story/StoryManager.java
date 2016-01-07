@@ -61,7 +61,7 @@ public class StoryManager
 			try
 			{
 				story = StorySerializer.unserialize();
-				eventID = 0;
+				eventID = story.getStartId();
 			} catch (ClassNotFoundException | IOException e)
 			{
 				// TODO Auto-generated catch block
