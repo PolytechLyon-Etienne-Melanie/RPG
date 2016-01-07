@@ -3,10 +3,12 @@ package test.rpg.editor.dialog.property;
 import java.awt.Frame;
 import java.util.ArrayList;
 
+import test.rpg.editor.dialog.EntityPropertyDialog;
 import test.rpg.editor.dialog.PropertyDialog;
 import test.rpg.editor.dialog.StringPropertyDialog;
+import test.rpg.perso.Entity;
 
-public class JEventPropertyListMonster extends JEventPropertyList<String>
+public class JEventPropertyListMonster extends JEventPropertyList<Entity>
 {
 
 	public JEventPropertyListMonster(Frame frame)
@@ -14,21 +16,21 @@ public class JEventPropertyListMonster extends JEventPropertyList<String>
 		super(frame);
 	}
 
-	public JEventPropertyListMonster(Frame frame, ArrayList<String> monsters)
+	public JEventPropertyListMonster(Frame frame, ArrayList<Entity> monsters)
 	{
 		super(frame, monsters);
 	}
 
 	@Override
-	protected PropertyDialog<String> getAddDialog(Frame frame)
+	protected PropertyDialog<Entity> getAddDialog(Frame frame)
 	{
 		// TODO Auto-generated method stub
-		return new StringPropertyDialog(frame, "Monstre");
+		return new EntityPropertyDialog(frame);
 	}
 
 	@Override
-	protected PropertyDialog<String> getEditDialog(Frame frame, String s)
+	protected PropertyDialog<Entity> getEditDialog(Frame frame, Entity s)
 	{
-		return new StringPropertyDialog(frame, "Monstre", s);
+		return new EntityPropertyDialog(frame, s);
 	}
 }

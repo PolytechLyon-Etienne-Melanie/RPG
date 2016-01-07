@@ -6,11 +6,12 @@ import test.rpg.editor.dialog.property.JEventPropertyList;
 import test.rpg.editor.dialog.property.JEventPropertyListMonster;
 import test.rpg.editor.dialog.property.JEventPropertyString;
 import test.rpg.engine.story.event.EventCombat;
+import test.rpg.perso.Entity;
 
 public class CombatPropertyDialog extends PropertyDialog<EventCombat>
 {
 	private JEventPropertyString title;
-	private JEventPropertyList<String> monsters;
+	private JEventPropertyList<Entity> monsters;
 	
 	public CombatPropertyDialog(Frame parent)
 	{
