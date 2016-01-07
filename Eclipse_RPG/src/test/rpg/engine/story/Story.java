@@ -3,15 +3,14 @@ package test.rpg.engine.story;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Random;
 
 import org.apache.commons.collections15.Factory;
 import org.apache.commons.collections15.Transformer;
 
 import edu.uci.ics.jung.graph.DirectedSparseMultigraph;
-import test.rpg.engine.console.printer.Log;
-import test.rpg.engine.exception.StoryEventNotFoundException;
-import test.rpg.engine.story.StoryEvent;
-import test.rpg.engine.story.StoryLink;
+import test.rpg.editor.factory.EdgeFactory;
+import test.rpg.editor.factory.VertexFactory;
 
 public class Story implements Serializable
 {
@@ -38,25 +37,10 @@ public class Story implements Serializable
 			return e.getEvent();
 		}
 	};
-	public transient Factory<StoryLink> edgeFactory = new Factory<StoryLink>()
-	{
-		public StoryLink create()
-		{
-			return new StoryLink(linkCount++);
-		}
-	};
-	public transient Factory<StoryEvent> vertexFactory = new Factory<StoryEvent>()
-	{
-		public StoryEvent create()
-		{
-			while(!isValidId(eventCount))
-			{
-				eventCount++;
-			}
-			Log.d(eventCount);
-			return new StoryEvent(eventCount++);
-		}
-	};
+	
+	public transient VertexFactory vertexFactory;
+	
+	public transient EdgeFactory edgeFactory;
 
 	public Story()
 	{
@@ -64,6 +48,9 @@ public class Story implements Serializable
 		eventCount = 0;
 		linkCount = 0;
 		startEvent = 0;
+		
+		vertexFactory = new VertexFactory();
+		edgeFactory = new EdgeFactory();
 	}
 	
 	public void setStartEvent(int i)
@@ -105,6 +92,20 @@ public class Story implements Serializable
 	public Integer getStartId()
 	{
 		return startEvent;
+	}
+	
+	public Integer getNextEventId()
+	{
+		int tmp = eventCount;
+		eventCount++;
+		return tmp;
+	}
+	
+	public Integer getNextLinkId()
+	{
+		int tmp = linkCount;
+		linkCount++;
+		return tmp;
 	}
 }
 

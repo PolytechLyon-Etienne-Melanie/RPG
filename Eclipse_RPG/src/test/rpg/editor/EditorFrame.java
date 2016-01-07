@@ -21,6 +21,8 @@ import edu.uci.ics.jung.visualization.control.EditingModalGraphMouse;
 import edu.uci.ics.jung.visualization.control.ModalGraphMouse;
 import edu.uci.ics.jung.visualization.decorators.ToStringLabeller;
 import test.rpg.editor.dialog.IntPropertyDialog;
+import test.rpg.editor.factory.EdgeFactory;
+import test.rpg.editor.factory.VertexFactory;
 import test.rpg.engine.console.printer.Log;
 import test.rpg.engine.story.Story;
 import test.rpg.engine.story.StoryEvent;
@@ -45,9 +47,9 @@ public class EditorFrame extends JFrame
 	private Story sgv;
 	private VisualizationViewer<Integer, String> vv;
 
-	public EditorFrame()
+	public EditorFrame(Story s)
 	{
-		sgv = new Story();
+		sgv = s;
 		Layout<Integer, String> layout = new FRLayout(sgv.getGraph());
 		layout.setSize(new Dimension(700, 500));
 		vv = new VisualizationViewer<Integer, String>(layout);
@@ -55,6 +57,11 @@ public class EditorFrame extends JFrame
 		vv.getRenderContext().setVertexLabelTransformer(new ToStringLabeller());
 		vv.getRenderContext().setEdgeLabelTransformer(new ToStringLabeller());
 		initComponents();
+	}
+	
+	public EditorFrame()
+	{
+		this(new Story());
 	}
 
 	private void initComponents()
@@ -82,10 +89,10 @@ public class EditorFrame extends JFrame
 		JMenuItem mntmQuitter = new JMenuItem("Quitter");
 		mntmQuitter.setAction(action_quit);
 		mnFichier.add(mntmQuitter);
-
-		EditingModalGraphMouse gm = new EditingModalGraphMouse(vv.getRenderContext(), sgv.vertexFactory,
-				sgv.edgeFactory);
+		
+		EditingModalGraphMouse gm = new EditingModalGraphMouse(vv.getRenderContext(), sgv.vertexFactory, sgv.edgeFactory);
 		vv.setGraphMouse(gm);
+		VertexFactory.setStory(sgv);
 
 		JMenu modeMenu = gm.getModeMenu(); // Obtain mode menu from the mouse
 		modeMenu.setText("Mouse Mode");
@@ -143,9 +150,14 @@ public class EditorFrame extends JFrame
 												// editing plugin
 
 		gm.add(myPlugin); // Add our new plugin to the mouse
-
 		vv.setGraphMouse(gm);
-
+	}
+	
+	private void setStory(Story s)
+	{
+		sgv = s;
+		VertexFactory.setStory(sgv);
+		this.repaintGraph();
 	}
 	
 	private void repaintGraph()
@@ -191,9 +203,7 @@ public class EditorFrame extends JFrame
 			
 			if(s != null)
 			{
-				sgv = s;
-				Log.d(sgv.eventCount);
-				repaintGraph();
+				setStory(s);
 			}
 		}
 	}
