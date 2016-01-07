@@ -1,17 +1,25 @@
 package test.rpg.menu;
 
 import test.rpg.engine.Game;
+import test.rpg.engine.console.event.Command;
 import test.rpg.engine.console.event.Dialogue;
+import test.rpg.engine.story.event.EventObserver;
+import test.rpg.perso.Personnage;
 import test.rpg.perso.classe.Classe;
 
 public class MenuDescriptionClasse extends Menu{
 	
 	private Classe classe;
+	private String nom;
 	private String text;
+	private Command confirmation;
+	private Command retour;
+	private Personnage hero;
 
-	public MenuDescriptionClasse(Game game, Classe c, String text) {
+	public MenuDescriptionClasse(Game game, Classe c, String nom, String text) {
 		super(game);
 		classe = c;
+		this.nom = nom;
 		this.text = text;
 	}
 
@@ -19,11 +27,29 @@ public class MenuDescriptionClasse extends Menu{
 	protected void setDials() {
 		this.addDial(new Dialogue("Histoire du "+classe.getNom()+" :"));
 		this.addDial(new Dialogue(text));
-		// ajouter caract de la classe classe.getCarac()
+		this.addDial(new Dialogue("Caractéristique du héro : (Force, Dextérité, Santé, Défence, Magie)"+classe.getCarac())); 
 	}
 
 	@Override
 	protected void setCommands() {
+		confirmation = new Command("Etes-vous sûr de vouloir prendre ce héro ?", "oui");
+		confirmation.addObserver(new EventObserver(){
+			@Override
+			public void actionPerformed()
+			{
+				//hero = new Personnage(nom, 1, classe); //help... comment on crée un pero ? ^^'
+			}
+		});
+		retour = new Command("Revenir au personnages", "retour");
+		retour.addObserver(new EventObserver(){
+			@Override
+			public void actionPerformed()
+			{
+				game.setCurrentMenu(new MenuChoixClasse(game)); //c'est juste ?...
+			}
+		});
+		this.addCommand(confirmation);
+		this.addCommand(retour);
 		// creer commande retour + creer new perso
 		
 		
