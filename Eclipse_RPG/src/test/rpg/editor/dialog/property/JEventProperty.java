@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 
 public abstract class JEventProperty<V> extends JPanel
 {
+	protected Class<V> type;
 	protected V value;
 	
 	public JEventProperty(Frame frame, V value)
@@ -14,6 +15,15 @@ public abstract class JEventProperty<V> extends JPanel
 		super();
 		setLayout(new BorderLayout(0, 0));
 		this.value = value;
+		initComponents(frame);
+	}
+	
+	public JEventProperty(Class<V> type, Frame frame, V value)
+	{
+		super();
+		setLayout(new BorderLayout(0, 0));
+		this.value = value;
+		this.type = type;
 		initComponents(frame);
 	}
 	
