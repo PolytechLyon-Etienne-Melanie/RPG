@@ -1,32 +1,21 @@
 package test.rpg.perso;
 
+import test.rpg.perso.classe.Classe;
 import test.rpg.perso.equipement.Arme;
 import test.rpg.perso.equipement.Armure;
 import test.rpg.perso.equipement.Item;
 
-public abstract class Personnage {
+public abstract class Personnage extends Entity {
 
-    private String name;
-    private int niveau;
-    private int poidsMax;
+	private int poidsMax;
     private int santeMax;
 
-    public String getName() {
-		return name;
+    
+    public Personnage(String nom, int n, Classe classe) {
+		super(nom, n, classe);
+		// TODO Auto-generated constructor stub
 	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public int getNiveau() {
-		return niveau;
-	}
-
-	public void setNiveau(int niveau) {
-		this.niveau = niveau;
-	}
-
+    
 	public int getPoidsMax() {
 		return poidsMax;
 	}
