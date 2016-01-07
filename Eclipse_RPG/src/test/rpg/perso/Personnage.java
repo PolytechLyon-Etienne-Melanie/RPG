@@ -7,6 +7,9 @@ import test.rpg.perso.equipement.Item;
 public class Personnage {
 
     private String name;
+    private int niveau;
+    private int poidsMax;
+    private int santeMax;
 
     public String getName() {
 		return name;
@@ -39,12 +42,6 @@ public class Personnage {
 	public void setSanteMax(int santeMax) {
 		this.santeMax = santeMax;
 	}
-
-	private int niveau;
-
-    private int poidsMax;
-
-    private int santeMax;
 
     public void appliquerEffet() {
     }

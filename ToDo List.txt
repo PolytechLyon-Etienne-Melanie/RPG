@@ -5,6 +5,6 @@ Liste des choses à faire :
 	- Créer des consommables
 	- Créer des compétences (différents types d'attaques suivant classe)
 
-	- Trouver une histoire
+	- Trouver une histoire (sur le site scriptorium : la cité des gémissements ;
 	
 	-
