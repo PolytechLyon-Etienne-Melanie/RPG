@@ -15,7 +15,7 @@ public class EntityPropertyDialog extends PropertyDialog<EventEntity>
 	
 	public EntityPropertyDialog(Frame parent)
 	{
-		super(parent, new EventEntity(), "Monsre", true);
+		super(parent, new EventEntity(), "Monstre", true);
 	}
 
 	public EntityPropertyDialog(Frame frame, EventEntity e)
@@ -37,6 +37,6 @@ public class EntityPropertyDialog extends PropertyDialog<EventEntity>
 	@Override
 	protected EventEntity setValues()
 	{
-		return new EventEntity(name.getValue(), lvl.getValue(), EventEntity.ClasseE.RODEUR);
+		return new EventEntity(name.getValue(), lvl.getValue(), classe.getValue());
 	}
 }

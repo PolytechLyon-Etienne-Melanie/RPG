@@ -66,8 +66,11 @@ public class ConsoleWriter
 
 	private void writeCommand(Command c)
 	{
-		Log.d("write command : " + c);
-		this.writeLine("<" + c.getCom() + "> " + c.getDesc().getDialogue());
+		if(c.isVisible())
+		{
+			Log.d("write command : " + c);
+			this.writeLine("<" + c.getCom() + "> " + c.getDesc().getDialogue());
+		}
 	}
 
 	public void reader()

@@ -13,7 +13,9 @@ import test.rpg.engine.story.StoryLink;
 import test.rpg.engine.story.event.Event;
 import test.rpg.engine.story.event.EventCombat;
 import test.rpg.engine.story.event.EventDialogue;
+import test.rpg.engine.story.event.EventEntity;
 import test.rpg.engine.story.event.EventObserver;
+import test.rpg.perso.Entity;
 
 public class MenuStory extends Menu
 {
@@ -39,7 +41,15 @@ public class MenuStory extends Menu
 			}
 			else if(e instanceof EventCombat)
 			{
-				
+				EventCombat ec = (EventCombat) e;
+				this.addDial(new Dialogue(ec.getTitle()));
+				Iterator<EventEntity> it = ec.getMonsters().iterator();
+				while(it.hasNext())
+				{
+					Entity en = it.next().genEntity();
+					Dialogue diag = new Dialogue(en.toString());
+					this.addDial(diag);
+				}
 			}
 		}
 	}
