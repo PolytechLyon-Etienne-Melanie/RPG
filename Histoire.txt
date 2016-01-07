@@ -1,0 +1,35 @@
+														Script :
+
+Préambule :
+
+	Comme d’habitude, la Cité des Gémissements retentissait des cris d’horreurs des suppliciés, des lamentations des Éplorées et des hurlements des Rôdeurs Déments. Une odeur de sang et de mort empuantissait les rues boueuses ; elle s’insinuait même à l’intérieur des bâtisses branlantes en torchis, où les habitants de la ville se terraient en attendant la fin de la nuit.
+Car une fois encore, le Voile était tombé sans prévenir, et nul ne pouvait prédire quand il se retirerait : il fallait espérer que cette fois-ci, il trouverait rapidement ses victimes...
+	La Cité des Gémissements était autrefois connue sous le nom de Sollisha, la Protégée de Sol. Les anciens racontent que l’on pouvait contempler le monde entier du haut de ses tours, fabriquées à partir de la chair même de Sol. Mais il y a quarante ans, lorsque survint la Chute, lorsque Sol tomba du ciel et que les étoiles se fracassèrent sur le sol, lorsque la terre se convulsa comme une mourante, alors Sollisha perdit à tout jamais son nom…
+	Les tours s’effondrèrent, et de leurs murs s’échappa un liquide putrescent qui forma un lac au beau milieu de la ville. Des beaux édifices d’antan, il ne restait que des carcasses éventrées et les survivants pleurèrent leur ancien foyer. La plupart se mirent en quête de leur dieu: ils voulaient le protéger et le guérir, pour qu’il puisse à nouveau retourner dans les cieux. Mais sans la lumière de Sol pour les guider, ils durent compter désormais sur les enfants de Sol, les étoiles, qui éclairaient chichement le ciel nocturne : à ce jour, nul ne sait ce qu’il est advenu d’eux. Ceux qui restèrent sur place tentèrent de rebâtir ce qui avait été détruit et la vie semblait devoir reprendre son cours, jusqu’à l’arrivée de l’Ombre, dix-sept ans
+après la Chute…
+	Encore aujourd’hui, l’Ombre demeure à bien des égards un mystère. Elle ressemble à un voile d’un noir profond, qui peut recouvrir en un instant une zone de plusieurs dizaines de kilomètres, et ce pendant quelques secondes ou plusieurs heures. A chacun de ses passages, des gens disparaissent sans laisser de traces ou sont transformés en monstres, des paysages sont hideusement altérés ou des créatures étranges surgissent comme par enchantement. Avec l’Ombre vinrent les Rodeurs, êtres immenses à la peau noire, au visage dépourvus d’yeux, et dont les bras décharnés s’étiraient à volonté. Ils déferlèrent sur Sollisha en nombre, écrasant facilement la faible résistance des autochtones. Ils annoncèrent la fin de l’Ere des Lumières et le retour à l’Obscurité Primordiale. Mais plutôt que de réduire les adorateurs de Sol en esclavage, ils s’accouplèrent avec eux, créant ainsi un nouveau peuple, les Liberis. La majorité des anciens habitants ne chercha pas à fuir, car les Rôdeurs les traitaient bien malgré leur appétence sexuelle.
+	Hélas, une curieuse maladie gagna les Rôdeurs ; elle se traduisait par un palissement de la peau et un comportement de plus en plus bestial. Eux qui répugnaient à la violence attaquèrent bientôt sans distinction leurs pairs ou leurs serviteurs. Cette folie destructrice ne pouvait durer ; Liberis et humains s’entendirent alors pour chasser leurs anciens maîtres...
+Six mois se sont écoulés depuis ; un quartier a été libéré mais la partie est loin d’être gagnée : entre les attaques continuelles des Rôdeurs, les apparitions impromptues de l’Ombre qui déversent des cortèges de monstres et les multiples dissensions internes, les deux alliés risquent la destruction à chaque instant ! 
+
+Histoire du Guerrier :
+	Arwed fut l'un des derniers enfants à naître de deux parents humains, il connu les dernière heures de gloire de Sollisha durant son enfance avant que sa vie ne toune au cauchemard. Du haut de ses 6 ans, il a vu son père se faire happer par l'Ombre peut après que sa mère eut disparu dans d'étranges circonstances. Depuis ce jour, Arwed érpouve une profonde haine contre les Rodeurs, les Eplorées et les Liberis.
+	Il a ensuite été recueilli par les defenseurs de la cité dont faisait parti son père. Du fait de son importante stature et de son endurance, il préféra rapidement la hache à la faux que les défenseur arbordent fièrement. Arward fut élévé dans un esprit guerrier et ayant pour seul but de restaurer la gloire d'antant de sa cité. 
+	Ces dernires mois, après la mutation inattendu des Rodeurs, une nouvelle rumeur apparut suggérant que Sol n'était pas morte mais seulement captive quelque part dans la cité. Il n'en fallut pas plus à Arwed pour décider de partie à sa recherche.
+
+Histoire de la magicienne :
+	Sunilda a présenté de grand pouvoirs magique dès sa plus tendre enfance. Ses parents, non magiques, effrayés de voir leur nouveau né faire voler ses couvertures et son biberon la confière au vieux mage de la forêt du Feu Soudain et ne revinrent jamais prendre de ses nouvelles ou même la voir. Le vieux magicien ressenti avant même de l'avoir vu le potentiel magique de la petite fille et accepta de l'élever et de la former comme sa propre fille. 
+	Sunilda grandit baignée dans les formules magiques, les légendes racontant la grandeur d'antant de Sollisha et la splendeur oubliée de la forêt du Feu Soudain. Son père adoptif mourru l'année de ses 16 ans, elle décida alors de reprendre ses travaux sur la mystérieuse disparition de Sol et la chute de la cité. Elle se mit à rêver secrètement de rétablir la situation dans la cité et dans la forêt.
+	Alors, lorsqu'elle entendit parler des rumeurs selon lesquelles Sol était retenue captive quelque part dans la cité elle décida de partir à sa recherche, quittant sa fôret tranquille pour le tumulte de la cité. 
+	
+
+
+
+
+Différentes quêtes :
+	Chapitre 1 : Début du jeu dans l'Auberge "La propreté incarnée", deux choix possible : faire un tour dans l'auberge (un des clients offre des potions [proba aléatoire]) puis de sortir ou sortir directement;
+	Chapitre 2 : Le héro se balade dans la ville se rapprochant du quartier "Les hurlements", rencontre avec Liberis étrange, choix de l'attaquer ou de continuer son chemin.
+	Chapitre 3 : intersection choix d'aller à droite ou gauche
+	Chapitre 3.1 (droite) : rencontre avec un Rodeur muté (combat obligatoire)
+	Chapitre 3.2 (gauche) : rencontre avec l'ombre (si résistance supérieur à ? le héro est seulement blessé sinon il meurt)
+	Chapitre 4 : 
+	

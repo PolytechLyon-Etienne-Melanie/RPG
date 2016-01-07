@@ -20,6 +20,7 @@ public class MenuDescriptionClasse extends Menu{
 	protected void setDials() {
 		this.addDial(new Dialogue("Histoire du "+classe.getNom()+" :"));
 		this.addDial(new Dialogue(text));
+		// ajouter caract de la classe classe.getCarac()
 	}
 
 	@Override
