@@ -110,4 +110,9 @@ public class MenuStory extends Menu
 			}
 		};
 	}
+	
+	public void startCombat()
+	{
+		
+	}
 }
