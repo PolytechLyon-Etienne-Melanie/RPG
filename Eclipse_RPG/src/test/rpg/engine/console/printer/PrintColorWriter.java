@@ -7,7 +7,7 @@ import java.io.PrintStream;
 public class PrintColorWriter extends PrintStream
 {
 	private final boolean gotColor;
-	private final String def = PrintColor.BLACK.getAnsiColor();
+	private final String def = PrintColor.RED.getAnsiColor();
 	
 	public PrintColorWriter(OutputStream stream, boolean color)
 	{

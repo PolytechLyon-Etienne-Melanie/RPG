@@ -63,4 +63,9 @@ public class ConsoleManager
 	{
 		writer.showAllCommands();
 	}
+
+	public void resetCommands()
+	{
+		commands = new ArrayList<Command>();
+	}
 }

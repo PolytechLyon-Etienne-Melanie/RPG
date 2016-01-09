@@ -48,7 +48,7 @@ public enum PrintColor
 			case '8':
 				return Color.white;
 			default :
-				return Color.black;
+				return Color.white;
 		}
 	}
 	

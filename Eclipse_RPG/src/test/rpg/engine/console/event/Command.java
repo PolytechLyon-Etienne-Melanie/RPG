@@ -47,4 +47,9 @@ public class Command extends ConsoleEvent {
 	{
 		return visible;
 	}
+
+	public void setDesc(String string)
+	{
+		desc.setDial(string);
+	}
 }

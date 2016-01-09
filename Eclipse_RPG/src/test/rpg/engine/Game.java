@@ -3,10 +3,10 @@ package test.rpg.engine;
 import test.rpg.engine.console.CustomConsole;
 import test.rpg.engine.console.printer.JConsole;
 import test.rpg.engine.console.printer.Log;
+import test.rpg.engine.interfaces.Menu;
 import test.rpg.engine.story.Story;
 import test.rpg.engine.story.StoryEvent;
 import test.rpg.engine.story.StoryManager;
-import test.rpg.menu.Menu;
 import test.rpg.menu.MenuLoading;
 import test.rpg.menu.MenuStory;
 

@@ -143,4 +143,17 @@ public class Log
 	        //  Handle any exceptions.
 	    }
 	}
+
+	public static boolean debug()
+	{
+		return level == Level.DEBUG;
+	}
+
+	public static void switchDebug()
+	{
+		if(debug())
+			level = Level.ERROR;
+		else
+			level = Level.DEBUG;
+	}
 }

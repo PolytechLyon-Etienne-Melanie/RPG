@@ -39,7 +39,7 @@ public class ConsoleWriter
 
 	public void writeLine(String l)
 	{
-		out.println(PrintColor.BLUE, l);
+		writeLine(l, PrintColor.WHITE);
 		/*
 		 * Log.write(""); for(int i = 0; i < l.length(); i++) {
 		 * Log.writeChar(l.charAt(i)); try { Thread.sleep(100); } catch
@@ -50,13 +50,23 @@ public class ConsoleWriter
 	
 	public void write(String l)
 	{
-		out.print(PrintColor.BLUE, l);
+		write(l, PrintColor.WHITE);
 		/*
 		 * Log.write(""); for(int i = 0; i < l.length(); i++) {
 		 * Log.writeChar(l.charAt(i)); try { Thread.sleep(100); } catch
 		 * (InterruptedException e) { // TODO Auto-generated catch block
 		 * e.printStackTrace(); } }
 		 */
+	}
+	
+	public void writeLine(String l, PrintColor color)
+	{
+		out.println(color, l);
+	}
+	
+	public void write(String l, PrintColor color)
+	{
+		out.print(color, l);
 	}
 
 	public void showAllCommands()
@@ -76,7 +86,8 @@ public class ConsoleWriter
 		if(c.isVisible())
 		{
 			Log.d("write command : " + c);
-			this.writeLine("<" + c.getCom() + "> " + c.getDesc().getDialogue());
+			write("<" + c.getCom() + "> ", PrintColor.CYAN);
+			writeLine(c.getDesc().getDialogue());
 		}
 	}
 

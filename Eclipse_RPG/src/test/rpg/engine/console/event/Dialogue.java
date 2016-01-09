@@ -18,4 +18,9 @@ public class Dialogue extends ConsoleEvent
     {
     	return dialogue;
     }
+
+	public void setDial(String string)
+	{
+		dialogue = string;
+	}
 }

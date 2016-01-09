@@ -5,6 +5,7 @@ import java.io.IOException;
 import test.rpg.engine.console.ConsoleManager;
 import test.rpg.engine.console.event.Command;
 import test.rpg.engine.console.printer.Log;
+import test.rpg.engine.console.printer.PrintColor;
 
 public abstract class CommandSender 
 {
@@ -14,6 +15,11 @@ public abstract class CommandSender
 	{
 		console = new ConsoleManager();
 	}
+	
+	protected final void resetCommands()
+    {
+    	console.resetCommands();
+    }
 	
 	protected final void addCommand(Command c)
     {
@@ -33,6 +39,16 @@ public abstract class CommandSender
     protected final void write(String l)
 	{
     	console.getWriter().write(l);
+	}
+    
+    protected final void writeLine(String l, PrintColor color)
+	{
+    	console.getWriter().writeLine(l, color);
+	}
+    
+    protected final void write(String l, PrintColor color)
+	{
+    	console.getWriter().write(l, color);
 	}
     
     protected final void showCommands()
