@@ -1,12 +1,14 @@
 package test.rpg.menu;
 
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 import test.rpg.engine.Game;
 import test.rpg.engine.console.event.Dialogue;
 import test.rpg.engine.console.printer.Log;
+import test.rpg.engine.console.printer.PrintColor;
 import test.rpg.engine.interfaces.CommandSender;
 
 public abstract class Menu extends CommandSender 
@@ -46,6 +48,7 @@ public abstract class Menu extends CommandSender
 	public void render()
 	{
 		Log.d("render menu");
+		write(PrintColor.ERASE.getAnsiColor());
 		if(!game.isDebug())
 			clearWindow();
 		writeSeparator(title);

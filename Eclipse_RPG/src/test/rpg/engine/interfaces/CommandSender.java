@@ -30,6 +30,11 @@ public abstract class CommandSender
     	console.getWriter().writeLine(l);
 	}
     
+    protected final void write(String l)
+	{
+    	console.getWriter().write(l);
+	}
+    
     protected final void showCommands()
    	{
        	console.showAllCommands();

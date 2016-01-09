@@ -1,25 +1,29 @@
 package test.rpg.engine.console.printer;
 
-import java.io.OutputStreamWriter;
+import java.io.OutputStream;
 import java.io.PrintStream;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 
-public class PrintColorWriter extends PrintWriter
+
+public class PrintColorWriter extends PrintStream
 {
-	//private static final String ANSI_RESET = "\u001B[0m";
-
-	public PrintColorWriter(PrintStream out) throws UnsupportedEncodingException
+	private final boolean gotColor;
+	private final String def = PrintColor.BLACK.getAnsiColor();
+	
+	public PrintColorWriter(OutputStream stream, boolean color)
 	{
-		super(new OutputStreamWriter(out), true);
+		super(stream);
+		gotColor = color;
+	}
+
+	public PrintColorWriter(OutputStream stream)
+	{
+		this(stream, false);
 	}
 
 	public void println(PrintColor color, String string)
 	{
-		//print(color.getAnsiColor());
-		print(string);
-		println(/*ANSI_RESET*/);
-		flush();
+		print(color, string);
+		println("");
 	}
 
 	public void green(String string)
@@ -34,9 +38,17 @@ public class PrintColorWriter extends PrintWriter
 
 	public void print(PrintColor color, String string)
 	{
-		//print(color.getAnsiColor());
+		if(gotColor)
+			print(color.getAnsiColor());
 		print(string);
-		//print(ANSI_RESET);
-		flush();
+		if(gotColor)
+			print(def);
+	}
+	
+	public void printN(PrintColor color, String string)
+	{
+		if(gotColor)
+			print(color.getAnsiColor());
+		print(string);
 	}
 }

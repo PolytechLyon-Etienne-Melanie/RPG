@@ -1,5 +1,7 @@
 package test.rpg.engine;
 
+import test.rpg.engine.console.CustomConsole;
+import test.rpg.engine.console.printer.JConsole;
 import test.rpg.engine.console.printer.Log;
 import test.rpg.engine.story.Story;
 import test.rpg.engine.story.StoryEvent;
@@ -18,6 +20,13 @@ public class Game implements Runnable
     
     public static void main(String[] args) 
     {
+    	JConsole console = new JConsole();
+    	CustomConsole cconsole = new CustomConsole(console);
+    	cconsole.setVisible(true);
+    	
+    	System.setErr(console.getOut());
+    	System.setIn(console.getInputStream());
+    	
     	Game game = new Game();
     	Thread thread = new Thread(game);
         thread.start();

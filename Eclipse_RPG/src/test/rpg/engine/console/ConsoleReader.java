@@ -48,7 +48,7 @@ public class ConsoleReader
 		Log.d("Start reading");
 		manager.getWriter().reader();
 		String com = br.readLine();
-		Log.d("End reading");
+		Log.d("End reading : " + com);
 		onCommand(com);
 	}
 

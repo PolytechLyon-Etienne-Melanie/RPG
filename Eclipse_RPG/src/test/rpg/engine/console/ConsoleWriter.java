@@ -31,19 +31,26 @@ public class ConsoleWriter
 		Log.setLevel(l);
 		Log.setStreamer(stream);
 
-		try
-		{
+		if(stream instanceof PrintColorWriter)
+			out = (PrintColorWriter)stream;
+		else
 			out = new PrintColorWriter(stream);
-		} catch (UnsupportedEncodingException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	public void writeLine(String l)
 	{
-		out.println(PrintColor.GREEN, l);
+		out.println(PrintColor.BLUE, l);
+		/*
+		 * Log.write(""); for(int i = 0; i < l.length(); i++) {
+		 * Log.writeChar(l.charAt(i)); try { Thread.sleep(100); } catch
+		 * (InterruptedException e) { // TODO Auto-generated catch block
+		 * e.printStackTrace(); } }
+		 */
+	}
+	
+	public void write(String l)
+	{
+		out.print(PrintColor.BLUE, l);
 		/*
 		 * Log.write(""); for(int i = 0; i < l.length(); i++) {
 		 * Log.writeChar(l.charAt(i)); try { Thread.sleep(100); } catch
@@ -75,6 +82,6 @@ public class ConsoleWriter
 
 	public void reader()
 	{
-		out.print(PrintColor.GREEN, ">> ");
+		out.printN(PrintColor.GREEN, ">> ");
 	}
 }

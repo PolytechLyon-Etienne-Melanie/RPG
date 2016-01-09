@@ -95,7 +95,7 @@ public class MenuStory extends Menu
 
 	private Command generateCommand(StoryLink link, int id)
 	{
-		return new Command(link.getLink(), "choice" + id);
+		return new Command(link.getLink(), "" + id);
 	}
 	
 	public EventObserver generateObserver(StoryLink l)

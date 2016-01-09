@@ -15,6 +15,7 @@ import test.rpg.engine.interfaces.CommandSender;
 import test.rpg.engine.story.event.Event;
 import test.rpg.engine.story.event.EventDialogue;
 import test.rpg.engine.story.event.EventObserver;
+import test.rpg.menu.MenuMain;
 
 public class StoryManager
 {
@@ -61,7 +62,14 @@ public class StoryManager
 			try
 			{
 				story = StorySerializer.unserialize();
-				eventID = story.getStartId();
+				if (story == null)
+				{
+					game.setCurrentMenu(new MenuMain(game));
+				}
+				else
+				{
+					eventID = story.getStartId();
+				}
 			} catch (ClassNotFoundException | IOException e)
 			{
 				// TODO Auto-generated catch block
@@ -74,7 +82,8 @@ public class StoryManager
 
 	public void startStory()
 	{
-		startStory(eventID);
+		if(story != null)
+			startStory(eventID);
 	}
 
 	public void startStory(int id)
