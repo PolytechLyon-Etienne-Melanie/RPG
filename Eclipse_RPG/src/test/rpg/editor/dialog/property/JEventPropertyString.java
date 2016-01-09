@@ -21,6 +21,7 @@ import test.rpg.engine.console.printer.PrintColor;
 public class JEventPropertyString extends JEventProperty<String>
 {
 	private JTextPane editorPane;
+
 	/**
 	 * @wbp.parser.constructor
 	 */
@@ -29,7 +30,6 @@ public class JEventPropertyString extends JEventProperty<String>
 		this(frame, "");
 	}
 
-	
 	public JEventPropertyString(Frame frame, String field)
 	{
 		super(frame, field);
@@ -44,17 +44,17 @@ public class JEventPropertyString extends JEventProperty<String>
 		this.add(editorPane, BorderLayout.CENTER);
 		JPanel panel = new JPanel();
 		this.add(panel, BorderLayout.SOUTH);
-		
+
 		JComboBox<PrintColor> comboBox = new JComboBox<PrintColor>(PrintColor.values());
 		panel.add(comboBox);
-		
+
 		JButton btnColorier = new JButton("Colorier");
-		btnColorier.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) 
+		btnColorier.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
 			{
 				PrintColor c = comboBox.getItemAt(comboBox.getSelectedIndex());
 				editorPane.replaceSelection(c.getAnsiColor() + editorPane.getSelectedText() + PrintColor.LAST.getAnsiColor());
-				System.out.println(editorPane.getText());
 			}
 		});
 		panel.add(btnColorier);

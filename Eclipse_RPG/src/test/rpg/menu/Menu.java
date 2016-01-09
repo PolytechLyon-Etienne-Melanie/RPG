@@ -55,7 +55,6 @@ public abstract class Menu extends CommandSender
 		writeMenu();
 		writeSeparator("Commands");
 		writeCommands();
-		writeSeparator("Input");
 	}
 	
 	protected void writeMenu()

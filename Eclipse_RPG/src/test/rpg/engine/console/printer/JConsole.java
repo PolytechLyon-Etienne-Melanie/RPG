@@ -131,6 +131,7 @@ public class JConsole extends JScrollPane
 		text.setFont(font);
 		text.setMargin(new Insets(7, 5, 7, 5));
 		text.addKeyListener(this);
+		text.setBackground(Color.black);
 		setViewportView(text);
 
 		// create popup menu
@@ -405,7 +406,7 @@ public class JConsole extends JScrollPane
 	{
 		cmdStart = textLength();
 	}
-public int i = 0;
+	
 	private void append(String string)
 	{
 		text.setText("");
@@ -715,6 +716,7 @@ public int i = 0;
 	
 	private AttributeSet setPrevStyle()
 	{
+		currentColor = lastColor;
 		return setStyle(null, lastColor);
 	}
 
