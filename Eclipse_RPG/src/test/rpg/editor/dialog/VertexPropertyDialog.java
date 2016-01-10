@@ -13,6 +13,7 @@ import test.rpg.engine.story.StoryEvent;
 import test.rpg.engine.story.event.Event;
 import test.rpg.engine.story.event.EventCombat;
 import test.rpg.engine.story.event.EventDialogue;
+import test.rpg.engine.story.event.EventLoot;
 
 import javax.swing.JLabel;
 import javax.swing.GroupLayout;
@@ -45,6 +46,7 @@ public class VertexPropertyDialog extends JDialog
 	
 	private enum SEvent{
 		Dialogue,
+		Loot,
 		Combat;
 	};
 	
@@ -129,7 +131,11 @@ public class VertexPropertyDialog extends JDialog
 						{
 							Event ev = list.getElementAt(jlist.getSelectedIndex());
 							PropertyDialog<? extends Event> dialog = null;
-							if(ev instanceof EventDialogue)
+							 if(ev instanceof EventLoot)
+							{
+								dialog = new LootPropertyDialog(frame, (EventLoot)ev);
+							}
+							 else if(ev instanceof EventDialogue)
 							{
 								dialog = new DialoguePropertyDialog(frame, (EventDialogue)ev);
 							}
@@ -171,6 +177,10 @@ public class VertexPropertyDialog extends JDialog
 					else if(comboBox.getItemAt(comboBox.getSelectedIndex()) == SEvent.Combat)
 					{
 						dialog = new CombatPropertyDialog(frame);
+					}
+					else if(comboBox.getItemAt(comboBox.getSelectedIndex()) == SEvent.Loot)
+					{
+						dialog = new LootPropertyDialog(frame);
 					}
 					if(dialog != null)
 						list.addElement(dialog.getValues());
