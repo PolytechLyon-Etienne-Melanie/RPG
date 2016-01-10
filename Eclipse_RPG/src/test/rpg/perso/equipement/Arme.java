@@ -15,7 +15,6 @@ public class Arme extends Item
     protected Arme(String name, Effet caract, float poids)
 	{
 		super("Arme", name, caract, poids);
-		System.out.println("add " + name);
 	}
 
     public float getDegat()

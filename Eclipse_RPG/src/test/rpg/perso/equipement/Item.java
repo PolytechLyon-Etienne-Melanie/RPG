@@ -90,7 +90,6 @@ public class Item
 	
 	public static Item getRandomLoot()
 	{
-		System.out.println(listItem.size());
 		int r = rand.nextInt(listItem.size());
 		return listItem.get(r);
 	}
@@ -121,7 +120,7 @@ public class Item
 	public static Item getItem(int loot)
 	{
 		Iterator<Item> i = listItem.iterator();
-		Item item = null;;
+		Item item = null;
 		int id = -1;
 		while(i.hasNext() && id != loot)
 		{

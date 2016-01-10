@@ -14,8 +14,10 @@ import test.rpg.engine.story.event.Event;
 import test.rpg.engine.story.event.EventCombat;
 import test.rpg.engine.story.event.EventDialogue;
 import test.rpg.engine.story.event.EventEntity;
+import test.rpg.engine.story.event.EventLoot;
 import test.rpg.engine.story.event.EventObserver;
 import test.rpg.perso.Entity;
+import test.rpg.perso.equipement.Item;
 
 public class MenuStory extends Menu
 {
@@ -33,7 +35,17 @@ public class MenuStory extends Menu
 		while(i.hasNext())
 		{
 			Event e = i.next();
-			if(e instanceof EventDialogue)
+			if(e instanceof EventLoot)
+			{
+				EventLoot el = (EventLoot) e;
+				Dialogue diag = new Dialogue(el.getDialogue());
+				this.addDial(diag);
+				Item item = el.getLoot();
+				Dialogue loot = new Dialogue("Loot : "+ item);
+				this.addDial(loot);
+				this.onLoot(item);
+			}
+			else if(e instanceof EventDialogue)
 			{
 				EventDialogue ed = (EventDialogue) e;
 				Dialogue diag = new Dialogue(ed.getDialogue());
@@ -50,6 +62,7 @@ public class MenuStory extends Menu
 					Dialogue diag = new Dialogue(en.toString());
 					this.addDial(diag);
 				}
+				this.startCombat();
 			}
 		}
 	}
@@ -110,6 +123,11 @@ public class MenuStory extends Menu
 				game.getStoryManager().goNextStoryEvent(l);
 			}
 		};
+	}
+	
+	public void onLoot(Item loot)
+	{
+		
 	}
 	
 	public void startCombat()
