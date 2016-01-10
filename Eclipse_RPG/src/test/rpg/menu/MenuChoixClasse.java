@@ -4,6 +4,7 @@ import test.rpg.engine.Game;
 import test.rpg.engine.console.event.Command;
 import test.rpg.engine.console.event.Dialogue;
 import test.rpg.engine.interfaces.Menu;
+import test.rpg.engine.story.StoryEvent;
 import test.rpg.engine.story.event.EventObserver;
 import test.rpg.perso.classe.Assassin;
 import test.rpg.perso.classe.Guerrier;
@@ -19,9 +20,12 @@ public class MenuChoixClasse extends Menu
 	private final String descMage = "Sunilda a présenté de grand pouvoirs magique dès sa plus tendre enfance. Ses parents, non magiques, effrayés de voir leur nouveau né faire voler ses couvertures et son biberon la confière au vieux mage de la forêt du Feu Soudain et ne revinrent jamais prendre de ses nouvelles ou même la voir. Le vieux magicien ressenti avant même de l'avoir vu le potentiel magique de la petite fille et accepta de l'élever et de la former comme sa propre fille. Sunilda grandit baignée dans les formules magiques, les légendes racontant la grandeur d'antant de Sollisha et la splendeur oubliée de la forêt du Feu Soudain. Son père adoptif mourru l'année de ses 16 ans, elle décida alors de reprendre ses travaux sur la mystérieuse disparition de Sol et la chute de la cité. Elle se mit à rêver secrètement de rétablir la situation dans la cité et dans la forêt. Alors, lorsqu'elle entendit parler des rumeurs selon lesquelles Sol était retenue captive quelque part dans la cité elle décida de partir à sa recherche, quittant sa fôret tranquille pour le tumulte de la cité. ";
 	private final String descAssassin = "desc assassin";
 	
-	public MenuChoixClasse(Game game)
+	private StoryEvent event;
+	
+	public MenuChoixClasse(Game game, StoryEvent event)
 	{
 		super(game);
+		this.event = event;
 	}
 
 	@Override
@@ -33,30 +37,30 @@ public class MenuChoixClasse extends Menu
 
 	@Override
 	protected void setCommands() {
-		guerrier = new Command("Arwed le guerrier", "1.");
+		guerrier = new Command("Arwed le guerrier", "1");
 		guerrier.addObserver(new EventObserver(){
 			@Override
 			public void actionPerformed()
 			{
-				game.setCurrentMenu(new MenuDescriptionClasse(game, new Guerrier(), "Arwed", descGuerrier));
+				game.setCurrentMenu(new MenuDescriptionClasse(game, new Guerrier(), "Arwed", descGuerrier, event));
 			}
 		});
 		
-		mage = new Command("Sunilda la magicienne", "2.");
+		mage = new Command("Sunilda la magicienne", "2");
 		mage.addObserver(new EventObserver(){
 			@Override
 			public void actionPerformed()
 			{
-				game.setCurrentMenu(new MenuDescriptionClasse(game, new Mage(), "Sunilda", descMage));
+				game.setCurrentMenu(new MenuDescriptionClasse(game, new Mage(), "Sunilda", descMage, event));
 			}
 		});
 		
-		assassin = new Command("Voleur", "3.");
+		assassin = new Command("Voleur", "3");
 		assassin.addObserver(new EventObserver(){
 			@Override
 			public void actionPerformed()
 			{
-				game.setCurrentMenu(new MenuDescriptionClasse(game, new Assassin(), "Sunilda", descAssassin));
+				game.setCurrentMenu(new MenuDescriptionClasse(game, new Assassin(), "Sunilda", descAssassin, event));
 			}
 		});
 		this.addCommand(guerrier);

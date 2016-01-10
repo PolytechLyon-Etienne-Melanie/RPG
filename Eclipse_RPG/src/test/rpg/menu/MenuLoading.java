@@ -18,11 +18,13 @@ public class MenuLoading extends Menu
 	@Override
 	protected void setDials()
 	{
-		this.addDial(new Dialogue("  |\\_/|        ****************************    (\\_/)"));
-		this.addDial(new Dialogue(" / @ @ \\       *  \"Purrrfectly pleasant\"  *   (='.'=)"));
-		this.addDial(new Dialogue("( > º < )      *       Poppy Prinz        *   (\")_(\")"));
-		this.addDial(new Dialogue(" `>>x<<´       *   (pprinz@example.com)   *"));
-		this.addDial(new Dialogue(" /  O  \\       ****************************"));
+		this.addDial(new Dialogue("____________________  ________     _____                .__        "));
+		this.addDial(new Dialogue("\\______   \\______   \\/  _____/    /     \\ _____    ____ |__|____   "));
+		this.addDial(new Dialogue(" |       _/|     ___/   \\  ___   /  \\ /  \\\\__  \\  /    \\|  \\__  \\  "));
+		this.addDial(new Dialogue(" |    |   \\|    |   \\    \\_\\  \\ /    Y    \\/ __ \\|   |  \\  |/ __ \\_"));
+		this.addDial(new Dialogue(" |____|_  /|____|    \\______  / \\____|__  (____  /___|  /__(____  /"));
+		this.addDial(new Dialogue("        \\/                  \\/          \\/     \\/     \\/        \\/ "));
+		
 	}
 
 	@Override

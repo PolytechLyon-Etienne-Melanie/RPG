@@ -124,7 +124,7 @@ public class JConsole extends JScrollPane
 			}
 		};
 
-		Font font = new Font("Monospaced", Font.PLAIN, 14);
+		Font font = new Font("Consolas", Font.PLAIN, 14);
 		text.setText("");
 		allText = "";
 		text.setFont(font);

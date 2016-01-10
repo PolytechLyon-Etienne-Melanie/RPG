@@ -4,6 +4,7 @@ import test.rpg.engine.Game;
 import test.rpg.engine.console.event.Command;
 import test.rpg.engine.console.event.Dialogue;
 import test.rpg.engine.interfaces.Menu;
+import test.rpg.engine.story.StoryEvent;
 import test.rpg.engine.story.event.EventObserver;
 import test.rpg.perso.Personnage;
 import test.rpg.perso.classe.Classe;
@@ -16,12 +17,13 @@ public class MenuDescriptionClasse extends Menu{
 	private Command confirmation;
 	private Command retour;
 	private Personnage hero;
-
-	public MenuDescriptionClasse(Game game, Classe c, String nom, String text) {
+	private StoryEvent event;
+	public MenuDescriptionClasse(Game game, Classe c, String nom, String text, StoryEvent event) {
 		super(game);
 		classe = c;
 		this.nom = nom;
 		this.text = text;
+		this.event = event;
 	}
 
 	@Override
@@ -38,7 +40,9 @@ public class MenuDescriptionClasse extends Menu{
 			@Override
 			public void actionPerformed()
 			{
-				//hero = new Personnage(nom, 1, classe); //help... comment on crée un pero ? ^^'
+				hero = new Personnage(nom, 1, classe); //help... comment on crée un pero ? ^^'
+				game.setHero(hero);
+				game.setMenuStory(event);
 			}
 		});
 		retour = new Command("Revenir au personnages", "retour");
@@ -46,7 +50,7 @@ public class MenuDescriptionClasse extends Menu{
 			@Override
 			public void actionPerformed()
 			{
-				game.setCurrentMenu(new MenuChoixClasse(game)); //c'est juste ?...
+				game.setCurrentMenu(new MenuChoixClasse(game, event)); //c'est juste ?...
 			}
 		});
 		this.addCommand(confirmation);

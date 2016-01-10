@@ -17,18 +17,12 @@ public class ConsoleWriter
 
 	public ConsoleWriter(ConsoleManager manager)
 	{
-		this(manager, Log.Level.ERROR, System.err);
-	}
-	
-	public ConsoleWriter(ConsoleManager manager, Log.Level l)
-	{
-		this(manager, l, System.err);
+		this(manager, System.err);
 	}
 
-	public ConsoleWriter(ConsoleManager manager, Log.Level l, PrintStream stream)
+	public ConsoleWriter(ConsoleManager manager, PrintStream stream)
 	{
 		this.manager = manager;
-		Log.setLevel(l);
 		Log.setStreamer(stream);
 
 		if(stream instanceof PrintColorWriter)

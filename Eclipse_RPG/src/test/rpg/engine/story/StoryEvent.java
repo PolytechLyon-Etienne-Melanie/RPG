@@ -14,11 +14,13 @@ public class StoryEvent implements Serializable
 	private ArrayList<Event> events;
     private String event;
     private int id;
+    private boolean setClasse;
     
     public StoryEvent(int id) {
     	this.id = id;
     	event = "none";
     	events = new ArrayList<Event>();
+    	setSetClasse(false);
     }
     
     public String getEvent()
@@ -49,5 +51,15 @@ public class StoryEvent implements Serializable
 	public int getID()
 	{
 		return id;
+	}
+
+	public boolean isSetClasse()
+	{
+		return setClasse;
+	}
+
+	public void setSetClasse(boolean setClasse)
+	{
+		this.setClasse = setClasse;
 	}
 }

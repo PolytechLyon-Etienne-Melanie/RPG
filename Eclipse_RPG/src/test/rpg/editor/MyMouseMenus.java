@@ -91,6 +91,7 @@ public class MyMouseMenus
 			this.add(new DeleteVertexMenuItem<StoryEvent>());
 			this.addSeparator();
 			this.add(new EventDisplay());
+			this.add(new VextexCheckBox());
 			this.addSeparator();
 			this.add(new VertexPropItem(frame));
 		}
@@ -128,4 +129,23 @@ public class MyMouseMenus
 			});
 		}
 	}
+	
+	public static class VextexCheckBox extends JCheckBoxMenuItem implements VertexMenuListener<StoryEvent> {
+		StoryEvent v;
+        
+        public VextexCheckBox() {
+            super("Set Classe");
+            this.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    v.setSetClasse(isSelected());
+                }
+                
+            });
+        }
+        public void setVertexAndView(StoryEvent v, VisualizationViewer visComp) {
+            this.v = v;
+            this.setSelected(v.isSetClasse());
+        }
+        
+    }
 }

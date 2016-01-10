@@ -116,4 +116,9 @@ public class MenuStory extends Menu
 	{
 		
 	}
+
+	public void setEvent(StoryEvent event)
+	{
+		this.event = event;
+	}
 }

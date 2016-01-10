@@ -5,7 +5,7 @@ import test.rpg.perso.equipement.Arme;
 import test.rpg.perso.equipement.Armure;
 import test.rpg.perso.equipement.Item;
 
-public abstract class Personnage extends Entity {
+public class Personnage extends Entity {
 
 	private int poidsMax;
     private int santeMax;

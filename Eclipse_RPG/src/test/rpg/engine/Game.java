@@ -7,16 +7,21 @@ import test.rpg.engine.interfaces.Menu;
 import test.rpg.engine.story.Story;
 import test.rpg.engine.story.StoryEvent;
 import test.rpg.engine.story.StoryManager;
+import test.rpg.menu.MenuChoixClasse;
 import test.rpg.menu.MenuLoading;
 import test.rpg.menu.MenuStory;
+import test.rpg.perso.Personnage;
 
 public class Game implements Runnable
 {
     private StoryManager story;
     private Menu currentMenu;
+    private MenuStory storyMenu;
     public static enum State {loading, running, inpause};
     private State state;
     private boolean debug = false;
+    
+    private Personnage hero;
     
     public static void main(String[] args) 
     {
@@ -79,7 +84,21 @@ public class Game implements Runnable
     
     public void setMenuStory(StoryEvent e)
     {
-    	this.setCurrentMenu(new MenuStory(this, e));
+    	if(e.isSetClasse() && hero == null)
+    		this.setCurrentMenu(new MenuChoixClasse(this, e));
+    	else
+    	{
+    		if(storyMenu == null)
+    			storyMenu = new MenuStory(this, e);
+    		else
+    			storyMenu.setEvent(e);
+    		this.setCurrentMenu(storyMenu);
+    	}
+    }
+    
+    public void setHero(Personnage p)
+    {
+    	this.hero = p;
     }
     
     public void updateGame()
