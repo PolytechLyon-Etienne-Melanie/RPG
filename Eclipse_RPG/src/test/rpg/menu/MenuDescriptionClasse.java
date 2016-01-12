@@ -40,7 +40,7 @@ public class MenuDescriptionClasse extends Menu{
 			@Override
 			public void actionPerformed()
 			{
-				hero = new Personnage(nom, 1, classe); //help... comment on crée un pero ? ^^'
+				hero = new Personnage(game, nom, 1, classe); //help... comment on crée un pero ? ^^'
 				game.setHero(hero);
 				game.setMenuStory(event);
 			}

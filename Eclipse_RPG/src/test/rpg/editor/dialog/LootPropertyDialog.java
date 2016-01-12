@@ -27,7 +27,7 @@ public class LootPropertyDialog extends PropertyDialog<EventLoot>
 	{
 		string = new JEventPropertyString(frame, value.getDialogue());
 		this.addProperty("Texte", string);
-		combo = new JEventPropertyComboList<Item>(frame, Item.getItems(), value.getLoot());
+		combo = new JEventPropertyComboList<Item>(frame, Item.getItems(), value.getLootForEditor());
 		this.addProperty("Item", combo);
 	}
 

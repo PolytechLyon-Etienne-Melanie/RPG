@@ -1,11 +1,13 @@
 package test.rpg.engine.story.event;
 
-import java.util.Random;
-
 import test.rpg.perso.equipement.Item;
 
 public class EventLoot extends EventDialogue
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7113219565187184622L;
 	private int loot;
 	
 	public EventLoot(String d, int loot)
@@ -30,19 +32,21 @@ public class EventLoot extends EventDialogue
 		super();
 	}
 
-	public Item getLoot()
+	public Item geenerateLoot()
 	{
-		Item item = null;
-		if(loot == 0)
-			item = Item.getRandomLoot();
-		else
-			item = Item.getItem(loot);
+		Item item = Item.getItem(loot);
+		return item;
+	}
+	
+	public Item getLootForEditor()
+	{
+		Item item = Item.getItemForEditor(loot);
 		return item;
 	}
 
 	public String toString() 
     {
-    	return "Loot : " + getLoot();
+    	return "Loot : " + getLootForEditor();
     }
 
 	public void setLoot(int loot)

@@ -1,19 +1,32 @@
 package test.rpg.perso;
 
+import test.rpg.engine.Game;
+import test.rpg.menu.MenuLevelUpScreen;
 import test.rpg.perso.classe.Classe;
 import test.rpg.perso.equipement.Arme;
 import test.rpg.perso.equipement.Armure;
 import test.rpg.perso.equipement.Item;
 
-public class Personnage extends Entity {
-
+public class Personnage extends Entity 
+{
+	private static final int xpGrow = 10; 
 	private int poidsMax;
     private int santeMax;
-
     
-    public Personnage(String nom, int n, Classe classe) {
+    private int pointsToAssing;
+    private int xp;
+    private int xpToNextLevel;
+
+    private Game game;
+    
+    public Personnage(Game game, String nom, int n, Classe classe) {
 		super(nom, n, classe);
 		// TODO Auto-generated constructor stub
+		this.pointsToAssing = 0;
+		xp = 0;
+		this.setXpToNextLevel();
+		
+		this.game = game;
 	}
     
 	public int getPoidsMax() {
@@ -68,4 +81,37 @@ public class Personnage extends Entity {
     public Arme enleverArme(Arme arme) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+    
+    public void earnXP(int xp)
+    {
+    	this.xp += xp;
+    	checkXP();
+    }
+    
+    private void checkXP()
+    {
+    	if(xp > this.xpToNextLevel)
+    	{
+    		xp -= this.xpToNextLevel;
+    		this.setXpToNextLevel();
+    		levelUp();
+    	}
+    }
+    
+    private int setXpToNextLevel()
+    {
+    	return niveau * Personnage.xpGrow;
+    }
+    
+    private void levelUp()
+    {
+    	niveau++;
+    	this.pointsToAssing += 3;
+    	game.setCurrentMenu(new MenuLevelUpScreen(game, this));
+    }
+
+	public int getPointsToAssing()
+	{
+		return pointsToAssing;
+	}
 }

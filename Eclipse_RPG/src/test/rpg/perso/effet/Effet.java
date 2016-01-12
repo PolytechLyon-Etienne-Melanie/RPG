@@ -16,6 +16,18 @@ public class Effet {
 		this(0,0,0,0,0);
 	}
 	
+
+	public Effet(int per, int v)
+	{
+		this(per, v, new Caracteristique());
+	}
+	
+	public Effet(int v)
+	{
+		this(-1, v, new Caracteristique());
+	}
+	
+	
 	public Effet(Caracteristique c)
 	{
 		this(-1, 0, c);
@@ -72,5 +84,22 @@ public class Effet {
 	{
 		c.setMagie(f);
 		return this;
+	}
+	
+	public Effet setDex(int f)
+	{
+		c.setDexterite(f);
+		return this;
+	}
+	
+	public String toString()
+	{
+		return "Val : " + valeur + ", Duree : " + permanent + ", Caract : " + c;
+	}
+
+	public Effet setDuree(int i)
+	{
+		this.permanent = i;
+		return null;
 	}
 }

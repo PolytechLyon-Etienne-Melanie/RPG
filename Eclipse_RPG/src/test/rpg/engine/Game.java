@@ -69,6 +69,11 @@ public class Game implements Runnable
 		this.currentMenu = currentMenu;
 		currentMenu.init();
 	}
+	
+	public void returnToStory()
+	{
+		this.setCurrentMenu(this.storyMenu);
+	}
 
 	public void initGame() 
 	{
@@ -99,6 +104,11 @@ public class Game implements Runnable
     public void setHero(Personnage p)
     {
     	this.hero = p;
+    }
+    
+    public Personnage getHero()
+    {
+    	return this.hero;
     }
     
     public void updateGame()

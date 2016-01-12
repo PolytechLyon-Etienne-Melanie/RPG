@@ -15,6 +15,7 @@ public class Arme extends Item
     protected Arme(String name, Effet caract, float poids)
 	{
 		super("Arme", name, caract, poids);
+		listArme.add(this);
 	}
 
     public float getDegat()
@@ -35,5 +36,11 @@ public class Arme extends Item
 	public void setManiabilite(float maniabilite)
 	{
 		this.maniabilite = maniabilite;
+	}
+	
+	public static Arme getRandomArme()
+	{
+		int r = rand.nextInt(listArme.size());
+		return listArme.get(r);
 	}
 }

@@ -52,4 +52,14 @@ public class Caracteristique {
 		defense = def;
 		magie = m;
 	}
+
+	public Caracteristique()
+	{
+		this(0,0,0,0,0);
+	}
+	
+	public String toString()
+	{
+		return "f:" + force + ", dex" + dexterite + ", s" + sante + ", def:" + defense + ", m:" + magie;
+	}
 }

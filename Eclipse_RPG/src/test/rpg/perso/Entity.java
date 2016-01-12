@@ -1,6 +1,6 @@
 package test.rpg.perso;
 
-import java.io.Serializable;
+import java.util.Random;
 
 import test.rpg.perso.classe.Caracteristique;
 import test.rpg.perso.classe.Classe;
@@ -8,12 +8,15 @@ import test.rpg.perso.classe.monstre.Rodeur;
 
 public class Entity
 {
+	public static final int xpMount = 10;
 	protected String nom;
 	protected int niveau;
 	protected int sante;
 
 	protected int santeMax;
 	protected Classe classe;
+	
+	protected Random rand;
 	
 	public Entity(String nom, int n, Classe classe)
 	{
@@ -22,6 +25,8 @@ public class Entity
 		this.classe = classe;
 		calculSanteMax();
 		sante = santeMax;
+		
+		rand = new Random();
 	}
 	
 	public Entity()
@@ -68,5 +73,10 @@ public class Entity
 	public String toString()
 	{
 		return "Nom : " + nom + " | Niveau : " + niveau + " | Classe : " + classe.getNom();
+	}
+	
+	public int getXpVal()
+	{
+		return niveau * Entity.xpMount + rand.nextInt(Entity.xpMount);
 	}
 }

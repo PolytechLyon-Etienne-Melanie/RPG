@@ -40,7 +40,7 @@ public class MenuStory extends Menu
 				EventLoot el = (EventLoot) e;
 				Dialogue diag = new Dialogue(el.getDialogue());
 				this.addDial(diag);
-				Item item = el.getLoot();
+				Item item = el.geenerateLoot();
 				Dialogue loot = new Dialogue("Loot : "+ item);
 				this.addDial(loot);
 				this.onLoot(item);
@@ -61,8 +61,9 @@ public class MenuStory extends Menu
 					Entity en = it.next().genEntity();
 					Dialogue diag = new Dialogue(en.toString());
 					this.addDial(diag);
+					this.startCombat(en);
 				}
-				this.startCombat();
+				//this.startCombat();
 			}
 		}
 	}
@@ -130,9 +131,9 @@ public class MenuStory extends Menu
 		
 	}
 	
-	public void startCombat()
+	public void startCombat(Entity e)
 	{
-		
+		game.getHero().earnXP(e.getXpVal());
 	}
 
 	public void setEvent(StoryEvent event)

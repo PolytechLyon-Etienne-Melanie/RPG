@@ -17,6 +17,7 @@ public abstract class Menu extends CommandSender
 	protected String title;
 	protected ArrayList<Dialogue> dials;
 	private Menu retour;
+	protected boolean init;
 
 	public Menu(Game game)
 	{
@@ -34,15 +35,21 @@ public abstract class Menu extends CommandSender
 		this.game = game;
 		title = name;
 		this.retour = retour;
+		init = true;
 	}
 
 	public void init()
 	{
-		resetCommands();
-		setRetourCom();
-		dials = new ArrayList<Dialogue>();
-		setDials();
-		setCommands();
+		//if(init)
+		//{
+			resetCommands();
+			setRetourCom();
+			dials = new ArrayList<Dialogue>();
+			setDials();
+			setCommands();
+		//}
+		//else
+		//	reload();
 	}
 
 	private void setRetourCom()
@@ -75,6 +82,8 @@ public abstract class Menu extends CommandSender
 	protected abstract void setDials();
 
 	protected abstract void setCommands();
+	
+	//protected abstract void reload();
 
 	public void render()
 	{
