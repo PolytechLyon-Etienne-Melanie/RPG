@@ -55,6 +55,6 @@ public class MenuInventaire extends Menu{
 		
 		writeLine("");
 		writeLine("Vous êtes équipé de l'armure suivante :" +inventaire.getArmureeq());
-	}
+	} //commande sorti + regler pb armure + refaire titre (pas beau) + command equiper/jeter/ ...
 
 }

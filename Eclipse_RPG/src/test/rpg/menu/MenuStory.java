@@ -73,7 +73,7 @@ public class MenuStory extends Menu
 	
 	public void generateEndChoice()
 	{
-		inventaire = new Command("Charger une histoire", "load");
+		inventaire = new Command("Accéder à votre inventaire", "invent");
 		inventaire.addObserver(new EventObserver(){
 			@Override
 			public void actionPerformed()
@@ -82,6 +82,7 @@ public class MenuStory extends Menu
 			}
 			
 		});
+		this.addCommand(inventaire);
 		
 		ArrayList<StoryLink> links = new ArrayList<StoryLink>(game.getStoryManager().getStory().getGraph().getOutEdges(event));
 		if(links.size() == 1)
