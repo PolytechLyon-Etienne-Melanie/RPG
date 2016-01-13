@@ -17,13 +17,7 @@ public class MenuLevelUpScreen extends Menu
 		this.perso = p;
 	}
 
-	@Override
-	protected void setDials()
-	{
-		this.addDial(new Dialogue("LEVEL UP"));
-	}
 
-	@Override
 	protected void setCommands()
 	{
 		KeyObserver key = new KeyObserver();
@@ -36,5 +30,27 @@ public class MenuLevelUpScreen extends Menu
 			}
 		});
 		this.addCommand(key);
+	}
+
+	@Override
+	protected void initMenu() {
+		setCommands();
+		
+	}
+
+	@Override
+	protected void renderMenu() {
+		writeLine(" /$$                                     /$$       /$$   /$$");          
+		writeLine("| $$                                    | $$      | $$  | $$");          
+		writeLine("| $$        /$$$$$$  /$$    /$$ /$$$$$$ | $$      | $$  | $$  /$$$$$$"); 
+		writeLine("| $$       /$$__  $$|  $$  /$$//$$__  $$| $$      | $$  | $$ /$$__  $$");
+		writeLine("| $$      | $$$$$$$$ \\  $$/$$/| $$$$$$$$| $$      | $$  | $$| $$  \\ $$");
+		writeLine("| $$      | $$_____/  \\  $$$/ | $$_____/| $$      | $$  | $$| $$  | $$");
+		writeLine("| $$$$$$$$|  $$$$$$$   \\  $/  |  $$$$$$$| $$      |  $$$$$$/| $$$$$$$/");
+		writeLine("|________/ \\_______/    \\_/    \\_______/|__/       \\______/ | $$____/ ");
+		writeLine("                                                            | $$");      
+		writeLine("                                                            | $$");      
+		writeLine("                                                            |__/");
+		
 	}
 }

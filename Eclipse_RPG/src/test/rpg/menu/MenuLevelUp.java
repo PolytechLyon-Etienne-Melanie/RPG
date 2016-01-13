@@ -99,19 +99,8 @@ public class MenuLevelUp extends Menu
 	}
 
 	@Override
-	protected void renderMenu() {
-		writeLine(" /$$                                     /$$       /$$   /$$");          
-		writeLine("| $$                                    | $$      | $$  | $$");          
-		writeLine("| $$        /$$$$$$  /$$    /$$ /$$$$$$ | $$      | $$  | $$  /$$$$$$"); 
-		writeLine("| $$       /$$__  $$|  $$  /$$//$$__  $$| $$      | $$  | $$ /$$__  $$");
-		writeLine("| $$      | $$$$$$$$ \\  $$/$$/| $$$$$$$$| $$      | $$  | $$| $$  \\ $$");
-		writeLine("| $$      | $$_____/  \\  $$$/ | $$_____/| $$      | $$  | $$| $$  | $$");
-		writeLine("| $$$$$$$$|  $$$$$$$   \\  $/  |  $$$$$$$| $$      |  $$$$$$/| $$$$$$$/");
-		writeLine("|________/ \\_______/    \\_/    \\_______/|__/       \\______/ | $$____/ ");
-		writeLine("                                                            | $$");      
-		writeLine("                                                            | $$");      
-		writeLine("                                                            |__/");
-		
+	protected void renderMenu() {	
+		writeLine("Félicitation !! Vous avez gagné un niveau !");
 		writeLine("Vous pouvez assigner " + perso.getPointsToAssing() + " points de compétences.");
 		writeLine("Points de compétences actuels : " + perso.getCaracteristique());
 		
