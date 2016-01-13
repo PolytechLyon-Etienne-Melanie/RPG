@@ -14,7 +14,7 @@ import test.rpg.perso.Personnage;
 
 public class MenuCombat extends Menu
 {
-	enum State {intro, yourTurn, enemyTurn, fin};
+	enum State {intro, yourTurn, enemyTurn, fin, distributeXp};
 	private int tour;
 	private int persoTurn;
 	
