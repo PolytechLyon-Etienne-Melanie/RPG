@@ -35,7 +35,7 @@ public class MenuLevelUp extends Menu
 	@Override
 	protected void setCommands()
 	{
-		addForce = new Command("Voules-vous augmenter la force de votre héro ?", "oui");
+		addForce = new Command("Voules-vous augmenter la force de votre héro ?", "1");
 		addForce.addObserver(new EventObserver(){
 			@Override
 			public void actionPerformed()
@@ -45,7 +45,7 @@ public class MenuLevelUp extends Menu
 			}
 		});
 		
-		addDex = new Command("Voules-vous augmenter la dextérité de votre héro ?", "oui");
+		addDex = new Command("Voules-vous augmenter la dextérité de votre héro ?", "2");
 		addDex.addObserver(new EventObserver(){
 			@Override
 			public void actionPerformed()
@@ -55,7 +55,7 @@ public class MenuLevelUp extends Menu
 			}
 		});
 		
-		addDef = new Command("Voules-vous augmenter la défense de votre héro ?", "oui");
+		addDef = new Command("Voules-vous augmenter la défense de votre héro ?", "3");
 		addDef.addObserver(new EventObserver(){
 			@Override
 			public void actionPerformed()
@@ -65,7 +65,7 @@ public class MenuLevelUp extends Menu
 			}
 		});
 		
-		addSante = new Command("Voules-vous augmenter la santé de votre héro ?", "oui");
+		addSante = new Command("Voules-vous augmenter la santé de votre héro ?", "4");
 		addSante.addObserver(new EventObserver(){
 			@Override
 			public void actionPerformed()
@@ -75,7 +75,7 @@ public class MenuLevelUp extends Menu
 			}
 		});
 		
-		addMagie = new Command("Voules-vous augmenter la magie de votre héro ?", "oui");
+		addMagie = new Command("Voules-vous augmenter la magie de votre héro ?", "5");
 		addMagie.addObserver(new EventObserver(){
 			@Override
 			public void actionPerformed()

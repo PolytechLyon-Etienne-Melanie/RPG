@@ -44,8 +44,6 @@ public abstract class Menu extends CommandSender
 		//{
 			resetCommands();
 			setRetourCom();
-			dials = new ArrayList<Dialogue>();
-			setDials();
 			setCommands();
 		//}
 		//else
@@ -87,6 +85,10 @@ public abstract class Menu extends CommandSender
 
 	public void render()
 	{
+		
+		dials = new ArrayList<Dialogue>();
+		setDials();
+		
 		Log.d("render menu");
 		write(PrintColor.ERASE.getAnsiColor());
 		if (!game.isDebug())
