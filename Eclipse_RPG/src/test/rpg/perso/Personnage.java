@@ -5,6 +5,7 @@ import test.rpg.menu.MenuLevelUpScreen;
 import test.rpg.perso.classe.Classe;
 import test.rpg.perso.equipement.Arme;
 import test.rpg.perso.equipement.Armure;
+import test.rpg.perso.equipement.Inventaire;
 import test.rpg.perso.equipement.Item;
 
 public class Personnage extends Entity 
@@ -12,6 +13,7 @@ public class Personnage extends Entity
 	private static final int xpGrow = 10; 
 	private int poidsMax;
     private int santeMax;
+    private Inventaire inventaire;
     
     private int pointsToAssing;
     private int xp;
@@ -25,7 +27,9 @@ public class Personnage extends Entity
 		this.pointsToAssing = 0;
 		xp = 0;
 		this.setXpToNextLevel();
-		
+		inventaire = new Inventaire();
+		inventaire.setArmreeq(classe.getDefaultArme());
+		updatePoidsMax();
 		this.game = game;
 	}
     
@@ -35,6 +39,10 @@ public class Personnage extends Entity
 
 	public void setPoidsMax(int poidsMax) {
 		this.poidsMax = poidsMax;
+	}
+	
+	private void updatePoidsMax(){
+		poidsMax = 10 + this.getCaracteristique().getForce();
 	}
 
 	public int getSanteMax() {
@@ -122,11 +130,13 @@ public class Personnage extends Entity
 	public void increaseForce() {
 		classe.increaseForce();
 		usePoint();
+		updatePoidsMax();
 	}
 	
 	public void increaseSante() {
 		classe.increaseSante();
 		usePoint();
+		calculSanteMax();
 	}
 	
 	public void increaseDexterite() {

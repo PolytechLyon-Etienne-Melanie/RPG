@@ -30,7 +30,7 @@ public class MenuChoixClasse extends Menu
 
 	
 	protected void setCommands() {
-		guerrier = new Command("Arwed le guerrier", "1");
+		guerrier = new Command("Arwed le Guerrier", "1");
 		guerrier.addObserver(new EventObserver(){
 			@Override
 			public void actionPerformed()
@@ -39,7 +39,7 @@ public class MenuChoixClasse extends Menu
 			}
 		});
 		
-		mage = new Command("Sunilda la magicienne", "2");
+		mage = new Command("Sunilda la Magicienne", "2");
 		mage.addObserver(new EventObserver(){
 			@Override
 			public void actionPerformed()
@@ -48,7 +48,7 @@ public class MenuChoixClasse extends Menu
 			}
 		});
 		
-		assassin = new Command("Voleur", "3");
+		assassin = new Command("Elrond le Voleur", "3");
 		assassin.addObserver(new EventObserver(){
 			@Override
 			public void actionPerformed()

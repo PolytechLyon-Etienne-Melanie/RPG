@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import test.rpg.perso.competence.Capacite;
+import test.rpg.perso.equipement.Arme;
+import test.rpg.perso.equipement.Armure;
 
 public class Classe
 {
@@ -70,6 +72,15 @@ public class Classe
 	
 	public void increaseMagie() {
 		carac.setMagie(carac.getMagie()+1);
+		
+	}
+	
+	public Arme getDefaultArme(){
+		return Arme.armeDebut;
+	}
+	
+	public Armure getDefaultArmure(){
+		return Armure.armureDebut;
 		
 	}
 }

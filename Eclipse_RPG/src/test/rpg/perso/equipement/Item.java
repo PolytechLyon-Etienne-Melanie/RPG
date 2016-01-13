@@ -18,7 +18,8 @@ public class Item
 	public static Arme epeeRandom;
 	public static Consommable consoRandom;
 	public static Armure armureRandom;
-
+	
+	public static Arme armeDebut;
 	public static Arme epeeBase;
 	public static Arme epeeMoyenne;
 	public static Arme epeeAvancee;
@@ -35,6 +36,15 @@ public class Item
 	public static Consommable potionForce;
 	public static Consommable potionMagie;
 	public static Consommable potionDex;
+	
+	public static Armure armureDebut;
+	public static Armure armureBase;
+	public static Armure armureMoyenne;
+	public static Armure armureAvancee;
+	public static Armure capeDeVoleur;
+	public static Armure robeDeSorcier;
+
+
 	
 	protected static Random rand = new Random();
 
@@ -163,7 +173,7 @@ public class Item
 		potionMagie = new Consommable("Potion de magie", new Effet().setMagie(20).setDuree(3), 1);
 		potionDex = new Consommable("Potion de dexterité", new Effet().setDex(20).setDuree(3), 1);
 
-		
+		armeDebut = new Arme("Noob", new Effet(1,1,0,0,1), 2);
 		epeeBase = new Arme("Adria", new Effet().setForce(2), 2);
 		epeeMoyenne = new Arme("Asmodan", new Effet().setForce(5), 6);
 		epeeAvancee = new Arme("Diablo", new Effet().setForce(10), 18);
@@ -175,6 +185,14 @@ public class Item
 		dagueBase = new Arme("Piquant d'Ambre", new Effet(2, 3, 0, 0, 0), 2);
 		dagueMoyenne = new Arme("Dague des sept étoiles", new Effet(4, 6, 0, 0, 0), 2);
 		dagueAvancee = new Arme("L'appel du Dragon", new Effet(8, 12, 0, 0, 0), 2);
+		
+		armureDebut = new Armure("BodyNoob", new Effet(0, 0, 1, 1, 0), 2);
+		armureBase = new Armure("Le Serment du Sage", new Effet(0, 0, 2, 3, 0), 2);
+		armureMoyenne = new Armure("Le Péril du Gardien", new Effet(0, 0, 6, 9, 0), 5);
+		armureAvancee = new Armure("La Fatalité de Sol", new Effet(0, 0, 18, 27, 0), 10);
+		capeDeVoleur = new Armure("La Fatalité de Sol", new Effet(0, 0, 18, 27, 0), 3);
+		robeDeSorcier = new Armure("Les Atours de l'oiseau de Feu", new Effet(0, 0, 9, 10, 5), 3);
+
 	}
 
 	public static Item[] getItems()
