@@ -40,7 +40,7 @@ public class MenuDescriptionClasse extends Menu{
 			@Override
 			public void actionPerformed()
 			{
-				hero = new Personnage(game, nom, 1, classe); //help... comment on crée un pero ? ^^'
+				hero = new Personnage(game, nom, 1, classe);
 				game.setHero(hero);
 				game.setMenuStory(event);
 			}
@@ -50,12 +50,11 @@ public class MenuDescriptionClasse extends Menu{
 			@Override
 			public void actionPerformed()
 			{
-				game.setCurrentMenu(new MenuChoixClasse(game, event)); //c'est juste ?...
+				game.setCurrentMenu(new MenuChoixClasse(game, event));
 			}
 		});
 		this.addCommand(confirmation);
 		this.addCommand(retour);
-		// creer commande retour + creer new perso
 		
 		
 	}

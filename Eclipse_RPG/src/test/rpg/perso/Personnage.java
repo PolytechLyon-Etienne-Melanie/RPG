@@ -114,4 +114,38 @@ public class Personnage extends Entity
 	{
 		return pointsToAssing;
 	}
+	
+	private void usePoint(){
+		pointsToAssing --;
+	}
+	
+	public void increaseForce() {
+		classe.increaseForce();
+		usePoint();
+	}
+	
+	public void increaseSante() {
+		classe.increaseSante();
+		usePoint();
+	}
+	
+	public void increaseDexterite() {
+		classe.increaseDex();
+		usePoint();
+	}
+	
+	public void increaseMagie() {
+		classe.increaseMagie();
+		usePoint();
+	}
+	
+	public void increaseDef() {
+		classe.increaseDef();
+		usePoint();
+	}
+	
+	
+		
+	
+
 }

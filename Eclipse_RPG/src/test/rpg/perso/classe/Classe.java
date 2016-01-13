@@ -27,7 +27,7 @@ public class Classe
 	public Caracteristique getCarac() {
 		return carac;
 	}
-
+	
 	public void setCarac(Caracteristique carac) {
 		this.carac = carac;
 	}
@@ -48,4 +48,28 @@ public class Classe
 		this.capa = capa;
 	}
 
+	public void increaseForce() {
+		carac.setForce(carac.getForce()+1);
+		
+	}
+	
+	public void increaseDef() {
+		carac.setDefense(carac.getDefense()+1);
+		
+	}
+	
+	public void increaseDex() {
+		carac.setDexterite(carac.getDexterite()+1);
+		
+	}
+	
+	public void increaseSante() {
+		carac.setSante(carac.getSante()+1);
+		
+	}
+	
+	public void increaseMagie() {
+		carac.setMagie(carac.getMagie()+1);
+		
+	}
 }
