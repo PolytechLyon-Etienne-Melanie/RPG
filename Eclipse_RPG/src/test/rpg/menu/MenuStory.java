@@ -24,6 +24,8 @@ import test.rpg.perso.equipement.Item;
 public class MenuStory extends Menu
 {
 	private StoryEvent event;
+	private Command inventaire;
+	
 	public MenuStory(Game game, StoryEvent event)
 	{
 		super(game);
@@ -71,6 +73,16 @@ public class MenuStory extends Menu
 	
 	public void generateEndChoice()
 	{
+		inventaire = new Command("Charger une histoire", "load");
+		inventaire.addObserver(new EventObserver(){
+			@Override
+			public void actionPerformed()
+			{
+				game.setCurrentMenu(new MenuInventaire(game, game.getHero().getInventaire()));
+			}
+			
+		});
+		
 		ArrayList<StoryLink> links = new ArrayList<StoryLink>(game.getStoryManager().getStory().getGraph().getOutEdges(event));
 		if(links.size() == 1)
 		{
