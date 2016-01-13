@@ -133,7 +133,8 @@ public class MenuStory extends Menu
 	
 	public void startCombat(Entity e)
 	{
-		game.getHero().earnXP(e.getXpVal());
+		
+		//game.getHero().earnXP(e.getXpVal());
 	}
 
 	public void setEvent(StoryEvent event)
