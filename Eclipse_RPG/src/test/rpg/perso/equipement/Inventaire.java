@@ -14,8 +14,9 @@ public class Inventaire {
 	private int poidsMax;
 	private Personnage perso;
 	
-	public Inventaire(){
+	public Inventaire(Personnage perso){
 		items = new ArrayList<Item>();
+		this.perso = perso;
 		setPoidsMax(perso.getPoidsMax());
 	}
 
@@ -74,5 +75,10 @@ public class Inventaire {
 		
 		return poidsInventaire < poidsMax; 
 		
+	}
+
+	public List<Consommable> getConsommables()
+	{
+		return new ArrayList<Consommable>();
 	}
 }

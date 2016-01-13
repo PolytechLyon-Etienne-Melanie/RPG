@@ -35,6 +35,7 @@ public class MenuCombat extends Menu
 	private Personnage perso;
 	private Capacite capacite;
 	private Consommable consommable;
+	private String actionComment;
 	
 	private Random rand;
 	
@@ -58,9 +59,23 @@ public class MenuCombat extends Menu
 
 			@Override
 			public void actionPerformed()
-			{}
+			{
+				setAttaquant();
+			}
 		});
 		this.addCommand(key);
+	}
+	
+	private void setAttaquant()
+	{
+		if(rand.nextBoolean())
+		{
+			this.state = State.yourTurn;
+		}
+		else
+		{
+			this.state = State.enemyTurn;
+		}
 	}
 	
 	private void setYourTurn()
@@ -135,10 +150,6 @@ public class MenuCombat extends Menu
 		this.addCommand(nada);
 	}
 	
-	private void passTurn()
-	{
-	}
-	
 	private void useCapa()
 	{
 		this.actionState = ActionState.useCapa;
@@ -166,7 +177,7 @@ public class MenuCombat extends Menu
 	private void setCapaPerso()
 	{
 		int n = 1;
-		Iterator<Consommable> i/* = perso.getClasse().getCapa().iterator()*/;
+		Iterator<Consommable> i = perso.getInventaire().getConsommables().iterator();
 		while(i.hasNext())
 		{
 			Consommable conso = i.next();
@@ -191,6 +202,7 @@ public class MenuCombat extends Menu
 				@Override
 				public void actionPerformed()
 				{
+					passTurn();
 				}
 			});
 			this.addCommand(key);
@@ -243,6 +255,11 @@ public class MenuCombat extends Menu
 		this.turnState = TurnState.applyAction;
 	}
 	
+	public void passTurn()
+	{
+		this.turnState = TurnState.applyAction;
+	}
+	
 	private void setEnemyTurn()
 	{
 		KeyObserver key = new KeyObserver();
@@ -287,25 +304,6 @@ public class MenuCombat extends Menu
 		writeLine("c'est le tour de votre adversaire", PrintColor.CYAN);
 	}
 
-	private void renderYourTurn()
-	{
-		writeLine("C'est au tour de " + perso.getNom() + " d'attaquer.", PrintColor.CYAN);
-	}
-
-	private void renderIntro()
-	{
-		if(rand.nextBoolean())
-		{
-			writeLine("Vous commencez le combat !", PrintColor.CYAN);
-			this.state = State.yourTurn;
-		}
-		else
-		{
-			writeLine("Votre adversaire commence le combat !", PrintColor.CYAN);
-			this.state = State.enemyTurn;
-		}
-	}
-
 	@Override
 	protected void initMenu()
 	{
@@ -342,5 +340,65 @@ public class MenuCombat extends Menu
 		}
 		else
 			renderFin();
+	}
+	
+	private void renderIntro()
+	{
+		writeLine("Debut du combat", PrintColor.CYAN);
+	}
+	
+	private void renderYourTurn()
+	{
+		if(turnState == TurnState.chooseAction)
+		{
+			writeLine("C'est au tour de " + perso.getNom() + " d'attaquer.", PrintColor.CYAN);
+			writeLine("Choisisssez une action");
+		}
+		else if(turnState == TurnState.listCommands)
+		{
+			writeLine("C'est au tour de " + perso.getNom() + " d'attaquer.", PrintColor.CYAN);
+			renderSetPersoTurn();
+		}
+		else
+		{
+			writeLine(perso.getNom() + " a fini son tour.", PrintColor.CYAN);
+			renderApplyPersoTurn();
+		}
+		
+	}
+	
+	private void renderApplyPersoTurn()
+	{
+		if(actionState == ActionState.useCapa)
+		{
+			renderExecuteCapacite();
+		}
+		else if(actionState == ActionState.useItem)
+		{
+			renderUseConsommable();
+		}
+	}
+	
+	private void renderExecuteCapacite()
+	{
+		writeLine("Il a utilisé la capacitée : " + capacite);
+		writeLine(actionComment);
+	}
+	
+	private void renderUseConsommable()
+	{
+		writeLine("Il a utilisé le consommable : " + consommable);
+	}
+
+	private void renderSetPersoTurn()
+	{
+		if(actionState == ActionState.useCapa)
+		{
+			writeLine("Choisisssez une capacite");
+		}
+		else if(actionState == ActionState.useItem)
+		{
+			writeLine("Choisisssez un consommable");
+		}
 	}
 }

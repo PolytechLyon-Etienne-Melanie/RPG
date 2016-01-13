@@ -27,9 +27,9 @@ public class Personnage extends Entity
 		this.pointsToAssing = 0;
 		xp = 0;
 		this.setXpToNextLevel();
-		inventaire = new Inventaire();
-		inventaire.setArmreeq(classe.getDefaultArme());
 		updatePoidsMax();
+		inventaire = new Inventaire(this);
+		inventaire.setArmreeq(classe.getDefaultArme());
 		this.game = game;
 	}
     
@@ -152,6 +152,11 @@ public class Personnage extends Entity
 	public void increaseDef() {
 		classe.increaseDef();
 		usePoint();
+	}
+
+	public Inventaire getInventaire()
+	{
+		return inventaire;
 	}
 	
 	
