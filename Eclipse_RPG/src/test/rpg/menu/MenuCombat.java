@@ -36,32 +36,6 @@ public class MenuCombat extends Menu
 		this.confrerie = confrerie;
 		this.monstres = monstres;
 	}
-
-	@Override
-	protected void setDials()
-	{}
-
-	@Override
-	protected void setCommands()
-	{}
-	
-	public void init()
-	{
-		if(state == State.intro)
-		{
-			setIntro();
-		}
-		else if(state == State.yourTurn)
-		{
-			setYourTurn();
-		}
-		else if(state == State.enemyTurn)
-		{
-			setEnemyTurn();
-		}
-		else
-			setFin();
-	}
 	
 	private void setIntro()
 	{
@@ -122,33 +96,6 @@ public class MenuCombat extends Menu
 	{
 		confrerie.get(0).earnXP(monstres.get(0).getXpVal());
 	}
-	
-	public void render()
-	{
-		Log.d("render menu combat");
-		write(PrintColor.ERASE.getAnsiColor());
-		if (!game.isDebug())
-			clearWindow();
-		writeSeparator(title);
-		
-		if(state == State.intro)
-		{
-			renderIntro();
-		}
-		else if(state == State.yourTurn)
-		{
-			renderYourTurn();
-		}
-		else if(state == State.enemyTurn)
-		{
-			renderEnemyTurn();
-		}
-		else
-			renderFin();
-		
-		writeSeparator("Commands");
-		writeCommands();
-	}
 
 	private void renderFin()
 	{
@@ -177,5 +124,43 @@ public class MenuCombat extends Menu
 			writeLine("Votre adversaire commence le combat !", PrintColor.CYAN);
 			this.state = State.enemyTurn;
 		}
+	}
+
+	@Override
+	protected void initMenu()
+	{
+		if(state == State.intro)
+		{
+			setIntro();
+		}
+		else if(state == State.yourTurn)
+		{
+			setYourTurn();
+		}
+		else if(state == State.enemyTurn)
+		{
+			setEnemyTurn();
+		}
+		else
+			setFin();
+	}
+
+	@Override
+	protected void renderMenu()
+	{
+		if(state == State.intro)
+		{
+			renderIntro();
+		}
+		else if(state == State.yourTurn)
+		{
+			renderYourTurn();
+		}
+		else if(state == State.enemyTurn)
+		{
+			renderEnemyTurn();
+		}
+		else
+			renderFin();
 	}
 }

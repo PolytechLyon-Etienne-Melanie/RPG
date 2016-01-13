@@ -2,6 +2,7 @@ package test.rpg.menu;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import test.rpg.engine.Game;
 import test.rpg.engine.console.event.Command;
@@ -17,6 +18,7 @@ import test.rpg.engine.story.event.EventEntity;
 import test.rpg.engine.story.event.EventLoot;
 import test.rpg.engine.story.event.EventObserver;
 import test.rpg.perso.Entity;
+import test.rpg.perso.Personnage;
 import test.rpg.perso.equipement.Item;
 
 public class MenuStory extends Menu
@@ -126,7 +128,20 @@ public class MenuStory extends Menu
 	
 	public void startCombat(Entity e)
 	{
+		Command combat = new Command("Voules-vous augmenter la magie de votre héro ?", "5");
+		combat.addObserver(new EventObserver(){
+			@Override
+			public void actionPerformed()
+			{
+				List<Personnage> confrerie = new ArrayList<Personnage>();
+				List<Entity> monstres = new ArrayList<Entity>();
+				confrerie.add(game.getHero());
+				monstres.add(e);
+				game.setCurrentMenu(new MenuCombat(game, confrerie, monstres));
+			}
+		});
 		
+		this.addCommand(combat);
 		//game.getHero().earnXP(e.getXpVal());
 	}
 
