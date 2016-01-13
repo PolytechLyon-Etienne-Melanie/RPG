@@ -28,7 +28,6 @@ public class MenuStory extends Menu
 		this.event = event;
 	}
 	
-	@Override
 	protected void setDials()
 	{
 		Iterator<Event> i = event.getEvents().iterator();
@@ -66,12 +65,6 @@ public class MenuStory extends Menu
 				//this.startCombat();
 			}
 		}
-	}
-
-	@Override
-	protected void setCommands()
-	{
-		generateEndChoice();
 	}
 	
 	public void generateEndChoice()
@@ -140,5 +133,28 @@ public class MenuStory extends Menu
 	public void setEvent(StoryEvent event)
 	{
 		this.event = event;
+	}
+
+	@Override
+	protected void initMenu()
+	{
+		dials = new ArrayList<Dialogue>();
+		setDials();
+		generateEndChoice();
+	}
+
+	@Override
+	protected void renderMenu()
+	{
+		Iterator<Dialogue> i = dials.iterator();
+		while (i.hasNext())
+		{
+			this.writeDialogue(i.next());
+		}
+	}
+
+	protected void writeDialogue(Dialogue d)
+	{
+		this.writeLine(d.getDialogue());
 	}
 }

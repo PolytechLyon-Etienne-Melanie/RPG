@@ -38,17 +38,14 @@ public abstract class Menu extends CommandSender
 		init = true;
 	}
 
-	public void init()
+	private void init()
 	{
-		//if(init)
-		//{
-			resetCommands();
-			setRetourCom();
-			setCommands();
-		//}
-		//else
-		//	reload();
+		resetCommands();
+		setRetourCom();
+		initMenu();
 	}
+
+	protected abstract void initMenu();
 
 	private void setRetourCom()
 	{
@@ -77,41 +74,21 @@ public abstract class Menu extends CommandSender
 		this.title = title;
 	}
 
-	protected abstract void setDials();
-
-	protected abstract void setCommands();
-	
-	//protected abstract void reload();
-
 	public void render()
 	{
-		
-		dials = new ArrayList<Dialogue>();
-		setDials();
-		
+		Log.d("init menu");
+		init();
 		Log.d("render menu");
 		write(PrintColor.ERASE.getAnsiColor());
 		if (!game.isDebug())
 			clearWindow();
 		writeSeparator(title);
-		writeMenu();
+		renderMenu();
 		writeSeparator("Commands");
 		writeCommands();
 	}
-
-	protected void writeMenu()
-	{
-		Iterator<Dialogue> i = dials.iterator();
-		while (i.hasNext())
-		{
-			this.writeDialogue(i.next());
-		}
-	}
-
-	protected void writeDialogue(Dialogue d)
-	{
-		this.writeLine(d.getDialogue());
-	}
+	
+	protected abstract void renderMenu();
 
 	protected void writeSeparator()
 	{
