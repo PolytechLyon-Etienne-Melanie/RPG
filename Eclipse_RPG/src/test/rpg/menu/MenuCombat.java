@@ -19,8 +19,8 @@ import test.rpg.perso.equipement.Item;
 public class MenuCombat extends Menu
 {
 	enum State {intro, yourTurn, enemyTurn, fin, distributeXp};
-	enum TurnState {chooseAction, listCommands, recapAction}
-	enum ActionState {listCapa, listItems}
+	enum TurnState {chooseAction, listCommands, applyAction}
+	enum ActionState {useCapa, useItem}
 	
 	private int tour;
 	private int persoTurn;
@@ -34,6 +34,7 @@ public class MenuCombat extends Menu
 	
 	private Personnage perso;
 	private Capacite capacite;
+	private Consommable consommable;
 	
 	private Random rand;
 	
@@ -66,49 +67,106 @@ public class MenuCombat extends Menu
 	{
 		if(turnState == TurnState.chooseAction)
 		{
-			
+			setPersoChoiceAction();
 		}
-		else
-		if(turnState == TurnState.listCommands)
+		else if(turnState == TurnState.listCommands)
 		{
 			setPersoTurn();
+		}
+		else
+		{
+			applyPersoTurn();
 		}
 		
 	}
 	
+	private void applyPersoTurn()
+	{
+		if(actionState == ActionState.useCapa)
+		{
+			executeCapacite();
+		}
+		else if(actionState == ActionState.useItem)
+		{
+			useConsommable();
+		}
+	}
+	
+	private void executeCapacite()
+	{
+		
+	}
+	
+	private void useConsommable()
+	{
+		
+	}
+
+	private void setPersoChoiceAction()
+	{
+		Command capa = new Command("Uiliser une capacitée.", "1");
+		capa.addObserver(new EventObserver(){
+			@Override
+			public void actionPerformed()
+			{
+				useCapa();
+			}
+		});
+		this.addCommand(capa);
+		
+		Command conso = new Command("Uiliser un consommable.", "2");
+		conso.addObserver(new EventObserver(){
+			@Override
+			public void actionPerformed()
+			{
+				useConso();
+			}
+		});
+		this.addCommand(conso);
+		
+		Command nada = new Command("Ne rien faire", "3");
+		nada.addObserver(new EventObserver(){
+			@Override
+			public void actionPerformed()
+			{
+				passTurn();
+			}
+		});
+		this.addCommand(nada);
+	}
+	
+	private void passTurn()
+	{
+	}
+	
+	private void useCapa()
+	{
+		this.actionState = ActionState.useCapa;
+	}
+	
+	private void useConso()
+	{
+		this.actionState = ActionState.useItem;
+	}
+
 	private void setPersoTurn()
 	{
 		perso = confrerie.get(persoTurn);
 		
-		if(actionState == ActionState.listCapa)
+		if(actionState == ActionState.useCapa)
 		{
 			setCapaPerso();
 		}
-		else if(actionState == ActionState.listItems)
+		else if(actionState == ActionState.useItem)
 		{
 			setConsoPerso();
-		}
-		else
-		{
-			KeyObserver key = new KeyObserver();
-			key.addObserver(new EventObserver(){
-
-				@Override
-				public void actionPerformed()
-				{
-					persoTurn++;
-					if(persoTurn >= confrerie.size())
-						state = State.enemyTurn;
-				}
-			});
-			this.addCommand(key);
 		}
 	}
 	
 	private void setCapaPerso()
 	{
 		int n = 1;
-		Iterator<Consommable> i = perso.getClasse().getCapa().iterator();
+		Iterator<Consommable> i/* = perso.getClasse().getCapa().iterator()*/;
 		while(i.hasNext())
 		{
 			Consommable conso = i.next();
@@ -117,11 +175,11 @@ public class MenuCombat extends Menu
 				@Override
 				public void actionPerformed()
 				{
-					setCapacite(capa);
+					setConsommable(conso);
 				}
 			});
-			
 			this.addCommand(comp);
+			
 			n++;
 		}
 		
@@ -176,21 +234,13 @@ public class MenuCombat extends Menu
 	public void setCapacite(Capacite capa)
 	{
 		this.capacite = capa;
+		this.turnState = TurnState.applyAction;
 	}
 	
 	public void setConsommable(Consommable conso)
 	{
-		
-	}
-	
-	private void executeCapacite()
-	{
-		
-	}
-	
-	private void useConsommable()
-	{
-		
+		this.consommable = conso;
+		this.turnState = TurnState.applyAction;
 	}
 	
 	private void setEnemyTurn()
