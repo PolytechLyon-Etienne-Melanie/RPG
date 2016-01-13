@@ -24,7 +24,7 @@ public class MenuCombat extends Menu
 	
 	private Random rand;
 	
-	public MenuCombat(Game game)
+	public MenuCombat(Game game, List<Personnage> confrerie, List<Entity> monstres)
 	{
 		super(game, "Combat");
 		
@@ -32,6 +32,9 @@ public class MenuCombat extends Menu
 		persoTurn = 0;
 		state = State.intro;
 		rand = new Random();
+		
+		this.confrerie = confrerie;
+		this.monstres = monstres;
 	}
 
 	@Override
@@ -79,7 +82,9 @@ public class MenuCombat extends Menu
 
 			@Override
 			public void actionPerformed()
-			{}
+			{
+				state = State.fin;
+			}
 		});
 		this.addCommand(key);
 	}
@@ -91,14 +96,31 @@ public class MenuCombat extends Menu
 
 			@Override
 			public void actionPerformed()
-			{}
+			{
+				state = State.fin;
+			}
 		});
 		this.addCommand(key);
 	}
 	
 	private void setFin()
 	{
-		
+		KeyObserver key = new KeyObserver();
+		key.addObserver(new EventObserver(){
+
+			@Override
+			public void actionPerformed()
+			{
+				distributeXP();
+				game.setCurrentMenu(new MenuLevelUpScreen(game, confrerie.get(0)));
+			}
+		});
+		this.addCommand(key);
+	}
+	
+	private void distributeXP()
+	{
+		confrerie.get(0).earnXP(monstres.get(0).getXpVal());
 	}
 	
 	public void render()
@@ -130,7 +152,7 @@ public class MenuCombat extends Menu
 
 	private void renderFin()
 	{
-		
+		writeLine("Fin du combat", PrintColor.CYAN);
 	}
 
 	private void renderEnemyTurn()
