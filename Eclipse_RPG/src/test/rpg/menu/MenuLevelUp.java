@@ -21,13 +21,25 @@ public class MenuLevelUp extends Menu
 	
 	public MenuLevelUp(Game game, Personnage perso)
 	{
-		super(game, "Level up : Stat choix");
+		super(game, "Stat choix");
 		this.perso = perso;
 	}
 
 	@Override
 	protected void setDials()
 	{
+		this.addDial(new Dialogue(" /$$                                     /$$       /$$   /$$"));          
+		this.addDial(new Dialogue("| $$                                    | $$      | $$  | $$"));          
+		this.addDial(new Dialogue("| $$        /$$$$$$  /$$    /$$ /$$$$$$ | $$      | $$  | $$  /$$$$$$")); 
+		this.addDial(new Dialogue("| $$       /$$__  $$|  $$  /$$//$$__  $$| $$      | $$  | $$ /$$__  $$"));
+		this.addDial(new Dialogue("| $$      | $$$$$$$$ \\  $$/$$/| $$$$$$$$| $$      | $$  | $$| $$  \\ $$"));
+		this.addDial(new Dialogue("| $$      | $$_____/  \\  $$$/ | $$_____/| $$      | $$  | $$| $$  | $$"));
+		this.addDial(new Dialogue("| $$$$$$$$|  $$$$$$$   \\  $/  |  $$$$$$$| $$      |  $$$$$$/| $$$$$$$/"));
+		this.addDial(new Dialogue("|________/ \\_______/    \\_/    \\_______/|__/       \\______/ | $$____/ "));
+		this.addDial(new Dialogue("                                                            | $$"));      
+		this.addDial(new Dialogue("                                                            | $$"));      
+		this.addDial(new Dialogue("                                                            |__/"));
+		
 		this.addDial(new Dialogue("Vous pouvez assigner " + perso.getPointsToAssing() + " points de compétences."));
 		this.addDial(new Dialogue("Points de compétences actuels : " + perso.getCaracteristique()));
 	}
