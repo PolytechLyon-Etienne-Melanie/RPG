@@ -17,14 +17,7 @@ public class MenuMain extends Menu
 	}
 
 	@Override
-	protected void setDials()
-	{
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	protected void setCommands()
+	protected void initMenu()
 	{
 		loadStory = new Command("Charger une histoire", "load");
 		loadStory.addObserver(new EventObserver(){
@@ -58,5 +51,12 @@ public class MenuMain extends Menu
 		this.addCommand(param);
 		this.addCommand(loadStory);
 		this.addCommand(quit);
+	}
+
+	@Override
+	protected void renderMenu()
+	{
+		// TODO Auto-generated method stub
+		
 	}
 }

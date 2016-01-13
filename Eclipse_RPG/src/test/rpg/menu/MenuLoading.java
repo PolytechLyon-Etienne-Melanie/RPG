@@ -16,19 +16,7 @@ public class MenuLoading extends Menu
 	}
 
 	@Override
-	protected void setDials()
-	{
-		this.addDial(new Dialogue("____________________  ________     _____                .__        "));
-		this.addDial(new Dialogue("\\______   \\______   \\/  _____/    /     \\ _____    ____ |__|____   "));
-		this.addDial(new Dialogue(" |       _/|     ___/   \\  ___   /  \\ /  \\\\__  \\  /    \\|  \\__  \\  "));
-		this.addDial(new Dialogue(" |    |   \\|    |   \\    \\_\\  \\ /    Y    \\/ __ \\|   |  \\  |/ __ \\_"));
-		this.addDial(new Dialogue(" |____|_  /|____|    \\______  / \\____|__  (____  /___|  /__(____  /"));
-		this.addDial(new Dialogue("        \\/                  \\/          \\/     \\/     \\/        \\/ "));
-		
-	}
-
-	@Override
-	protected void setCommands()
+	protected void initMenu()
 	{
 		KeyObserver key = new KeyObserver();
 		key.addObserver(new EventObserver(){
@@ -40,6 +28,17 @@ public class MenuLoading extends Menu
 			}
 		});
 		this.addCommand(key);
+	}
+
+	@Override
+	protected void renderMenu()
+	{
+		writeLine("____________________  ________     _____                .__        ");
+		writeLine("\\______   \\______   \\/  _____/    /     \\ _____    ____ |__|____   ");
+		writeLine(" |       _/|     ___/   \\  ___   /  \\ /  \\\\__  \\  /    \\|  \\__  \\  ");
+		writeLine(" |    |   \\|    |   \\    \\_\\  \\ /    Y    \\/ __ \\|   |  \\  |/ __ \\_");
+		writeLine(" |____|_  /|____|    \\______  / \\____|__  (____  /___|  /__(____  /");
+		writeLine("        \\/                  \\/          \\/     \\/     \\/        \\/ ");
 	}
 	
 }

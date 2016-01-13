@@ -16,16 +16,24 @@ public class MenuParametre extends Menu
 	{
 		super(game, "Menu Principal", retour);
 	}
-
-	@Override
-	protected void setDials()
+	
+	private void switchDebug()
 	{
-		// TODO Auto-generated method stub
-
+		Log.switchDebug();
+		if(Log.debug())
+		{
+			debug.setDesc("Cacher le DEBUG.");
+			game.setDebug(true);
+		}
+		else
+		{
+			debug.setDesc("Afficher le DEBUG.");
+			game.setDebug(false);
+		}
 	}
 
 	@Override
-	protected void setCommands()
+	protected void initMenu()
 	{
 		String c = "";
 		if(Log.debug())
@@ -48,19 +56,9 @@ public class MenuParametre extends Menu
 		});
 		this.addCommand(debug);
 	}
-	
-	private void switchDebug()
+
+	@Override
+	protected void renderMenu()
 	{
-		Log.switchDebug();
-		if(Log.debug())
-		{
-			debug.setDesc("Cacher le DEBUG.");
-			game.setDebug(true);
-		}
-		else
-		{
-			debug.setDesc("Afficher le DEBUG.");
-			game.setDebug(false);
-		}
 	}
 }
