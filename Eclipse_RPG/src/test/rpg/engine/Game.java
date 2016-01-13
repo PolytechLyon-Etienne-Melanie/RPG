@@ -67,7 +67,7 @@ public class Game implements Runnable
 	public void setCurrentMenu(Menu currentMenu)
 	{
 		this.currentMenu = currentMenu;
-		currentMenu.init();
+		
 	}
 	
 	public void returnToStory()
