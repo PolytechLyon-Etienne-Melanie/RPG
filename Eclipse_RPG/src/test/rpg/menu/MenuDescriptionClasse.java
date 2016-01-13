@@ -26,14 +26,7 @@ public class MenuDescriptionClasse extends Menu{
 		this.event = event;
 	}
 
-	@Override
-	protected void setDials() {
-		this.addDial(new Dialogue("Histoire du "+classe.getNom()+" :"));
-		this.addDial(new Dialogue(text));
-		this.addDial(new Dialogue("Caractéristique du héro : (Force, Dextérité, Santé, Défence, Magie)"+classe.getCarac())); 
-	}
-
-	@Override
+	
 	protected void setCommands() {
 		confirmation = new Command("Etes-vous sûr de vouloir prendre ce héro ?", "oui");
 		confirmation.addObserver(new EventObserver(){
@@ -56,6 +49,20 @@ public class MenuDescriptionClasse extends Menu{
 		this.addCommand(confirmation);
 		this.addCommand(retour);
 		
+		
+	}
+
+	@Override
+	protected void initMenu() {
+		setCommands();
+		
+	}
+
+	@Override
+	protected void renderMenu() {
+		writeLine("Histoire du "+classe.getNom()+" :");
+		writeLine(text);
+		writeLine("Caractéristique du héro : (Force, Dextérité, Santé, Défence, Magie)"+classe.getCarac());
 		
 	}
 

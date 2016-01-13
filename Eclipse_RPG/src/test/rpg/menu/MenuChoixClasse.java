@@ -28,14 +28,7 @@ public class MenuChoixClasse extends Menu
 		this.event = event;
 	}
 
-	@Override
-	protected void setDials() {
-		this.addDial(new Dialogue("Il est temps de choisir votre classe !"));
-		this.addDial(new Dialogue("Trois choix s'offre à vous :"));
-		
-	}
-
-	@Override
+	
 	protected void setCommands() {
 		guerrier = new Command("Arwed le guerrier", "1");
 		guerrier.addObserver(new EventObserver(){
@@ -66,6 +59,19 @@ public class MenuChoixClasse extends Menu
 		this.addCommand(guerrier);
 		this.addCommand(mage);
 		this.addCommand(assassin);
+	}
+
+	@Override
+	protected void initMenu() {
+		setCommands();
+		
+	}
+
+	@Override
+	protected void renderMenu() {
+		writeLine("Il est temps de choisir votre classe !");
+		writeLine("Trois choix s'offre à vous :");
+		
 	}
 
 }

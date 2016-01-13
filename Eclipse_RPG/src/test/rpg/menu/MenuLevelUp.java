@@ -25,26 +25,7 @@ public class MenuLevelUp extends Menu
 		this.perso = perso;
 	}
 
-	@Override
-	protected void setDials()
-	{
-		this.addDial(new Dialogue(" /$$                                     /$$       /$$   /$$"));          
-		this.addDial(new Dialogue("| $$                                    | $$      | $$  | $$"));          
-		this.addDial(new Dialogue("| $$        /$$$$$$  /$$    /$$ /$$$$$$ | $$      | $$  | $$  /$$$$$$")); 
-		this.addDial(new Dialogue("| $$       /$$__  $$|  $$  /$$//$$__  $$| $$      | $$  | $$ /$$__  $$"));
-		this.addDial(new Dialogue("| $$      | $$$$$$$$ \\  $$/$$/| $$$$$$$$| $$      | $$  | $$| $$  \\ $$"));
-		this.addDial(new Dialogue("| $$      | $$_____/  \\  $$$/ | $$_____/| $$      | $$  | $$| $$  | $$"));
-		this.addDial(new Dialogue("| $$$$$$$$|  $$$$$$$   \\  $/  |  $$$$$$$| $$      |  $$$$$$/| $$$$$$$/"));
-		this.addDial(new Dialogue("|________/ \\_______/    \\_/    \\_______/|__/       \\______/ | $$____/ "));
-		this.addDial(new Dialogue("                                                            | $$"));      
-		this.addDial(new Dialogue("                                                            | $$"));      
-		this.addDial(new Dialogue("                                                            |__/"));
-		
-		this.addDial(new Dialogue("Vous pouvez assigner " + perso.getPointsToAssing() + " points de compétences."));
-		this.addDial(new Dialogue("Points de compétences actuels : " + perso.getCaracteristique()));
-	}
 
-	@Override
 	protected void setCommands()
 	{
 		addForce = new Command("Voules-vous augmenter la force de votre héro ?", "1");
@@ -109,6 +90,31 @@ public class MenuLevelUp extends Menu
 		{
 			game.returnToStory();
 		}
+	}
+
+	@Override
+	protected void initMenu() {
+		setCommands();
+		
+	}
+
+	@Override
+	protected void renderMenu() {
+		writeLine(" /$$                                     /$$       /$$   /$$");          
+		writeLine("| $$                                    | $$      | $$  | $$");          
+		writeLine("| $$        /$$$$$$  /$$    /$$ /$$$$$$ | $$      | $$  | $$  /$$$$$$"); 
+		writeLine("| $$       /$$__  $$|  $$  /$$//$$__  $$| $$      | $$  | $$ /$$__  $$");
+		writeLine("| $$      | $$$$$$$$ \\  $$/$$/| $$$$$$$$| $$      | $$  | $$| $$  \\ $$");
+		writeLine("| $$      | $$_____/  \\  $$$/ | $$_____/| $$      | $$  | $$| $$  | $$");
+		writeLine("| $$$$$$$$|  $$$$$$$   \\  $/  |  $$$$$$$| $$      |  $$$$$$/| $$$$$$$/");
+		writeLine("|________/ \\_______/    \\_/    \\_______/|__/       \\______/ | $$____/ ");
+		writeLine("                                                            | $$");      
+		writeLine("                                                            | $$");      
+		writeLine("                                                            |__/");
+		
+		writeLine("Vous pouvez assigner " + perso.getPointsToAssing() + " points de compétences.");
+		writeLine("Points de compétences actuels : " + perso.getCaracteristique());
+		
 	}
 
 }
