@@ -55,10 +55,12 @@ public class MenuParametre extends Menu
 		if(Log.debug())
 		{
 			debug.setDesc("Cacher le DEBUG.");
+			game.setDebug(true);
 		}
 		else
 		{
 			debug.setDesc("Afficher le DEBUG.");
+			game.setDebug(false);
 		}
 	}
 }

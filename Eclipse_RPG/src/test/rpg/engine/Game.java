@@ -19,7 +19,7 @@ public class Game implements Runnable
     private MenuStory storyMenu;
     public static enum State {loading, running, inpause};
     private State state;
-    private boolean debug = false;
+    private boolean debug = true;
     
     private Personnage hero;
     
