@@ -58,15 +58,8 @@ public class MenuStory extends Menu
 			{
 				EventCombat ec = (EventCombat) e;
 				this.addDial(new Dialogue(ec.getTitle()));
-				Iterator<EventEntity> it = ec.getMonsters().iterator();
-				while(it.hasNext())
-				{
-					Entity en = it.next().genEntity();
-					Dialogue diag = new Dialogue(en.toString());
-					this.addDial(diag);
-					this.startCombat(en);
-				}
-				//this.startCombat();
+				if(!ec.isDone())
+					this.startCombat(ec);
 			}
 		}
 	}
@@ -139,22 +132,29 @@ public class MenuStory extends Menu
 		
 	}
 	
-	public void startCombat(Entity e)
+	public void startCombat(EventCombat combat)
 	{
-		Command combat = new Command("Voules-vous augmenter la magie de votre héro ?", "5");
-		combat.addObserver(new EventObserver(){
+		Command combatC = new Command("Combat", "c");
+		combatC.addObserver(new EventObserver(){
 			@Override
 			public void actionPerformed()
 			{
 				List<Personnage> confrerie = new ArrayList<Personnage>();
 				List<Entity> monstres = new ArrayList<Entity>();
 				confrerie.add(game.getHero());
-				monstres.add(e);
+
+				Iterator<EventEntity> it = combat.getMonsters().iterator();
+				while(it.hasNext())
+				{
+					Entity en = it.next().genEntity();
+					monstres.add(en);
+				}
 				game.setCurrentMenu(new MenuCombat(game, confrerie, monstres));
+				combat.done();
 			}
 		});
 		
-		this.addCommand(combat);
+		this.addCommand(combatC);
 		//game.getHero().earnXP(e.getXpVal());
 	}
 

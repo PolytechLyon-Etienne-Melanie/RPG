@@ -20,7 +20,7 @@ public class MenuCombat extends Menu
 {
 	enum State {intro, yourTurn, enemyTurn, fin, distributeXp};
 	enum TurnState {chooseAction, listCommands, applyAction}
-	enum ActionState {useCapa, useItem}
+	enum ActionState {useCapa, useItem, pass}
 	
 	private int tour;
 	private int persoTurn;
@@ -71,6 +71,7 @@ public class MenuCombat extends Menu
 		if(rand.nextBoolean())
 		{
 			this.state = State.yourTurn;
+			this.turnState = TurnState.chooseAction;
 		}
 		else
 		{
@@ -105,20 +106,49 @@ public class MenuCombat extends Menu
 		{
 			useConsommable();
 		}
+		else if(actionState == ActionState.pass)
+		{
+			setEndTurnCommand();
+		}
+	}
+	
+	private void setEndTurnCommand()
+	{
+		KeyObserver key = new KeyObserver();
+		key.addObserver(new EventObserver(){
+
+			@Override
+			public void actionPerformed()
+			{
+				nextTurn();
+			}
+		});
+		this.addCommand(key);
+	}
+
+	private void nextTurn()
+	{
+		persoTurn++;
+		if(persoTurn >= confrerie.size())
+		{
+			state = State.enemyTurn;
+		}
 	}
 	
 	private void executeCapacite()
 	{
-		
+		setEndTurnCommand();
 	}
 	
 	private void useConsommable()
 	{
-		
+		setEndTurnCommand();
 	}
 
 	private void setPersoChoiceAction()
 	{
+		perso = confrerie.get(persoTurn);
+		
 		Command capa = new Command("Uiliser une capacitée.", "1");
 		capa.addObserver(new EventObserver(){
 			@Override
@@ -153,17 +183,17 @@ public class MenuCombat extends Menu
 	private void useCapa()
 	{
 		this.actionState = ActionState.useCapa;
+		this.turnState = TurnState.listCommands;
 	}
 	
 	private void useConso()
 	{
 		this.actionState = ActionState.useItem;
+		this.turnState = TurnState.listCommands;
 	}
 
 	private void setPersoTurn()
 	{
-		perso = confrerie.get(persoTurn);
-		
 		if(actionState == ActionState.useCapa)
 		{
 			setCapaPerso();
@@ -258,6 +288,7 @@ public class MenuCombat extends Menu
 	public void passTurn()
 	{
 		this.turnState = TurnState.applyAction;
+		this.actionState = ActionState.pass;
 	}
 	
 	private void setEnemyTurn()

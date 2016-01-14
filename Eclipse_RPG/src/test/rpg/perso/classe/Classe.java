@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import test.rpg.perso.competence.Attaque;
 import test.rpg.perso.competence.Capacite;
 import test.rpg.perso.equipement.Arme;
 import test.rpg.perso.equipement.Armure;
@@ -19,6 +20,8 @@ public class Classe
 		this.nom = nom;
 		carac = new Caracteristique(f, dex, s, def, m);
 		capa = new ArrayList<Capacite>();
+		
+		this.addCapacite(new Attaque());
 	}
 	
 	public void addCapacite(Capacite capa)
