@@ -1,5 +1,6 @@
 package test.rpg.menu;
 
+import java.awt.Color;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
@@ -7,6 +8,7 @@ import java.util.Random;
 import test.rpg.engine.Game;
 import test.rpg.engine.console.event.Command;
 import test.rpg.engine.console.event.KeyObserver;
+import test.rpg.engine.console.printer.Log;
 import test.rpg.engine.console.printer.PrintColor;
 import test.rpg.engine.interfaces.Menu;
 import test.rpg.engine.story.event.EventObserver;
@@ -58,7 +60,7 @@ public class MenuCombat extends Menu
 		key.addObserver(new EventObserver(){
 
 			@Override
-			public void actionPerformed()
+			public void actionPerformed(String p)
 			{
 				setAttaquant();
 			}
@@ -77,6 +79,8 @@ public class MenuCombat extends Menu
 		{
 			this.state = State.enemyTurn;
 		}
+		this.state = State.yourTurn;
+		this.turnState = TurnState.chooseAction;
 	}
 	
 	private void setYourTurn()
@@ -88,6 +92,7 @@ public class MenuCombat extends Menu
 		else if(turnState == TurnState.listCommands)
 		{
 			setPersoTurn();
+			setRetourChoice();
 		}
 		else
 		{
@@ -96,6 +101,24 @@ public class MenuCombat extends Menu
 		
 	}
 	
+	private void setRetourChoice()
+	{
+		Command back = new Command("Retour", "back");
+		back.addObserver(new EventObserver(){
+			@Override
+			public void actionPerformed(String p)
+			{
+				retour();
+			}
+		});
+		this.addCommand(back);
+	}
+	
+	private void retour()
+	{
+		turnState = TurnState.chooseAction;
+	}
+
 	private void applyPersoTurn()
 	{
 		if(actionState == ActionState.useCapa)
@@ -118,7 +141,7 @@ public class MenuCombat extends Menu
 		key.addObserver(new EventObserver(){
 
 			@Override
-			public void actionPerformed()
+			public void actionPerformed(String p)
 			{
 				nextTurn();
 			}
@@ -152,7 +175,7 @@ public class MenuCombat extends Menu
 		Command capa = new Command("Uiliser une capacitée.", "1");
 		capa.addObserver(new EventObserver(){
 			@Override
-			public void actionPerformed()
+			public void actionPerformed(String p)
 			{
 				useCapa();
 			}
@@ -162,7 +185,7 @@ public class MenuCombat extends Menu
 		Command conso = new Command("Uiliser un consommable.", "2");
 		conso.addObserver(new EventObserver(){
 			@Override
-			public void actionPerformed()
+			public void actionPerformed(String p)
 			{
 				useConso();
 			}
@@ -172,7 +195,7 @@ public class MenuCombat extends Menu
 		Command nada = new Command("Ne rien faire", "3");
 		nada.addObserver(new EventObserver(){
 			@Override
-			public void actionPerformed()
+			public void actionPerformed(String p)
 			{
 				passTurn();
 			}
@@ -204,17 +227,17 @@ public class MenuCombat extends Menu
 		}
 	}
 	
-	private void setCapaPerso()
+	private void setConsoPerso()
 	{
 		int n = 1;
 		Iterator<Consommable> i = perso.getInventaire().getConsommables().iterator();
 		while(i.hasNext())
 		{
 			Consommable conso = i.next();
-			Command comp = new Command("Capacite : " + conso.toString(), ""+ n);
+			Command comp = new Command("Consommable   " + conso.toString(), ""+ n);
 			comp.addObserver(new EventObserver(){
 				@Override
-				public void actionPerformed()
+				public void actionPerformed(String p)
 				{
 					setConsommable(conso);
 				}
@@ -230,7 +253,7 @@ public class MenuCombat extends Menu
 			key.addObserver(new EventObserver(){
 
 				@Override
-				public void actionPerformed()
+				public void actionPerformed(String p)
 				{
 					passTurn();
 				}
@@ -239,17 +262,17 @@ public class MenuCombat extends Menu
 		}
 	}
 	
-	private void setConsoPerso()
+	private void setCapaPerso()
 	{
 		int n = 1;
 		Iterator<Capacite> i = perso.getClasse().getCapa().iterator();
 		while(i.hasNext())
 		{
 			Capacite capa = i.next();
-			Command comp = new Command("Capacite : " + capa.toString(), ""+ n);
+			Command comp = new Command("Capacite   " + capa.toString(), ""+ n);
 			comp.addObserver(new EventObserver(){
 				@Override
-				public void actionPerformed()
+				public void actionPerformed(String p)
 				{
 					setCapacite(capa);
 				}
@@ -265,7 +288,7 @@ public class MenuCombat extends Menu
 			key.addObserver(new EventObserver(){
 
 				@Override
-				public void actionPerformed()
+				public void actionPerformed(String p)
 				{
 				}
 			});
@@ -297,7 +320,7 @@ public class MenuCombat extends Menu
 		key.addObserver(new EventObserver(){
 
 			@Override
-			public void actionPerformed()
+			public void actionPerformed(String p)
 			{
 				state = State.fin;
 			}
@@ -311,7 +334,7 @@ public class MenuCombat extends Menu
 		key.addObserver(new EventObserver(){
 
 			@Override
-			public void actionPerformed()
+			public void actionPerformed(String p)
 			{
 				distributeXP();
 				game.setCurrentMenu(new MenuLevelUpScreen(game, confrerie.get(0)));
@@ -357,6 +380,8 @@ public class MenuCombat extends Menu
 	@Override
 	protected void renderMenu()
 	{
+		renderConfrerie();
+		renderEnemy();
 		if(state == State.intro)
 		{
 			renderIntro();
@@ -412,13 +437,13 @@ public class MenuCombat extends Menu
 	
 	private void renderExecuteCapacite()
 	{
-		writeLine("Il a utilisé la capacitée : " + capacite);
+		writeLine("Il a utilisé la capacitée   " + capacite);
 		writeLine(actionComment);
 	}
 	
 	private void renderUseConsommable()
 	{
-		writeLine("Il a utilisé le consommable : " + consommable);
+		writeLine("Il a utilisé le consommable   " + consommable);
 	}
 
 	private void renderSetPersoTurn()
@@ -431,5 +456,53 @@ public class MenuCombat extends Menu
 		{
 			writeLine("Choisisssez un consommable");
 		}
+	}
+	
+	private void renderConfrerie()
+	{
+		writeLine("--> Confrerie :");
+		Iterator<Personnage> i = confrerie.iterator();
+		while(i.hasNext())
+		{
+			Personnage p = i.next();
+			writeLine(p.getNom() + " | " + p.getNiveau() + " | " + p.getClasse().getNom());
+			String life = "::::::::::::::::::::::::::::::::::::";
+			String notlife = "                                    ";
+			float ratio = (float)(p.getSante()) / (float)(p.getSanteMax());
+			Log.d(ratio);
+			int l = (int)(life.length() * ratio);
+			Log.d(l);
+			PrintColor color = PrintColor.GREEN;
+			if(ratio < 0.5)
+				color = PrintColor.YELLOW;
+			else if(ratio < 0.2)
+				color = PrintColor.RED;
+			writeLine("|" + life.substring(0, l) + notlife.substring(l)+ "|", color);
+		}
+		writeLine("");
+	}
+	
+	private void renderEnemy()
+	{
+		writeLine("--> Enemies :");
+		Iterator<Entity> i = monstres.iterator();
+		while(i.hasNext())
+		{
+			Entity p = i.next();
+			writeLine(p.getNom() + " | " + p.getNiveau() + " | " + p.getClasse().getNom());
+			String life = "::::::::::::::::::::::::::::::::::::";
+			String notlife = "                                    ";
+			float ratio = (float)(p.getSante()) / (float)(p.getSanteMax());
+			Log.d(ratio);
+			int l = (int)(life.length() * ratio);
+			Log.d(l);
+			PrintColor color = PrintColor.GREEN;
+			if(ratio < 0.5)
+				color = PrintColor.YELLOW;
+			else if(ratio < 0.2)
+				color = PrintColor.RED;
+			writeLine("|" + life.substring(0, l) + notlife.substring(l)+ "|", color);
+		}
+		writeLine("");
 	}
 }

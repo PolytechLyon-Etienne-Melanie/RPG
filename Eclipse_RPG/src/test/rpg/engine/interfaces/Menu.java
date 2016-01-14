@@ -55,7 +55,7 @@ public abstract class Menu extends CommandSender
 			back.addObserver(new EventObserver()
 			{
 				@Override
-				public void actionPerformed()
+				public void actionPerformed(String p)
 				{
 					game.setCurrentMenu(retour);
 				}

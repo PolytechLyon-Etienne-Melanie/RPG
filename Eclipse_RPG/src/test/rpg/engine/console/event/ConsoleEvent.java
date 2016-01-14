@@ -13,12 +13,12 @@ public abstract class ConsoleEvent {
 		observers = new ArrayList<EventObserver>();
 	}
 	
-    public void actionPerformed() 
+    public void actionPerformed(String param) 
     {
     	Iterator<EventObserver> i = observers.iterator();
     	while(i.hasNext())
     	{
-    		i.next().actionPerformed();
+    		i.next().actionPerformed(param);
     	}
     }
     

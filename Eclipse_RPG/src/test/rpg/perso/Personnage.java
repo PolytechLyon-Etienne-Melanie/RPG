@@ -12,7 +12,6 @@ public class Personnage extends Entity
 {
 	private static final int xpGrow = 10; 
 	private int poidsMax;
-    private int santeMax;
     private Inventaire inventaire;
     
     private int pointsToAssing;
@@ -45,14 +44,6 @@ public class Personnage extends Entity
 		poidsMax = 10 + this.getCaracteristique().getForce();
 	}
 
-	public int getSanteMax() {
-		return santeMax;
-	}
-
-	public void setSanteMax(int santeMax) {
-		this.santeMax = santeMax;
-	}
-
     public void appliquerEffet() {
     }
 
@@ -74,9 +65,6 @@ public class Personnage extends Entity
 
     public Item ajouterAvantaire(Item obj) {
         throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public void calculSanteMax() {
     }
 
     public void initCaracteristique() {

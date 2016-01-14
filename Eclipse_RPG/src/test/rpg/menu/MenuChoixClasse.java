@@ -33,7 +33,7 @@ public class MenuChoixClasse extends Menu
 		guerrier = new Command("Arwed le Guerrier", "1");
 		guerrier.addObserver(new EventObserver(){
 			@Override
-			public void actionPerformed()
+			public void actionPerformed(String p)
 			{
 				game.setCurrentMenu(new MenuDescriptionClasse(game, new Guerrier(), "Arwed", descGuerrier, event));
 			}
@@ -42,7 +42,7 @@ public class MenuChoixClasse extends Menu
 		mage = new Command("Sunilda la Magicienne", "2");
 		mage.addObserver(new EventObserver(){
 			@Override
-			public void actionPerformed()
+			public void actionPerformed(String p)
 			{
 				game.setCurrentMenu(new MenuDescriptionClasse(game, new Mage(), "Sunilda", descMage, event));
 			}
@@ -51,7 +51,7 @@ public class MenuChoixClasse extends Menu
 		assassin = new Command("Elrond le Voleur", "3");
 		assassin.addObserver(new EventObserver(){
 			@Override
-			public void actionPerformed()
+			public void actionPerformed(String p)
 			{
 				game.setCurrentMenu(new MenuDescriptionClasse(game, new Assassin(), "Sunilda", descAssassin, event));
 			}

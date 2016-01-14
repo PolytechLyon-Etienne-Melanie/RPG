@@ -731,12 +731,12 @@ public class JConsole extends JScrollPane
 
 	private void inPipeWatcher() throws IOException
 	{
-		byte[] ba = new byte[512]; // arbitrary blocking factor
+		byte[] ba = new byte[256]; // arbitrary blocking factor
 		int read;
 		while ((read = inPipe.read(ba)) != -1)
 		{
 			print(new String(ba, 0, read));
-			// text.repaint();
+			//text.repaint();
 		}
 
 		println("Console: Input	closed...");

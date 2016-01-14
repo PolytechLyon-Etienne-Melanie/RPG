@@ -31,7 +31,7 @@ public class MenuDescriptionClasse extends Menu{
 		confirmation = new Command("Etes-vous sûr de vouloir prendre ce héro ?", "oui");
 		confirmation.addObserver(new EventObserver(){
 			@Override
-			public void actionPerformed()
+			public void actionPerformed(String p)
 			{
 				hero = new Personnage(game, nom, 1, classe);
 				game.setHero(hero);
@@ -41,7 +41,7 @@ public class MenuDescriptionClasse extends Menu{
 		retour = new Command("Revenir au personnages", "retour");
 		retour.addObserver(new EventObserver(){
 			@Override
-			public void actionPerformed()
+			public void actionPerformed(String p)
 			{
 				game.setCurrentMenu(new MenuChoixClasse(game, event));
 			}

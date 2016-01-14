@@ -49,7 +49,7 @@ public class MenuParametre extends Menu
 		debug.addObserver(new EventObserver()
 		{
 			@Override
-			public void actionPerformed()
+			public void actionPerformed(String p)
 			{
 				switchDebug();
 			}

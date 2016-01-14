@@ -2,6 +2,7 @@ package test.rpg.perso;
 
 import java.util.Random;
 
+import test.rpg.engine.console.printer.Log;
 import test.rpg.perso.classe.Caracteristique;
 import test.rpg.perso.classe.Classe;
 import test.rpg.perso.classe.monstre.Rodeur;
@@ -31,7 +32,7 @@ public class Entity
 	
 	public Entity()
 	{
-		this("Default Monster", 1, new Rodeur());
+		this("Default Entity", 1, new Rodeur());
 	}
 	
 	public Caracteristique getCaracteristique()
@@ -41,7 +42,7 @@ public class Entity
 	
 	public void calculSanteMax()
 	{
-		santeMax = getCaracteristique().getSante() * niveau;
+		santeMax = 50 + getCaracteristique().getSante() * niveau;
 	}
 	
 	public String getNom()
@@ -56,11 +57,13 @@ public class Entity
 
 	public int getSante()
 	{
+		Log.d("sante " + sante);
 		return sante;
 	}
 
 	public int getSanteMax()
 	{
+		Log.d("sante max " + santeMax);
 		return santeMax;
 	}
 

@@ -69,7 +69,7 @@ public class MenuStory extends Menu
 		inventaire = new Command("Accéder à votre inventaire", "invent");
 		inventaire.addObserver(new EventObserver(){
 			@Override
-			public void actionPerformed()
+			public void actionPerformed(String p)
 			{
 				game.setCurrentMenu(new MenuInventaire(game, game.getHero().getInventaire()));
 			}
@@ -119,7 +119,7 @@ public class MenuStory extends Menu
 		return new EventObserver()
 		{
 			@Override
-			public void actionPerformed()
+			public void actionPerformed(String p)
 			{
 				// System.out.println("next event");
 				game.getStoryManager().goNextStoryEvent(l);
@@ -137,7 +137,7 @@ public class MenuStory extends Menu
 		Command combatC = new Command("Combat", "c");
 		combatC.addObserver(new EventObserver(){
 			@Override
-			public void actionPerformed()
+			public void actionPerformed(String p)
 			{
 				List<Personnage> confrerie = new ArrayList<Personnage>();
 				List<Entity> monstres = new ArrayList<Entity>();

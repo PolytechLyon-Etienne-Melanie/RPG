@@ -26,7 +26,7 @@ public class ConsoleReader
 		showall.addObserver(new EventObserver()
 		{
 			@Override
-			public void actionPerformed()
+			public void actionPerformed(String p)
 			{
 				manager.showAllCommands();
 			}
@@ -34,7 +34,7 @@ public class ConsoleReader
 		quit.addObserver(new EventObserver()
 		{
 			@Override
-			public void actionPerformed()
+			public void actionPerformed(String p)
 			{
 				System.exit(0);
 			}
@@ -56,13 +56,19 @@ public class ConsoleReader
 
 	public void onCommand(String com)
 	{
+		String[] split = com.split(" ");
+		String command = split[0];
+		String param = "";
+		if(split.length > 1)
+			param = split[1];
+		
 		Command c = findCommand(com);
 
 		if (c != null)
 		{
 			// System.out.println("commande executée");
 			Log.d("Execute command : " + c);
-			executeCommand(c);
+			executeCommand(c, param);
 		} else
 		{
 			Log.e("Command introuvable");
@@ -75,7 +81,7 @@ public class ConsoleReader
 			return null;
 		
 		if(com.equals(quit.getCom()))
-			quit.actionPerformed();
+			quit.actionPerformed("");
 
 		// System.out.println("test command " + com);
 		Iterator<Command> i = manager.getCommands().iterator();
@@ -94,8 +100,8 @@ public class ConsoleReader
 		return command;
 	}
 
-	public void executeCommand(Command com)
+	public void executeCommand(Command com, String param)
 	{
-		com.actionPerformed();
+		com.actionPerformed(param);
 	}
 }

@@ -7,15 +7,19 @@ public class Soin implements Capacite {
     public void rajoutVIe() {
     }
 
-	@Override
-	public Personnage probaReussite(Personnage src) {
+    @Override
+	public float probaReussite(Personnage src) {
 		// TODO Auto-generated method stub
-		return null;
+		return 0;
 	}
 
 	@Override
-	public Personnage effet(Personnage cible, Personnage src) {
+	public void effet(Personnage cible, Personnage src) {
 		// TODO Auto-generated method stub
-		return null;
+	}
+	
+	public String getName()
+	{
+		return "Soin";
 	}
 }

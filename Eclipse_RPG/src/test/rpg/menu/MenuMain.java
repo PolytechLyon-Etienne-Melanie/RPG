@@ -22,7 +22,7 @@ public class MenuMain extends Menu
 		loadStory = new Command("Charger une histoire", "load");
 		loadStory.addObserver(new EventObserver(){
 			@Override
-			public void actionPerformed()
+			public void actionPerformed(String p)
 			{
 				game.loadStory();
 			}
@@ -30,7 +30,7 @@ public class MenuMain extends Menu
 		quit = new Command("Quitter le jeu", "quit");
 		quit.addObserver(new EventObserver(){
 			@Override
-			public void actionPerformed()
+			public void actionPerformed(String p)
 			{
 				System.exit(0);
 			}
@@ -43,7 +43,7 @@ public class MenuMain extends Menu
 				return this;
 			}
 			private Menu menu;
-			public void actionPerformed()
+			public void actionPerformed(String p)
 			{
 				game.setCurrentMenu(new MenuParametre(game, menu));
 			}

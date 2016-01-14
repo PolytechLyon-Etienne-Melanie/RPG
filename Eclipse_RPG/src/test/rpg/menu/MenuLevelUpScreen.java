@@ -24,7 +24,7 @@ public class MenuLevelUpScreen extends Menu
 		key.addObserver(new EventObserver(){
 
 			@Override
-			public void actionPerformed()
+			public void actionPerformed(String p)
 			{
 				game.setCurrentMenu(new MenuLevelUp(game, perso));
 			}
