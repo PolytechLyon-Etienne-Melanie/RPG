@@ -156,4 +156,10 @@ public class Log
 		else
 			level = Level.DEBUG;
 	}
+
+	public static void setDebug(boolean debug)
+	{
+		if(debug() != debug)
+			switchDebug();
+	}
 }

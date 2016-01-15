@@ -1,6 +1,6 @@
 package test.rpg.engine.story.event;
 
-public class EventDialogue implements Event {
+public class EventDialogue extends Event {
 
     /**
 	 * 

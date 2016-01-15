@@ -6,13 +6,23 @@ public class Command extends ConsoleEvent {
     private String com;
     private String param;
     private boolean visible;
+    private boolean needParam;
     
     public Command(boolean v, String t, String com, String p)
     {
     	visible = v;
     	desc = new Dialogue(t);
     	this.com = com;
-    	param = p;
+    	if(p != null && p != "")
+    	{
+    		param = p;
+    		needParam = true;
+    	}
+    	else
+    	{	
+    		param = "";
+    		needParam = false;
+    	}
     }
     
     
@@ -25,6 +35,11 @@ public class Command extends ConsoleEvent {
     public Command(String t, String com)
     {
     	this(true, t, com);
+    }
+    
+    public Command(String t, String com, String p)
+    {
+    	this(true, t, com, p);
     }
     
 	public Dialogue getDesc()
@@ -63,5 +78,17 @@ public class Command extends ConsoleEvent {
 	public void setDesc(String string)
 	{
 		desc.setDial(string);
+	}
+
+
+	public boolean needParam()
+	{
+		return needParam;
+	}
+
+
+	public String getParam()
+	{
+		return param;
 	}
 }

@@ -8,6 +8,7 @@ import test.rpg.engine.story.Story;
 import test.rpg.engine.story.StoryEvent;
 import test.rpg.engine.story.StoryManager;
 import test.rpg.menu.MenuChoixClasse;
+import test.rpg.menu.MenuLevelUpScreen;
 import test.rpg.menu.MenuLoading;
 import test.rpg.menu.MenuStory;
 import test.rpg.perso.Personnage;
@@ -19,7 +20,8 @@ public class Game implements Runnable
     private MenuStory storyMenu;
     public static enum State {loading, running, inpause};
     private State state;
-    private boolean debug = true;
+    private boolean debug = false;
+    private boolean erase = true;
     
     private Personnage hero;
     
@@ -37,6 +39,8 @@ public class Game implements Runnable
         thread.start();
     	//game.run(); 
         //System.exit(0);
+        
+        Log.setDebug(game.isDebug());
     }
     
     public Game()
@@ -72,7 +76,11 @@ public class Game implements Runnable
 	
 	public void returnToStory()
 	{
-		this.setCurrentMenu(this.storyMenu);
+		// check all perso levels
+		if(getHero().getPointsToAssing() > 0)
+			this.setCurrentMenu(new MenuLevelUpScreen(this, getHero()));
+		else
+			this.setCurrentMenu(this.storyMenu);
 	}
 
 	public void initGame() 
@@ -151,5 +159,15 @@ public class Game implements Runnable
 	public void setDebug(boolean debug)
 	{
 		this.debug = debug;
+	}
+
+	public boolean isErase()
+	{
+		return erase;
+	}
+
+	public void setErase(boolean erase)
+	{
+		this.erase = erase;
 	}
 }

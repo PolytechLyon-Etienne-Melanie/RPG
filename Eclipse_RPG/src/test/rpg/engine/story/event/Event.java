@@ -4,5 +4,22 @@ import java.io.Serializable;
 
 import test.rpg.engine.story.StoryManager;
 
-public interface Event extends Serializable {
+public abstract class Event implements Serializable 
+{
+	private boolean done;
+	
+	public Event()
+	{
+		done = false;
+	}
+	
+	public void done()
+	{
+		done = true;
+	}
+	
+	public boolean isDone()
+	{
+		return done;
+	}
 }

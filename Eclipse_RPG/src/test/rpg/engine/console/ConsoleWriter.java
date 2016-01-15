@@ -81,6 +81,8 @@ public class ConsoleWriter
 		{
 			Log.d("write command : " + c);
 			write("<" + c.getCom() + "> ", PrintColor.CYAN);
+			if(c.needParam())
+				write("<" + c.getParam() + "> ", PrintColor.CYAN);
 			writeLine(c.getDesc().getDialogue());
 		}
 	}

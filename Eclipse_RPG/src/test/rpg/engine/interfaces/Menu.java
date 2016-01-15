@@ -1,8 +1,6 @@
 package test.rpg.engine.interfaces;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import test.rpg.engine.Game;
 import test.rpg.engine.console.event.Command;
@@ -79,9 +77,11 @@ public abstract class Menu extends CommandSender
 		Log.d("init menu");
 		init();
 		Log.d("render menu");
-		write(PrintColor.ERASE.getAnsiColor());
-		if (!game.isDebug())
+		if (game.isErase())
+		{
+			write(PrintColor.ERASE.getAnsiColor());
 			clearWindow();
+		}
 		writeSeparator(title);
 		renderMenu();
 		writeSeparator("Commands");
@@ -110,5 +110,19 @@ public abstract class Menu extends CommandSender
 	protected void addDial(Dialogue d)
 	{
 		this.dials.add(d);
+	}
+	
+	protected final int getCommandParamInt(String p)
+	{
+		try
+		{
+			int i = Integer.parseInt(p);
+			return i;
+		}
+		catch(NumberFormatException  e)
+		{
+			Log.e("Not a number, retry");
+			return -1;
+		}
 	}
 }

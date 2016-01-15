@@ -1,18 +1,19 @@
 package test.rpg.perso.competence;
 
-import test.rpg.perso.Personnage;
+import test.rpg.perso.Entity;
 
 public class Parade implements Capacite {
 
 	@Override
-	public float probaReussite(Personnage src) {
+	public float probaReussite(Entity src) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public void effet(Personnage cible, Personnage src) {
+	public String effet(Entity cible, Entity src) {
 		// TODO Auto-generated method stub
+		return "Bloquage de la prochaine attaque";
 	}
 	
 	public String getName()

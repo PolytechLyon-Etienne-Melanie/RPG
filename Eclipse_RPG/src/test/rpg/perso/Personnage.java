@@ -3,6 +3,7 @@ package test.rpg.perso;
 import test.rpg.engine.Game;
 import test.rpg.menu.MenuLevelUpScreen;
 import test.rpg.perso.classe.Classe;
+import test.rpg.perso.effet.Effet;
 import test.rpg.perso.equipement.Arme;
 import test.rpg.perso.equipement.Armure;
 import test.rpg.perso.equipement.Inventaire;
@@ -147,8 +148,18 @@ public class Personnage extends Entity
 		return inventaire;
 	}
 	
+	public int getTotalDex()
+	{
+		return classe.getCarac().getDexterite();
+	}
 	
-		
+	public int getTotalMagie()
+	{
+		return classe.getCarac().getMagie();
+	}
 	
-
+	public int getTotalDef()
+	{
+		return classe.getCarac().getDefense();
+	}
 }

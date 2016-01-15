@@ -1,5 +1,6 @@
 package test.rpg.perso.effet;
 
+import test.rpg.perso.Entity;
 import test.rpg.perso.classe.Caracteristique;
 
 public class Effet {
@@ -100,6 +101,11 @@ public class Effet {
 	public Effet setDuree(int i)
 	{
 		this.permanent = i;
-		return null;
+		return this;
+	}
+	
+	public void update(Entity src)
+	{
+		this.permanent -= 1;
 	}
 }

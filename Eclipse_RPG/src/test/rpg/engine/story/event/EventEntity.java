@@ -5,8 +5,13 @@ import test.rpg.perso.classe.Classe;
 import test.rpg.perso.classe.Guerrier;
 import test.rpg.perso.classe.monstre.Rodeur;
 
-public class EventEntity implements Event
+public class EventEntity extends Event
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5946725470451597233L;
+
 	public enum ClasseE {
 		RODEUR,
 		GUERRIER

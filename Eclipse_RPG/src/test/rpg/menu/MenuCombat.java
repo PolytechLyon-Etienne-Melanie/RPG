@@ -1,8 +1,9 @@
 package test.rpg.menu;
 
-import java.awt.Color;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import test.rpg.engine.Game;
@@ -12,6 +13,7 @@ import test.rpg.engine.console.printer.Log;
 import test.rpg.engine.console.printer.PrintColor;
 import test.rpg.engine.interfaces.Menu;
 import test.rpg.engine.story.event.EventObserver;
+import test.rpg.menu.item.MenuGetLoot;
 import test.rpg.perso.Entity;
 import test.rpg.perso.Personnage;
 import test.rpg.perso.competence.Capacite;
@@ -20,7 +22,7 @@ import test.rpg.perso.equipement.Item;
 
 public class MenuCombat extends Menu
 {
-	enum State {intro, yourTurn, enemyTurn, fin, distributeXp};
+	enum State {intro, yourTurn, enemyTurn, fin, distributeXp, distributeLoot};
 	enum TurnState {chooseAction, listCommands, applyAction}
 	enum ActionState {useCapa, useItem, pass}
 	
@@ -35,11 +37,16 @@ public class MenuCombat extends Menu
 	private ActionState actionState;
 	
 	private Personnage perso;
+	private Entity enemy;
 	private Capacite capacite;
 	private Consommable consommable;
-	private String actionComment;
+	private Entity target;
+	
+	private String effet;
 	
 	private Random rand;
+	
+	private Map<Integer, Entity> entities;
 	
 	public MenuCombat(Game game, List<Personnage> confrerie, List<Entity> monstres)
 	{
@@ -52,8 +59,34 @@ public class MenuCombat extends Menu
 		
 		this.confrerie = confrerie;
 		this.monstres = monstres;
+		
+		effet = "";
+		
+		initMap();
 	}
 	
+	private void initMap()
+	{
+		entities = new HashMap<Integer, Entity>();
+		int id = 0;
+		Iterator<Personnage> i = confrerie.iterator();
+		while(i.hasNext())
+		{
+			id++;
+			Personnage p = i.next();
+			p.setId_combat(id);
+			entities.put(id, p);
+		}
+		Iterator<Entity> i2 = monstres.iterator();
+		while(i2.hasNext())
+		{
+			id++;
+			Entity e = i2.next();
+			e.setId_combat(id);
+			entities.put(id, e);
+		}
+	}
+
 	private void setIntro()
 	{
 		KeyObserver key = new KeyObserver();
@@ -154,12 +187,15 @@ public class MenuCombat extends Menu
 		persoTurn++;
 		if(persoTurn >= confrerie.size())
 		{
+			persoTurn = 0;
 			state = State.enemyTurn;
+			this.turnState = TurnState.chooseAction;
 		}
 	}
 	
 	private void executeCapacite()
 	{
+		this.effet = this.capacite.effet(this.target, this.perso);
 		setEndTurnCommand();
 	}
 	
@@ -239,7 +275,7 @@ public class MenuCombat extends Menu
 				@Override
 				public void actionPerformed(String p)
 				{
-					setConsommable(conso);
+					setConsommable(conso, p);
 				}
 			});
 			this.addCommand(comp);
@@ -269,12 +305,12 @@ public class MenuCombat extends Menu
 		while(i.hasNext())
 		{
 			Capacite capa = i.next();
-			Command comp = new Command("Capacite   " + capa.toString(), ""+ n);
+			Command comp = new Command("Capacite   " + capa.getName(), ""+ n, "cible");
 			comp.addObserver(new EventObserver(){
 				@Override
 				public void actionPerformed(String p)
 				{
-					setCapacite(capa);
+					setCapacite(capa, p);
 				}
 			});
 			
@@ -296,16 +332,39 @@ public class MenuCombat extends Menu
 		}
 	}
 	
-	public void setCapacite(Capacite capa)
+	public void setCapacite(Capacite capa, String p)
 	{
-		this.capacite = capa;
-		this.turnState = TurnState.applyAction;
+		try
+		{
+			int i = Integer.parseInt(p);
+			this.target = entities.get(i);
+			this.capacite = capa;
+			this.turnState = TurnState.applyAction;
+		}
+		catch(NumberFormatException  e)
+		{
+			Log.e("Not a number, retry");
+		}
+		catch(IndexOutOfBoundsException e)
+		{
+			Log.e("Not a valid Target");
+		}
 	}
 	
-	public void setConsommable(Consommable conso)
+	public void setConsommable(Consommable conso, String p)
 	{
-		this.consommable = conso;
-		this.turnState = TurnState.applyAction;
+		try
+		{
+			int i = Integer.valueOf(p);
+
+			this.target = monstres.get(i);
+			this.consommable = conso;
+			this.turnState = TurnState.applyAction;
+		}
+		catch(NumberFormatException  e)
+		{
+			Log.e("Not a number, retry");
+		}
 	}
 	
 	public void passTurn()
@@ -316,18 +375,66 @@ public class MenuCombat extends Menu
 	
 	private void setEnemyTurn()
 	{
-		KeyObserver key = new KeyObserver();
-		key.addObserver(new EventObserver(){
-
-			@Override
-			public void actionPerformed(String p)
-			{
-				state = State.fin;
-			}
-		});
-		this.addCommand(key);
+		if(turnState == TurnState.chooseAction)
+		{
+			this.enemy = this.monstres.get(this.persoTurn);
+			setEnemyAction();
+			
+			KeyObserver key = new KeyObserver();
+			key.addObserver(new EventObserver(){
+	
+				@Override
+				public void actionPerformed(String p)
+				{
+					turnState = TurnState.applyAction;
+				}
+			});
+			this.addCommand(key);
+		}
+		else if(turnState == TurnState.applyAction)
+		{
+			applyEnemyAction();
+			
+			KeyObserver key = new KeyObserver();
+			key.addObserver(new EventObserver(){
+	
+				@Override
+				public void actionPerformed(String p)
+				{
+					nextEnemyTurn();
+				}
+			});
+			this.addCommand(key);
+		}
 	}
 	
+	private void nextEnemyTurn()
+	{
+		persoTurn++;
+		if(persoTurn >= monstres.size())
+		{
+			persoTurn = 0;
+			state = State.yourTurn;
+			this.turnState = TurnState.chooseAction;
+		}
+	}
+	
+	private void setEnemyAction()
+	{
+		capacite = enemy.getClasse().getCapa().get(0);
+		target = chooseRandomTarget();
+	}
+	
+	private Entity chooseRandomTarget()
+	{
+		return confrerie.get(0);
+	}
+	
+	private void applyEnemyAction()
+	{
+		this.effet = this.capacite.effet(this.target, this.perso);
+	}
+
 	private void setFin()
 	{
 		KeyObserver key = new KeyObserver();
@@ -337,7 +444,7 @@ public class MenuCombat extends Menu
 			public void actionPerformed(String p)
 			{
 				distributeXP();
-				game.setCurrentMenu(new MenuLevelUpScreen(game, confrerie.get(0)));
+				game.setCurrentMenu(new MenuGetLoot(game, Item.getRandomLoot()));
 			}
 		});
 		this.addCommand(key);
@@ -355,7 +462,16 @@ public class MenuCombat extends Menu
 
 	private void renderEnemyTurn()
 	{
-		writeLine("c'est le tour de votre adversaire", PrintColor.CYAN);
+		if(turnState == TurnState.chooseAction)
+		{
+			writeLine("C'est le tour de " + enemy.getNom(), PrintColor.CYAN);
+		}
+		else if(turnState == TurnState.applyAction)
+		{
+			writeLine(enemy.getNom() + " a attaqué " + target.getNom(), PrintColor.CYAN);
+			writeLine("Il a utilisé la capacitée   " + capacite);
+			writeLine(effet);
+		}
 	}
 
 	@Override
@@ -373,7 +489,7 @@ public class MenuCombat extends Menu
 		{
 			setEnemyTurn();
 		}
-		else
+		else if(state == State.fin)
 			setFin();
 	}
 
@@ -415,12 +531,11 @@ public class MenuCombat extends Menu
 			writeLine("C'est au tour de " + perso.getNom() + " d'attaquer.", PrintColor.CYAN);
 			renderSetPersoTurn();
 		}
-		else
+		else if(turnState == TurnState.applyAction)
 		{
 			writeLine(perso.getNom() + " a fini son tour.", PrintColor.CYAN);
 			renderApplyPersoTurn();
 		}
-		
 	}
 	
 	private void renderApplyPersoTurn()
@@ -438,7 +553,7 @@ public class MenuCombat extends Menu
 	private void renderExecuteCapacite()
 	{
 		writeLine("Il a utilisé la capacitée   " + capacite);
-		writeLine(actionComment);
+		writeLine(effet);
 	}
 	
 	private void renderUseConsommable()
@@ -465,7 +580,7 @@ public class MenuCombat extends Menu
 		while(i.hasNext())
 		{
 			Personnage p = i.next();
-			writeLine(p.getNom() + " | " + p.getNiveau() + " | " + p.getClasse().getNom());
+			writeLine("<" + p.getId_combat() + "> " + p.getNom() + " | " + p.getNiveau() + " | " + p.getClasse().getNom());
 			String life = "::::::::::::::::::::::::::::::::::::";
 			String notlife = "                                    ";
 			float ratio = (float)(p.getSante()) / (float)(p.getSanteMax());
@@ -489,7 +604,7 @@ public class MenuCombat extends Menu
 		while(i.hasNext())
 		{
 			Entity p = i.next();
-			writeLine(p.getNom() + " | " + p.getNiveau() + " | " + p.getClasse().getNom());
+			writeLine("<" + p.getId_combat() + "> " + p.getNom() + " | " + p.getNiveau() + " | " + p.getClasse().getNom());
 			String life = "::::::::::::::::::::::::::::::::::::";
 			String notlife = "                                    ";
 			float ratio = (float)(p.getSante()) / (float)(p.getSanteMax());
@@ -497,10 +612,11 @@ public class MenuCombat extends Menu
 			int l = (int)(life.length() * ratio);
 			Log.d(l);
 			PrintColor color = PrintColor.GREEN;
-			if(ratio < 0.5)
-				color = PrintColor.YELLOW;
-			else if(ratio < 0.2)
+			if(ratio < 0.2)
 				color = PrintColor.RED;
+			else if(ratio < 0.5)
+				color = PrintColor.YELLOW;
+			
 			writeLine("|" + life.substring(0, l) + notlife.substring(l)+ "|", color);
 		}
 		writeLine("");

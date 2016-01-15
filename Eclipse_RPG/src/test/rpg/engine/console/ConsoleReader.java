@@ -62,7 +62,7 @@ public class ConsoleReader
 		if(split.length > 1)
 			param = split[1];
 		
-		Command c = findCommand(com);
+		Command c = findCommand(command);
 
 		if (c != null)
 		{

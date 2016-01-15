@@ -1,12 +1,12 @@
 package test.rpg.perso.competence;
 
-import test.rpg.perso.Personnage;
+import test.rpg.perso.Entity;
 
 public interface Capacite 
 {
 	public String getName();
 	
-    public float probaReussite(Personnage src);
+    public float probaReussite(Entity src);
 
-    public void effet(Personnage cible, Personnage src);
+    public String effet(Entity cible, Entity src);
 }

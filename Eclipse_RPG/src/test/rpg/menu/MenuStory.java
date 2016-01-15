@@ -17,6 +17,8 @@ import test.rpg.engine.story.event.EventDialogue;
 import test.rpg.engine.story.event.EventEntity;
 import test.rpg.engine.story.event.EventLoot;
 import test.rpg.engine.story.event.EventObserver;
+import test.rpg.menu.item.MenuGetLoot;
+import test.rpg.menu.item.MenuInventaire;
 import test.rpg.perso.Entity;
 import test.rpg.perso.Personnage;
 import test.rpg.perso.equipement.Item;
@@ -35,7 +37,8 @@ public class MenuStory extends Menu
 	protected void setDials()
 	{
 		Iterator<Event> i = event.getEvents().iterator();
-		while(i.hasNext())
+		boolean stop = false;
+		while(i.hasNext() && !stop)
 		{
 			Event e = i.next();
 			if(e instanceof EventLoot)
@@ -43,10 +46,11 @@ public class MenuStory extends Menu
 				EventLoot el = (EventLoot) e;
 				Dialogue diag = new Dialogue(el.getDialogue());
 				this.addDial(diag);
-				Item item = el.geenerateLoot();
-				Dialogue loot = new Dialogue("Loot : "+ item);
-				this.addDial(loot);
-				this.onLoot(item);
+				if(!el.isDone())
+				{
+					this.onLoot(el);
+					stop = true;
+				}
 			}
 			else if(e instanceof EventDialogue)
 			{
@@ -59,23 +63,29 @@ public class MenuStory extends Menu
 				EventCombat ec = (EventCombat) e;
 				this.addDial(new Dialogue(ec.getTitle()));
 				if(!ec.isDone())
+				{
 					this.startCombat(ec);
+					stop = true;
+				}
 			}
 		}
 	}
 	
 	public void generateEndChoice()
 	{
-		inventaire = new Command("Accéder à votre inventaire", "invent");
-		inventaire.addObserver(new EventObserver(){
-			@Override
-			public void actionPerformed(String p)
-			{
-				game.setCurrentMenu(new MenuInventaire(game, game.getHero().getInventaire()));
-			}
-			
-		});
-		this.addCommand(inventaire);
+		if(game.getHero() != null)
+		{
+			inventaire = new Command("Accéder à votre inventaire", "invent");
+			inventaire.addObserver(new EventObserver(){
+				@Override
+				public void actionPerformed(String p)
+				{
+					game.setCurrentMenu(new MenuInventaire(game, game.getHero().getInventaire()));
+				}
+				
+			});
+			this.addCommand(inventaire);
+		}
 		
 		ArrayList<StoryLink> links = new ArrayList<StoryLink>(game.getStoryManager().getStory().getGraph().getOutEdges(event));
 		if(links.size() == 1)
@@ -127,9 +137,20 @@ public class MenuStory extends Menu
 		};
 	}
 	
-	public void onLoot(Item loot)
+	public void onLoot(EventLoot loot)
 	{
+		Command combatC = new Command("Loot", "l");
+		combatC.addObserver(new EventObserver(){
+			@Override
+			public void actionPerformed(String p)
+			{
+				game.setCurrentMenu(new MenuGetLoot(game, loot.geenerateLoot()));
+				loot.done();
+			}
+		});
 		
+		this.addCommand(combatC);
+		//game.getHero().earnXP(e.getXpVal());
 	}
 	
 	public void startCombat(EventCombat combat)

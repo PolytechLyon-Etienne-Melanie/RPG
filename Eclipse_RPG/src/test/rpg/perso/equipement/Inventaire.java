@@ -79,6 +79,14 @@ public class Inventaire {
 
 	public List<Consommable> getConsommables()
 	{
-		return new ArrayList<Consommable>();
+		ArrayList<Consommable> conso = new ArrayList<Consommable>();
+		Iterator<Item> i = items.iterator();
+		while(i.hasNext())
+		{
+			Item item = i.next();
+			if(item instanceof Consommable)
+				conso.add((Consommable)item);
+		}
+		return conso;
 	}
 }

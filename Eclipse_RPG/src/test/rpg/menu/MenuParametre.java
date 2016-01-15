@@ -10,7 +10,7 @@ public class MenuParametre extends Menu
 {
 
 	private Command debug;
-	private Command color;
+	private Command erase;
 
 	public MenuParametre(Game game, Menu retour)
 	{
@@ -30,6 +30,11 @@ public class MenuParametre extends Menu
 			debug.setDesc("Afficher le DEBUG.");
 			game.setDebug(false);
 		}
+	}
+	
+	private void switchErase()
+	{
+		game.setErase(!game.isErase());
 	}
 
 	@Override
@@ -55,6 +60,27 @@ public class MenuParametre extends Menu
 			}
 		});
 		this.addCommand(debug);
+		
+		
+		String e = "";
+		if(Log.debug())
+		{
+			e = "Desactiver Erase";
+		}
+		else
+		{
+			e = "Activer Erase";
+		}
+		erase = new Command(e, "erase");
+		erase.addObserver(new EventObserver()
+		{
+			@Override
+			public void actionPerformed(String p)
+			{
+				switchErase();
+			}
+		});
+		this.addCommand(erase);
 	}
 
 	@Override
