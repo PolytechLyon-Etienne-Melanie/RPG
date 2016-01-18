@@ -80,7 +80,7 @@ public class MenuStory extends Menu
 				@Override
 				public void actionPerformed(String p)
 				{
-					game.setCurrentMenu(new MenuInventaire(game, game.getHero().getInventaire()));
+					game.setCurrentMenu(new MenuInventaire(game, game.getHero()));
 				}
 				
 			});

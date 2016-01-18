@@ -8,7 +8,7 @@ public class Armure extends Item
 	
     public Armure(String name, Effet caract, float poids)
 	{
-		super(name, caract, poids);
+		super("Armure",name, caract, poids);
 	}
     
 	public float getResistance()

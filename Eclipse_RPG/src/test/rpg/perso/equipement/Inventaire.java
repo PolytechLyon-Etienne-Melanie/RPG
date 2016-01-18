@@ -91,4 +91,23 @@ public class Inventaire {
 		}
 		return conso;
 	}
+	
+	public void remplacerArme(Arme arme)
+	{
+		items.add(armeeq);
+		armeeq = arme;
+		items.remove(arme);
+	}
+	
+	public void remplacerArmure(Armure armure)
+	{
+		items.add(armureeq);
+		armureeq = armure;
+		items.remove(armure);
+	}
+	
+	public void jeterItem(Item item)
+	{
+		items.remove(item);
+	}
 }

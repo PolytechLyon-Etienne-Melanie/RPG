@@ -7,6 +7,7 @@ import test.rpg.engine.console.event.Command;
 import test.rpg.engine.console.printer.Log;
 import test.rpg.engine.interfaces.Menu;
 import test.rpg.engine.story.event.EventObserver;
+import test.rpg.perso.Personnage;
 import test.rpg.perso.equipement.Inventaire;
 import test.rpg.perso.equipement.Item;
 
@@ -17,54 +18,18 @@ public class MenuInventaire extends Menu{
 	private Command equipeArme;
 	private Command equipeArmure;
 	private Command utiliserPotion;
+	private Command jeterItem;
 	
-	public MenuInventaire(Game game, Inventaire invent )
+	private Personnage perso;
+	
+	public MenuInventaire(Game game, Personnage perso)
 	{
 		super(game);
-		inventaire = invent;
+		inventaire = perso.getInventaire();
+		this.perso = perso;
 	}
 
 	protected void setCommands(){
-		retour = new Command("Retourner au jeu.", "exit");
-		retour.addObserver(new EventObserver(){
-			@Override
-			public void actionPerformed(String p)
-			{
-				game.returnToStory();
-			}
-		});
-		
-		equipeArme = new Command("Voulez-vous équiper une arme ?", "Arme");
-		equipeArme.addObserver(new EventObserver(){
-			@Override
-			public void actionPerformed(String p)
-			{
-				//comment on gère le choix de l'item à équiper ?
-			}
-		});
-		
-		equipeArmure = new Command("Voulez-vous équiper une armure ?", "Armure");
-		equipeArmure.addObserver(new EventObserver(){
-			@Override
-			public void actionPerformed(String p)
-			{
-				//à compléter
-			}
-		});
-		
-		utiliserPotion = new Command("Voulez-vous utiliser une potion ?", "Potion");
-		utiliserPotion.addObserver(new EventObserver(){
-			@Override
-			public void actionPerformed(String p)
-			{
-				//à compléter
-			}
-		});
-		
-		this.addCommand(retour);
-		this.addCommand(equipeArme);
-		this.addCommand(equipeArmure);
-		this.addCommand(utiliserPotion);
 	}
 	
 	@Override
@@ -79,9 +44,8 @@ public class MenuInventaire extends Menu{
 				game.returnToStory();
 			}
 		});
-		this.addCommand(back);
 		
-		Command use = new Command("Utiliser item", "use", "item");
+		Command use = new Command("Utiliser item", "use", "n° item");
 		use.addObserver(new EventObserver()
 		{
 			@Override
@@ -92,6 +56,38 @@ public class MenuInventaire extends Menu{
 		});
 		this.addCommand(use);
 		
+		equipeArme = new Command("Voulez-vous équiper une arme ?", "arme", "n°");
+		equipeArme.addObserver(new EventObserver(){
+			@Override
+			public void actionPerformed(String p)
+			{
+
+				equipArme(p);
+			}
+		});
+		
+		equipeArmure = new Command("Voulez-vous équiper une armure ?", "armure", "n°");
+		equipeArmure.addObserver(new EventObserver(){
+			@Override
+			public void actionPerformed(String p)
+			{
+				equipArmure(p);
+			}
+		});
+		
+		jeterItem = new Command("Voulez-vous vous débarrasser d'un objet ?", "item", "n°");
+		jeterItem.addObserver(new EventObserver(){
+			@Override
+			public void actionPerformed(String p)
+			{
+				jeterItems(p);
+			}
+		});
+		
+		this.addCommand(equipeArme);
+		this.addCommand(equipeArmure);
+		this.addCommand(jeterItem);
+		this.addCommand(back);
 	}
 	
 
@@ -101,7 +97,49 @@ public class MenuInventaire extends Menu{
 		try
 		{
 			Item item = inventaire.getItems().get(i);
-			game.setCurrentMenu(new MenuUseItem(game, this, item));
+			game.setCurrentMenu(new MenuUseItem(game, this, item, perso));
+		}
+		catch(IndexOutOfBoundsException e)
+		{
+			Log.e("Not a valid Target");
+		}
+	}
+	
+	private void equipArme(String p)
+	{
+		int i = this.getCommandParamInt(p);
+		try
+		{
+			Item item = inventaire.getItems().get(i);
+			game.setCurrentMenu(new MenuEquipArme(game, this, item, perso));
+		}
+		catch(IndexOutOfBoundsException e)
+		{
+			Log.e("Not a valid Target");
+		}
+	}
+	
+	private void equipArmure(String p)
+	{
+		int i = this.getCommandParamInt(p);
+		try
+		{
+			Item item = inventaire.getItems().get(i);
+			game.setCurrentMenu(new MenuEquipArmure(game, this, item, perso));
+		}
+		catch(IndexOutOfBoundsException e)
+		{
+			Log.e("Not a valid Target");
+		}
+	}
+	
+	private void jeterItems(String p)
+	{
+		int i = this.getCommandParamInt(p);
+		try
+		{
+			Item item = inventaire.getItems().get(i);
+			game.setCurrentMenu(new MenuJeterItem(game, this, item, perso));
 		}
 		catch(IndexOutOfBoundsException e)
 		{
@@ -133,10 +171,10 @@ public class MenuInventaire extends Menu{
 		}
 		writeLine("");
 		
-		writeLine("Vous êtes équipé de l'arme siuvante :"+inventaire.getArmreeq());
+		writeLine("Vous êtes équipé de l'arme suivante :"+inventaire.getArmreeq());
 		
 		writeLine("");
 		writeLine("Vous êtes équipé de l'armure suivante :" +inventaire.getArmureeq());
-	}	// command equiper/jeter/ ...
+	}
 
 }
