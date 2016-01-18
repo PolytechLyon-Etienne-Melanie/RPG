@@ -34,7 +34,7 @@ public class MenuStory extends Menu
 		this.event = event;
 	}
 	
-	protected void setDials()
+	protected boolean setDials()
 	{
 		Iterator<Event> i = event.getEvents().iterator();
 		boolean stop = false;
@@ -69,6 +69,8 @@ public class MenuStory extends Menu
 				}
 			}
 		}
+		
+		return stop;
 	}
 	
 	public void generateEndChoice()
@@ -139,7 +141,7 @@ public class MenuStory extends Menu
 	
 	public void onLoot(EventLoot loot)
 	{
-		Command combatC = new Command("Loot", "l");
+		Command combatC = new Command("Appuyez sur <Entrer> pour récupérer l'objet.", "");
 		combatC.addObserver(new EventObserver(){
 			@Override
 			public void actionPerformed(String p)
@@ -155,7 +157,8 @@ public class MenuStory extends Menu
 	
 	public void startCombat(EventCombat combat)
 	{
-		Command combatC = new Command("Combat", "c");
+		KeyObserver key = new KeyObserver();
+		Command combatC = new Command("Appuyez sur <Entrer> pour commencer le combat.", "");
 		combatC.addObserver(new EventObserver(){
 			@Override
 			public void actionPerformed(String p)
@@ -188,8 +191,8 @@ public class MenuStory extends Menu
 	protected void initMenu()
 	{
 		dials = new ArrayList<Dialogue>();
-		setDials();
-		generateEndChoice();
+		if(!setDials())
+			generateEndChoice();
 	}
 
 	@Override
