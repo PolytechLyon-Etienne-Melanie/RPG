@@ -16,6 +16,8 @@ public class Inventaire {
 	
 	public Inventaire(Personnage perso){
 		items = new ArrayList<Item>();
+		armeeq = Arme.armeDebut;
+		armureeq = Armure.armureDebut;
 		this.perso = perso;
 		setPoidsMax(perso.getPoidsMax());
 	}
