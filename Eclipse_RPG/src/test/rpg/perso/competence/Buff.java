@@ -29,7 +29,7 @@ public class Buff implements Capacite
 	@Override
 	public String effet(Entity cible, Entity src)
 	{
-		System.out.println(effet);
+		src.addEffet(effet);
 		return cible.getNom() + " possède maintenant le buff " + effet + " pour une durée de " + effet.getPermanent();
 	}
 }

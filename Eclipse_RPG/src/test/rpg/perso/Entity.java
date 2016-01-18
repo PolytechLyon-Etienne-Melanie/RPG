@@ -47,6 +47,11 @@ public class Entity
 		this("Default Entity", 1, new Rodeur());
 	}
 	
+	public boolean isAlive()
+	{
+		return sante > 0;
+	}
+	
 	public Caracteristique getCaracteristique()
 	{
 		return classe.getCarac();
@@ -132,6 +137,12 @@ public class Entity
 				effets.remove(e);
 			}
 		}
+	}
+	
+	
+	public List<Effet> getEffets()
+	{
+		return effets;
 	}
 
 	public void damages(int dmg)

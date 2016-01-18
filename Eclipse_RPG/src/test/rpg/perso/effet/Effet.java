@@ -39,11 +39,11 @@ public class Effet {
 		this(new Caracteristique(f, dex, s, def, m));
 	}
 	
-    private Caracteristique c;
+	protected Caracteristique c;
 
-    private int valeur;
+    protected int valeur;
     
-	private int permanent;
+    protected int permanent;
 
     public Caracteristique getC()
 	{
@@ -95,7 +95,7 @@ public class Effet {
 	
 	public String toString()
 	{
-		return "Val : " + valeur + ", Duree : " + permanent + ", Caract : " + c;
+		return "Val : " + valeur + ", Duree : " + permanent + ", " + c;
 	}
 
 	public Effet setDuree(int i)
@@ -104,8 +104,9 @@ public class Effet {
 		return this;
 	}
 	
-	public void update(Entity src)
+	public String update(Entity src)
 	{
 		this.permanent -= 1;
+		return "";
 	}
 }

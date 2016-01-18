@@ -60,6 +60,6 @@ public class Caracteristique {
 	
 	public String toString()
 	{
-		return "f:" + force + ", dex" + dexterite + ", s" + sante + ", def:" + defense + ", m:" + magie;
+		return "Force: " + force + ", Dexterité:" + dexterite + ", Santé:" + sante + ", Défence:" + defense + ", Magie:" + magie;
 	}
 }
