@@ -4,10 +4,7 @@ import java.util.Iterator;
 
 import test.rpg.engine.Game;
 import test.rpg.engine.console.event.Command;
-<<<<<<< HEAD:Eclipse_RPG/src/test/rpg/menu/item/MenuInventaire.java
 import test.rpg.engine.console.printer.Log;
-=======
->>>>>>> origin/master:Eclipse_RPG/src/test/rpg/menu/MenuInventaire.java
 import test.rpg.engine.interfaces.Menu;
 import test.rpg.engine.story.event.EventObserver;
 import test.rpg.perso.equipement.Inventaire;
@@ -25,17 +22,13 @@ public class MenuInventaire extends Menu{
 	{
 		super(game);
 		inventaire = invent;
-<<<<<<< HEAD:Eclipse_RPG/src/test/rpg/menu/item/MenuInventaire.java
-=======
-		
-		
 	}
 
 	protected void setCommands(){
 		retour = new Command("Retourner au jeu.", "exit");
 		retour.addObserver(new EventObserver(){
 			@Override
-			public void actionPerformed()
+			public void actionPerformed(String p)
 			{
 				game.returnToStory();
 			}
@@ -44,7 +37,7 @@ public class MenuInventaire extends Menu{
 		equipeArme = new Command("Voulez-vous équiper une arme ?", "Arme");
 		equipeArme.addObserver(new EventObserver(){
 			@Override
-			public void actionPerformed()
+			public void actionPerformed(String p)
 			{
 				//comment on gère le choix de l'item à équiper ?
 			}
@@ -53,7 +46,7 @@ public class MenuInventaire extends Menu{
 		equipeArmure = new Command("Voulez-vous équiper une armure ?", "Armure");
 		equipeArmure.addObserver(new EventObserver(){
 			@Override
-			public void actionPerformed()
+			public void actionPerformed(String p)
 			{
 				//à compléter
 			}
@@ -62,7 +55,7 @@ public class MenuInventaire extends Menu{
 		utiliserPotion = new Command("Voulez-vous utiliser une potion ?", "Potion");
 		utiliserPotion.addObserver(new EventObserver(){
 			@Override
-			public void actionPerformed()
+			public void actionPerformed(String p)
 			{
 				//à compléter
 			}
@@ -72,7 +65,6 @@ public class MenuInventaire extends Menu{
 		this.addCommand(equipeArme);
 		this.addCommand(equipeArmure);
 		this.addCommand(utiliserPotion);
->>>>>>> origin/master:Eclipse_RPG/src/test/rpg/menu/MenuInventaire.java
 	}
 	
 	@Override
