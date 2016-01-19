@@ -30,7 +30,7 @@ public class MenuCombat extends Menu
 
 	enum TurnState
 	{
-		chooseAction, listCommands, applyAction
+		chooseAction, listCommands, applyAction, updateEffet
 	}
 
 	enum ActionState
@@ -142,6 +142,9 @@ public class MenuCombat extends Menu
 		} else if (turnState == TurnState.applyAction)
 		{
 			applyPersoTurn();
+		} else if (turnState == TurnState.updateEffet)
+		{
+			updatePersoEffet();
 		}
 
 	}
@@ -175,8 +178,14 @@ public class MenuCombat extends Menu
 			useConsommable();
 		} else if (actionState == ActionState.pass)
 		{
-			setEndTurnCommand();
+			setEffectCommand();
 		}
+	}
+
+	private void updatePersoEffet()
+	{
+		effet = perso.updateEffet();
+		setEndTurnCommand();
 	}
 
 	private void setEndTurnCommand()
@@ -192,6 +201,26 @@ public class MenuCombat extends Menu
 			}
 		});
 		this.addCommand(key);
+	}
+
+	private void setEffectCommand()
+	{
+		KeyObserver key = new KeyObserver();
+		key.addObserver(new EventObserver()
+		{
+
+			@Override
+			public void actionPerformed(String p)
+			{
+				applyEffect();
+			}
+		});
+		this.addCommand(key);
+	}
+
+	private void applyEffect()
+	{
+		this.turnState = TurnState.updateEffet;
 	}
 
 	private void nextTurn()
@@ -230,13 +259,13 @@ public class MenuCombat extends Menu
 	private void executeCapacite()
 	{
 		this.effet = this.capacite.effet(this.target, this.perso);
-		setEndTurnCommand();
+		setEffectCommand();
 	}
 
 	private void useConsommable()
 	{
 		this.effet = this.consommable.effet(this.perso, this.perso);
-		setEndTurnCommand();
+		setEffectCommand();
 	}
 
 	private void setPersoChoiceAction()
@@ -307,7 +336,7 @@ public class MenuCombat extends Menu
 		while (i.hasNext())
 		{
 			Consommable conso = i.next();
-			Command comp = new Command("Consommable   " + conso.toString(), "" + n);
+			Command comp = new Command("Consommable : " + conso.toString(), "" + n);
 			comp.addObserver(new EventObserver()
 			{
 				@Override
@@ -344,7 +373,7 @@ public class MenuCombat extends Menu
 		while (i.hasNext())
 		{
 			Capacite capa = i.next();
-			Command comp = new Command("Capacite   " + capa.getName(), "" + n, "n° cible");
+			Command comp = new Command(" -> " + capa.getName(), "" + n, "n° cible");
 			comp.addObserver(new EventObserver()
 			{
 				@Override
@@ -367,6 +396,7 @@ public class MenuCombat extends Menu
 				@Override
 				public void actionPerformed(String p)
 				{
+					passTurn();
 				}
 			});
 			this.addCommand(key);
@@ -392,17 +422,8 @@ public class MenuCombat extends Menu
 
 	public void setConsommable(Consommable conso, String p)
 	{
-		try
-		{
-			int i = Integer.valueOf(p);
-
-			this.target = monstres.get(i);
-			this.consommable = conso;
-			this.turnState = TurnState.applyAction;
-		} catch (NumberFormatException e)
-		{
-			Log.e("Not a number, retry");
-		}
+		this.consommable = conso;
+		this.turnState = TurnState.applyAction;
 	}
 
 	public void passTurn()
@@ -525,7 +546,7 @@ public class MenuCombat extends Menu
 	private void renderFin()
 	{
 		writeLine("Fin du combat.", PrintColor.CYAN);
-		if(win)
+		if (win)
 			writeLine("Vous avez gagné.");
 		else
 			writeLine("Vous avez perdu.");
@@ -539,7 +560,7 @@ public class MenuCombat extends Menu
 		} else if (turnState == TurnState.applyAction)
 		{
 			writeLine(enemy.getNom() + " a attaqué " + target.getNom(), PrintColor.CYAN);
-			writeLine("Il a utilisé la capacitée   " + capacite);
+			writeLine("Compétence utiliée : " + capacite);
 			writeLine(effet);
 		}
 	}
@@ -597,6 +618,13 @@ public class MenuCombat extends Menu
 		{
 			writeLine(perso.getNom() + " a fini son tour.", PrintColor.CYAN);
 			renderApplyPersoTurn();
+		} else if (turnState == TurnState.updateEffet)
+		{
+			if (effet != "")
+			{
+				writeLine("Mise à jour des effets de " + perso.getNom() + ":");
+				writeLine(effet);
+			}
 		}
 	}
 
@@ -613,7 +641,7 @@ public class MenuCombat extends Menu
 
 	private void renderExecuteCapacite()
 	{
-		writeLine("Il a utilisé la capacitée " + capacite.getName());
+		writeLine("Compétence utilisée : " + capacite.getName());
 		writeLine(effet);
 		if (target.getSante() <= 0)
 		{
@@ -623,7 +651,7 @@ public class MenuCombat extends Menu
 
 	private void renderUseConsommable()
 	{
-		writeLine("Il a utilisé le consommable " + consommable.getNom());
+		writeLine("Objet utilisé : " + consommable.getNom());
 		writeLine(effet);
 	}
 
@@ -631,10 +659,10 @@ public class MenuCombat extends Menu
 	{
 		if (actionState == ActionState.useCapa)
 		{
-			writeLine("Choisisssez une capacite");
+			writeLine("Choisisssez une compétence :");
 		} else if (actionState == ActionState.useItem)
 		{
-			writeLine("Choisisssez un consommable");
+			writeLine("Choisisssez un objet :");
 		}
 	}
 

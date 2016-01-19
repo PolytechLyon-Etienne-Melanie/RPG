@@ -4,12 +4,21 @@ import test.rpg.perso.Entity;
 import test.rpg.perso.classe.Caracteristique;
 
 public class Effet {
+	
+	private String name;
+	
+	protected Caracteristique c;
 
+    protected int valeur;
+    
+    protected int permanent;
+	
 	public Effet(int per, int val, Caracteristique c)
 	{
 		this.c = c;
 		valeur = val;
 		permanent = per;
+		name = "";
 	}
 	
 	public Effet()
@@ -39,11 +48,10 @@ public class Effet {
 		this(new Caracteristique(f, dex, s, def, m));
 	}
 	
-	protected Caracteristique c;
-
-    protected int valeur;
-    
-    protected int permanent;
+	public void setName(String n)
+	{
+		name = n;
+	}
 
     public Caracteristique getC()
 	{
@@ -95,7 +103,14 @@ public class Effet {
 	
 	public String toString()
 	{
-		return "Val : " + valeur + ", Duree : " + permanent + ", " + c;
+		String r = "";
+		if(name != "")
+			r += name + " | ";
+		if(valeur != 0)
+			r += "Valeur: " + valeur;
+		if(permanent != -1)
+			r += ", Durée: " + permanent;
+		return r + ", " + c;
 	}
 
 	public Effet setDuree(int i)

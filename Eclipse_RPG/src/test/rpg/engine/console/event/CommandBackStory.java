@@ -7,12 +7,12 @@ public class CommandBackStory extends Command
 {
 	public CommandBackStory(Game game)
 	{
-		super("Retour a l'histoire", "back");
+		super("Retour.", "");
 		this.addObserver(new EventObserver(){
 			@Override
 			public void actionPerformed(String p)
 			{
-			game.returnToStory();
+				game.returnToStory();
 			}
 		});
 	}

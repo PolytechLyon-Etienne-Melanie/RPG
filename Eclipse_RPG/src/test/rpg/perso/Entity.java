@@ -14,6 +14,7 @@ import test.rpg.perso.effet.Effet;
 public class Entity
 {
 	public static final int xpMount = 10;
+	public static final float hpMount = 5;
 	protected String nom;
 	protected int niveau;
 	protected int sante;
@@ -59,7 +60,7 @@ public class Entity
 	
 	public void calculSanteMax()
 	{
-		santeMax = 50 + getCaracteristique().getSante() * niveau;
+		santeMax = (int)( 50 + getCaracteristique().getSante() * niveau * hpMount);
 	}
 	
 	public String getNom()
@@ -100,43 +101,38 @@ public class Entity
 		return niveau * Entity.xpMount + rand.nextInt(Entity.xpMount);
 	}
 
-	public int getTotalForce()
+	public Caracteristique getTotalCarac()
 	{
-		return classe.getCarac().getForce();
+		Caracteristique c = new Caracteristique().add(classe.getCarac());
+		Iterator<Effet> i = effets.iterator();
+		while(i.hasNext())
+		{
+			c.add(i.next().getC());
+		}
+		return c;
 	}
 	
-	public int getTotalDex()
+	public void addEffet(Effet e)
 	{
-		return classe.getCarac().getDexterite();
+		effets.add(e);
 	}
-	
-	public int getTotalMagie()
+
+	public String updateEffet()
 	{
-		return classe.getCarac().getMagie();
-	}
-	
-	public void addEffet(Effet effet)
-	{
-		this.effets.add(effet);
-	}
-	
-	public int getTotalDef()
-	{
-		return classe.getCarac().getDefense();
-	}
-	
-	public void updateEffet()
-	{
+		String s = "";
 		Iterator<Effet> i = effets.iterator();
 		while(i.hasNext())
 		{
 			Effet e = i.next();
-			e.update(this);
+			String s2 = e.update(this);
+			if(s2 != "")
+				s += s2 + " ";
 			if(e.getPermanent() <= 0)
 			{
 				effets.remove(e);
 			}
 		}
+		return s;
 	}
 	
 	

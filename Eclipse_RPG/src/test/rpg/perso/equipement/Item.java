@@ -50,20 +50,27 @@ public class Item
 
 	private String nom;
 	private float poids;
-	private Effet effet;
+	protected Effet effet;
 	private int id;
 
 	private String type;
+	private boolean lootable;
 
-	public Item(String t, String name, Effet caract, float poids)
+	public Item(String t, String name, Effet caract, float poids, boolean lootable)
 	{
 		type = t;
 		nom = name;
 		this.poids = poids;
 		id = ID++;
 		this.effet = caract;
-
+		this.lootable = (lootable);
+		
 		listItem.add(this);
+	}
+	
+	public Item(String t, String name, Effet caract, float poids)
+	{
+		this(t, name, caract, poids, true);
 	}
 
 	public Item(String t, String name, float poids)
@@ -134,44 +141,57 @@ public class Item
 			public Item getItem()
 			{
 				int r = this.getID();
-				while (r == this.getID())
+				Item i = this;
+				do
 				{
 					r = rand.nextInt(listItem.size());
+					i = listItem.get(r);
 				}
-				return listItem.get(r);
+				while (!i.isLootable());
+				
+				return i;
 			}
 		};
+		lootRandom.setNotLootable();
 		epeeRandom = new Arme("Epee aléatoire", new Effet(), 0)
 		{
 			public Item getItem()
 			{
 				int r = this.getID();
-				while (r == this.getID())
+				Item i = this;
+				do
 				{
 					r = rand.nextInt(listArme.size());
+					i = listArme.get(r);
 				}
-				return listArme.get(r);
+				while (!i.isLootable());
+				
+				return i;
 			}
 		};
-		consoRandom = new Consommable("Consommable Random", new Effet(), 0)
+		epeeRandom.setNotLootable();
+		consoRandom = new Consommable("Consommable Random", new Effet(), 0, "")
 		{
 			public Item getItem()
 			{
-				int r = 0;
+				int r = this.getID();
 				Item i = this;
-				while (i.getID() == this.getID())
+				do
 				{
 					r = rand.nextInt(listConsommable.size());
 					i = listConsommable.get(r);
 				}
-				return listConsommable.get(r);
+				while (!i.isLootable());
+				
+				return i;
 			}
 		};
+		consoRandom.setNotLootable();
 
-		potionSoin = new Consommable("Potion de soin", new EffetSoin(50), 1);
-		potionForce = new Consommable("Potion de force", new Effet().setForce(20).setDuree(3), 1);
-		potionMagie = new Consommable("Potion de magie", new Effet().setMagie(20).setDuree(3), 1);
-		potionDex = new Consommable("Potion de dexterité", new Effet().setDex(20).setDuree(3), 1);
+		potionSoin = new Consommable("Potion de soin", new EffetSoin(50), 1, "Soin intantané");
+		potionForce = new Consommable("Potion de force", new Effet().setForce(20).setDuree(3), 1, "Force");
+		potionMagie = new Consommable("Potion de magie", new Effet().setMagie(20).setDuree(3), 1, "Magie");
+		potionDex = new Consommable("Potion de dexterité", new Effet().setDex(20).setDuree(3), 1, "Dextérité");
 
 		armeDebut = new Arme("Noob", new Effet(1,1,0,0,1), 2);
 		epeeBase = new Arme("Adria", new Effet().setForce(2), 2);
@@ -243,5 +263,15 @@ public class Item
 	public Item getItem()
 	{
 		return this;
+	}
+	
+	public void setNotLootable()
+	{
+		this.lootable = false;
+	}
+
+	public boolean isLootable()
+	{
+		return lootable;
 	}
 }
