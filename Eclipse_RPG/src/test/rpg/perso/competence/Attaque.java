@@ -1,6 +1,7 @@
 package test.rpg.perso.competence;
 
 import test.rpg.perso.Entity;
+import test.rpg.perso.classe.Caracteristique;
 
 public class Attaque implements Capacite {
 
@@ -27,11 +28,12 @@ public class Attaque implements Capacite {
 	@Override
 	public String effet(Entity cible, Entity src) 
 	{
-		int d_f = src.getTotalForce();
-		int d_d = src.getTotalDex();
-		int d_m = src.getTotalMagie();
+		Caracteristique c = src.getTotalCarac();
+		int d_f = c.getForce();
+		int d_d = c.getDexterite();
+		int d_m = c.getMagie();
 		float tot_damages = ration_force*d_f + ration_dex*d_d + ration_magie*d_m;
-		int dmg = (int)tot_damages - cible.getTotalDef();
+		int dmg = (int)tot_damages - cible.getTotalCarac().getDefense();
 		cible.damages(dmg);
 		return "Degats avant reduction : " + tot_damages + " | Degats infligés à " + cible.getNom() + " : " + dmg;
 	}

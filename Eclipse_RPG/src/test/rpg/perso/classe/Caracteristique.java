@@ -62,4 +62,14 @@ public class Caracteristique {
 	{
 		return "Force: " + force + ", Dexterité:" + dexterite + ", Santé:" + sante + ", Défence:" + defense + ", Magie:" + magie;
 	}
+
+	public Caracteristique add(Caracteristique carac)
+	{
+		force += carac.getForce();
+		dexterite += carac.getDexterite();
+		sante += carac.getSante();
+		defense += carac.getDefense();
+		magie += carac.getMagie();
+		return this;
+	}
 }

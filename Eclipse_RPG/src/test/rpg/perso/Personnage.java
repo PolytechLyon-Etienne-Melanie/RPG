@@ -1,7 +1,10 @@
 package test.rpg.perso;
 
+import java.util.Iterator;
+
 import test.rpg.engine.Game;
 import test.rpg.menu.MenuLevelUpScreen;
+import test.rpg.perso.classe.Caracteristique;
 import test.rpg.perso.classe.Classe;
 import test.rpg.perso.effet.Effet;
 import test.rpg.perso.equipement.Arme;
@@ -148,18 +151,9 @@ public class Personnage extends Entity
 		return inventaire;
 	}
 	
-	public int getTotalDex()
+	public Caracteristique getTotalCarac()
 	{
-		return classe.getCarac().getDexterite();
-	}
-	
-	public int getTotalMagie()
-	{
-		return classe.getCarac().getMagie();
-	}
-	
-	public int getTotalDef()
-	{
-		return classe.getCarac().getDefense();
+		Caracteristique c = super.getTotalCarac();
+		return c.add(inventaire.getArmreeq().getValeurEffet()).add(inventaire.getArmureeq().getValeurEffet());
 	}
 }
