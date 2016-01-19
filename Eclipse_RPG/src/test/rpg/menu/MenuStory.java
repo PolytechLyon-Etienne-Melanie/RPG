@@ -157,7 +157,6 @@ public class MenuStory extends Menu
 	
 	public void startCombat(EventCombat combat)
 	{
-		KeyObserver key = new KeyObserver();
 		Command combatC = new Command("Appuyez sur <Entrer> pour commencer le combat.", "");
 		combatC.addObserver(new EventObserver(){
 			@Override
