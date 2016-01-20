@@ -133,8 +133,7 @@ public class Item
 
 	public static Item getRandomLoot()
 	{
-		int r = rand.nextInt(listItem.size());
-		return listItem.get(r);
+		return lootRandom.getItem();
 	}
 
 	static

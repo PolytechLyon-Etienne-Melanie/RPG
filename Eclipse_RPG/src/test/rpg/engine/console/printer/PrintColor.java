@@ -42,7 +42,7 @@ public enum PrintColor
 			case '5':
 				return Color.blue;
 			case '6':
-				return Color.pink;
+				return new Color(255,0,255);
 			case '7':
 				return Color.cyan;
 			case '8':
