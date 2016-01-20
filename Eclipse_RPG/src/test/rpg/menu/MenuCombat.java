@@ -728,6 +728,7 @@ public class MenuCombat extends Menu
 		write("<" + entity.getId_combat() + "> ", PrintColor.PURPLE);
 		writeLine(entity.getNom() + " | Niveau : " + entity.getNiveau() + " | "
 				+ entity.getClasse().getNom());
+		writeLine("Stats classe: " + entity.getClasse().getCarac());
 		String life = "::::::::::::::::::::::::::::::::::::";
 		String notlife = "                                    ";
 		float ratio = (float) (entity.getSante()) / (float) (entity.getSanteMax());

@@ -48,6 +48,7 @@ public class MenuPerso extends Menu
 		write("<" + entity.getId_combat() + "> ", PrintColor.PURPLE);
 		writeLine(entity.getNom() + " | Niveau : " + entity.getNiveau() + " | "
 				+ entity.getClasse().getNom());
+		writeLine("Stats classe: " + entity.getClasse().getCarac());
 		String life = "::::::::::::::::::::::::::::::::::::";
 		String notlife = "                                    ";
 		
