@@ -219,8 +219,11 @@ public class Item
 		robeDeSorcier = new Armure("Les Atours de l'oiseau de Feu", new Effet(0, 0, 9, 10, 5), 3);
 		
 		skillGuerrier = new LivreCompetence("Livre de compétence pour Guerrier", new Attaque("Baston", 2, 1, 0));
+		skillGuerrier.setNotLootable();
 		skillMage = new LivreCompetence("Livre de compétence pour Mage", new Attaque("Explosion", 1, 0, 2));
+		skillMage.setNotLootable();
 		skillVoleur = new LivreCompetence("Livre de compétence pour Voleur", new Attaque("Deluge de lames", 0.5f, 2, 0.5f));
+		skillVoleur.setNotLootable();
 	}
 
 	public static Item[] getItems()

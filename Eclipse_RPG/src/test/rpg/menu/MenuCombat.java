@@ -372,7 +372,7 @@ public class MenuCombat extends Menu
 		{
 			Capacite capa = i.next();
 			Command comp = null;
-			if(capa.isTargeted())
+			if (capa.isTargeted())
 				comp = new Command(" -> " + capa, "" + n, "n° cible");
 			else
 				comp = new Command(" -> " + capa, "" + n);
@@ -409,14 +409,13 @@ public class MenuCombat extends Menu
 	{
 		try
 		{
-			if(capa.isTargeted())
+			if (capa.isTargeted())
 			{
 				int i = Integer.parseInt(p);
 				this.target = entities.get(i);
 				this.capacite = capa;
 				this.turnState = TurnState.applyAction;
-			}
-			else
+			} else
 			{
 				this.capacite = capa;
 				this.turnState = TurnState.applyAction;
@@ -485,10 +484,8 @@ public class MenuCombat extends Menu
 		{
 			persoTurn = 0;
 			state = State.yourTurn;
-			this.turnState = TurnState.chooseAction;
-		} else if (!monstres.get(persoTurn).isAlive())
-			nextEnemyTurn();
-
+		}
+		this.turnState = TurnState.chooseAction;
 		verifLoose();
 	}
 
@@ -525,8 +522,15 @@ public class MenuCombat extends Menu
 
 	private void applyEnemyAction()
 	{
-		this.effet = this.capacite.effet(this.target, this.enemy);
-		enemy.updateEffet();
+		if(!enemy.isAlive())
+		{
+			effet = enemy.getNom() + " ne peut pas attaquer.";
+		}
+		else
+		{
+			this.effet = this.capacite.effet(this.target, this.enemy);
+			enemy.updateEffet();
+		}
 	}
 
 	private void setFin()
@@ -550,14 +554,20 @@ public class MenuCombat extends Menu
 
 	private void distributeXP()
 	{
-		int xp = monstres.get(0).getXpVal();
+		Iterator<Entity> i = monstres.iterator();
+		int xp =0;
+		while(i.hasNext())
+		{
+			xp += i.next().getXpVal();
+		}
+		
 		confrerie.get(0).earnXP(xp);
 		effet = perso.getNom() + " a gagné " + xp + " points d'experience";
-		if(perso.getPointsToAssing() > 0)
+		if (perso.getPointsToAssing() > 0)
 			effet += " et viens de progresser de 1 niveau.";
 		else
 			effet += ".";
-		
+
 		KeyObserver key = new KeyObserver();
 		key.addObserver(new EventObserver()
 		{
@@ -586,8 +596,11 @@ public class MenuCombat extends Menu
 			writeLine("C'est le tour de " + enemy.getNom(), PrintColor.CYAN);
 		} else if (turnState == TurnState.applyAction)
 		{
-			writeLine(enemy.getNom() + " a attaqué " + target.getNom(), PrintColor.CYAN);
-			writeLine("Compétence utilisée : " + capacite.getName());
+			if(enemy.isAlive())
+			{
+				writeLine(enemy.getNom() + " a attaqué " + target.getNom(), PrintColor.CYAN);
+				writeLine("Compétence utilisée : " + capacite.getName());
+			}
 			writeLine(effet);
 		}
 	}
@@ -726,8 +739,7 @@ public class MenuCombat extends Menu
 	private void renderEntity(Entity entity)
 	{
 		write("<" + entity.getId_combat() + "> ", PrintColor.PURPLE);
-		writeLine(entity.getNom() + " | Niveau : " + entity.getNiveau() + " | "
-				+ entity.getClasse().getNom());
+		writeLine(entity.getNom() + " | Niveau : " + entity.getNiveau() + " | " + entity.getClasse().getNom());
 		writeLine("Stats classe: " + entity.getClasse().getCarac());
 		String life = "::::::::::::::::::::::::::::::::::::";
 		String notlife = "                                    ";
