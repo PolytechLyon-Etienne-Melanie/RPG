@@ -23,4 +23,11 @@ public class Soin implements Capacite {
 	{
 		return "Soin";
 	}
+
+	@Override
+	public boolean isTargeted()
+	{
+		// TODO Auto-generated method stub
+		return true;
+	}
 }

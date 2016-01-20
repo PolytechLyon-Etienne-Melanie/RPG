@@ -7,11 +7,14 @@ public class Buff implements Capacite
 {
 	private Effet effet;
 	private String name;
+	private boolean targeted;
 	
-	public Buff(String n, Effet e)
+	public Buff(String n, Effet e, boolean c)
 	{
 		this.effet = e;
 		name = n;
+		effet.setName(name);
+		targeted = c;
 	}
 	
 	@Override
@@ -29,7 +32,31 @@ public class Buff implements Capacite
 	@Override
 	public String effet(Entity cible, Entity src)
 	{
-		cible.addEffet(effet);
-		return cible.getNom() + " possède maintenant le l'effet : " + effet;
+		if(targeted)
+		{
+			cible.addEffet(effet);
+			return cible.getNom() + " possède maintenant le l'effet : " + effet;
+		}
+		else
+		{
+			src.addEffet(effet);
+			return src.getNom() + " possède maintenant le l'effet : " + effet;
+		}
+	}
+	
+	public void setTargeted(boolean t)
+	{
+		targeted = t;
+	}
+
+	@Override
+	public boolean isTargeted()
+	{
+		return targeted;
+	}
+	
+	public String toString()
+	{
+		return effet.toString();
 	}
 }

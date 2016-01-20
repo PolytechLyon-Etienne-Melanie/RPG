@@ -114,7 +114,7 @@ public class Entity
 	
 	public void addEffet(Effet e)
 	{
-		effets.add(e);
+		effets.add(e.cloneEffet());
 	}
 
 	public String updateEffet()
@@ -127,9 +127,9 @@ public class Entity
 			String s2 = e.update(this);
 			if(s2 != "")
 				s += s2 + " ";
-			if(e.getPermanent() <= 0)
+			if(e.getPermanent() < 0)
 			{
-				effets.remove(e);
+				i.remove();
 			}
 		}
 		return s;

@@ -9,4 +9,6 @@ public interface Capacite
     public float probaReussite(Entity src);
 
     public String effet(Entity cible, Entity src);
+    
+    public boolean isTargeted();
 }

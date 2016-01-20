@@ -72,4 +72,9 @@ public class Caracteristique {
 		magie += carac.getMagie();
 		return this;
 	}
+
+	public Caracteristique cloneCarac()
+	{
+		return new Caracteristique(force, dexterite, sante, defense, magie);
+	}
 }

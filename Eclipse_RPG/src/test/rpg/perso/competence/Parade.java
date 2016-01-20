@@ -20,4 +20,11 @@ public class Parade implements Capacite {
 	{
 		return "Parade";
 	}
+
+	@Override
+	public boolean isTargeted()
+	{
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

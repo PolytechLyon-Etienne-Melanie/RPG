@@ -83,6 +83,12 @@ public class Effet {
 		this.permanent = permanent;
 	}
 	
+	public Effet setDef(int d)
+	{
+		c.setDefense(d);
+		return this;
+	}
+	
 	public Effet setForce(int f)
 	{
 		c.setForce(f);
@@ -123,5 +129,12 @@ public class Effet {
 	{
 		this.permanent -= 1;
 		return "";
+	}
+
+	public Effet cloneEffet()
+	{
+		Effet e = new Effet(permanent, valeur, c.cloneCarac());
+		e.setName(name);
+		return e;
 	}
 }

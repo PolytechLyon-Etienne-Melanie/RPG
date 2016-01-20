@@ -20,8 +20,6 @@ public class Classe
 		this.nom = nom;
 		carac = new Caracteristique(f, dex, s, def, m);
 		capa = new ArrayList<Capacite>();
-		
-		this.addCapacite(new Attaque(2,1,1));
 	}
 	
 	public void addCapacite(Capacite capa)

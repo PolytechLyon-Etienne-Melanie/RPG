@@ -373,7 +373,11 @@ public class MenuCombat extends Menu
 		while (i.hasNext())
 		{
 			Capacite capa = i.next();
-			Command comp = new Command(" -> " + capa.getName(), "" + n, "n° cible");
+			Command comp = null;
+			if(capa.isTargeted())
+				comp = new Command(" -> " + capa, "" + n, "n° cible");
+			else
+				comp = new Command(" -> " + capa, "" + n);
 			comp.addObserver(new EventObserver()
 			{
 				@Override
@@ -407,10 +411,18 @@ public class MenuCombat extends Menu
 	{
 		try
 		{
-			int i = Integer.parseInt(p);
-			this.target = entities.get(i);
-			this.capacite = capa;
-			this.turnState = TurnState.applyAction;
+			if(capa.isTargeted())
+			{
+				int i = Integer.parseInt(p);
+				this.target = entities.get(i);
+				this.capacite = capa;
+				this.turnState = TurnState.applyAction;
+			}
+			else
+			{
+				this.capacite = capa;
+				this.turnState = TurnState.applyAction;
+			}
 		} catch (NumberFormatException e)
 		{
 			Log.e("Not a number, retry");
@@ -503,7 +515,8 @@ public class MenuCombat extends Menu
 
 	private void setEnemyAction()
 	{
-		capacite = enemy.getClasse().getCapa().get(0);
+		List<Capacite> cap = enemy.getClasse().getCapa();
+		capacite = cap.get(rand.nextInt(cap.size()));
 		target = chooseRandomTarget();
 	}
 
@@ -514,7 +527,8 @@ public class MenuCombat extends Menu
 
 	private void applyEnemyAction()
 	{
-		this.effet = this.capacite.effet(this.target, this.perso);
+		this.effet = this.capacite.effet(this.target, this.enemy);
+		enemy.updateEffet();
 	}
 
 	private void setFin()
@@ -560,7 +574,7 @@ public class MenuCombat extends Menu
 		} else if (turnState == TurnState.applyAction)
 		{
 			writeLine(enemy.getNom() + " a attaqué " + target.getNom(), PrintColor.CYAN);
-			writeLine("Compétence utiliée : " + capacite);
+			writeLine("Compétence utiliée : " + capacite.getName());
 			writeLine(effet);
 		}
 	}
@@ -643,7 +657,7 @@ public class MenuCombat extends Menu
 	{
 		writeLine("Compétence utilisée : " + capacite.getName());
 		writeLine(effet);
-		if (target.getSante() <= 0)
+		if (target != null && target.getSante() <= 0)
 		{
 			writeLine(target.getNom() + " a succombé.");
 		}
