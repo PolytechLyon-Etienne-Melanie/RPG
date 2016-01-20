@@ -6,7 +6,6 @@ import java.io.InputStreamReader;
 import java.util.Iterator;
 
 import test.rpg.engine.console.event.Command;
-import test.rpg.engine.console.event.KeyObserver;
 import test.rpg.engine.console.printer.Log;
 import test.rpg.engine.story.event.EventObserver;
 

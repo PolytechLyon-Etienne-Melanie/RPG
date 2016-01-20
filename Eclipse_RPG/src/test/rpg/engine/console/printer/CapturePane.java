@@ -2,11 +2,11 @@ package test.rpg.engine.console.printer;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Font;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import java.awt.Font;
 
 public class CapturePane extends JPanel implements Consumer {
 

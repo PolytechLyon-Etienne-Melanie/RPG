@@ -1,10 +1,8 @@
 package test.rpg.perso.classe;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import test.rpg.perso.competence.Attaque;
 import test.rpg.perso.competence.Capacite;
 import test.rpg.perso.equipement.Arme;
 import test.rpg.perso.equipement.Armure;

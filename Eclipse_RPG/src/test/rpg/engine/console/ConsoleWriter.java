@@ -1,11 +1,9 @@
 package test.rpg.engine.console;
 
 import java.io.PrintStream;
-import java.io.UnsupportedEncodingException;
 import java.util.Iterator;
 
 import test.rpg.engine.console.event.Command;
-import test.rpg.engine.console.event.Dialogue;
 import test.rpg.engine.console.printer.Log;
 import test.rpg.engine.console.printer.PrintColor;
 import test.rpg.engine.console.printer.PrintColorWriter;

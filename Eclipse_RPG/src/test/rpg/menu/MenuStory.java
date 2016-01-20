@@ -21,7 +21,6 @@ import test.rpg.menu.item.MenuGetLoot;
 import test.rpg.menu.item.MenuInventaire;
 import test.rpg.perso.Entity;
 import test.rpg.perso.Personnage;
-import test.rpg.perso.equipement.Item;
 
 public class MenuStory extends Menu
 {
@@ -87,6 +86,17 @@ public class MenuStory extends Menu
 				
 			});
 			this.addCommand(inventaire);
+			
+			Command perso = new Command("Voir stats personnage.", "perso");
+			perso.addObserver(new EventObserver(){
+				@Override
+				public void actionPerformed(String p)
+				{
+					game.setCurrentMenu(new MenuPerso(game));
+				}
+				
+			});
+			this.addCommand(perso);
 		}
 		
 		ArrayList<StoryLink> links = new ArrayList<StoryLink>(game.getStoryManager().getStory().getGraph().getOutEdges(event));
@@ -118,7 +128,15 @@ public class MenuStory extends Menu
 
 	private void endStory()
 	{
-		// game.getConsole().getWriter().writeLine(">Quit<");
+		KeyObserver key = new KeyObserver();
+		key.addObserver(new EventObserver(){
+			@Override
+			public void actionPerformed(String param)
+			{
+				game.setCurrentMenu(new MenuEnd(game, true));
+			}
+		});
+		this.addCommand(key);
 	}
 
 	private Command generateCommand(StoryLink link, int id)

@@ -14,7 +14,7 @@ import test.rpg.perso.effet.Effet;
 public class Entity
 {
 	public static final int xpMount = 10;
-	public static final float hpMount = 5;
+	public static final float hpMount = 4;
 	protected String nom;
 	protected int niveau;
 	protected int sante;
@@ -146,6 +146,13 @@ public class Entity
 		this.sante -= dmg;
 		if(sante < 0)
 			sante = 0;
+	}
+	
+	public void heal(int dmg)
+	{
+		this.sante += dmg;
+		if(sante > santeMax)
+			sante = santeMax;
 	}
 
 	public int getId_combat()

@@ -3,15 +3,12 @@ package test.rpg.engine.story;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Random;
 
-import org.apache.commons.collections15.Factory;
 import org.apache.commons.collections15.Transformer;
 
 import edu.uci.ics.jung.graph.DirectedSparseMultigraph;
 import test.rpg.editor.factory.EdgeFactory;
 import test.rpg.editor.factory.VertexFactory;
-import test.rpg.engine.console.printer.Log;
 
 public class Story implements Serializable
 {

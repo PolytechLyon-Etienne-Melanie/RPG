@@ -38,7 +38,6 @@ public class MenuCombat extends Menu
 		useCapa, useItem, pass
 	}
 
-	private int tour;
 	private int persoTurn;
 
 	private List<Personnage> confrerie;
@@ -66,7 +65,6 @@ public class MenuCombat extends Menu
 	{
 		super(game, "Combat");
 
-		tour = 0;
 		persoTurn = 0;
 		state = State.intro;
 		rand = new Random();
@@ -542,19 +540,34 @@ public class MenuCombat extends Menu
 			{
 				if (win)
 				{
-					distributeXP();
-					game.setCurrentMenu(new MenuGetLoot(game, Item.getRandomLoot()));
+					state = State.distributeXp;
 				} else
-					game.setCurrentMenu(new MenuGetLoot(game, Item.getRandomLoot()));
+					game.setCurrentMenu(new MenuEnd(game, false));
 			}
 		});
 		this.addCommand(key);
-
 	}
 
 	private void distributeXP()
 	{
-		confrerie.get(0).earnXP(monstres.get(0).getXpVal());
+		int xp = monstres.get(0).getXpVal();
+		confrerie.get(0).earnXP(xp);
+		effet = perso.getNom() + " a gagné " + xp + " points d'experience";
+		if(perso.getPointsToAssing() > 0)
+			effet += " et viens de progresser de 1 niveau.";
+		else
+			effet += ".";
+		
+		KeyObserver key = new KeyObserver();
+		key.addObserver(new EventObserver()
+		{
+			@Override
+			public void actionPerformed(String p)
+			{
+				game.setCurrentMenu(new MenuGetLoot(game, Item.getRandomLoot()));
+			}
+		});
+		this.addCommand(key);
 	}
 
 	private void renderFin()
@@ -574,7 +587,7 @@ public class MenuCombat extends Menu
 		} else if (turnState == TurnState.applyAction)
 		{
 			writeLine(enemy.getNom() + " a attaqué " + target.getNom(), PrintColor.CYAN);
-			writeLine("Compétence utiliée : " + capacite.getName());
+			writeLine("Compétence utilisée : " + capacite.getName());
 			writeLine(effet);
 		}
 	}
@@ -593,6 +606,8 @@ public class MenuCombat extends Menu
 			setEnemyTurn();
 		} else if (state == State.fin)
 			setFin();
+		else if (state == State.distributeXp)
+			distributeXP();
 	}
 
 	@Override
@@ -611,6 +626,10 @@ public class MenuCombat extends Menu
 			renderEnemyTurn();
 		} else if (state == State.fin)
 			renderFin();
+		else if (state == State.distributeXp)
+		{
+			writeLine(effet);
+		}
 	}
 
 	private void renderIntro()
@@ -706,7 +725,8 @@ public class MenuCombat extends Menu
 
 	private void renderEntity(Entity entity)
 	{
-		writeLine("<" + entity.getId_combat() + "> " + entity.getNom() + " | Niveau : " + entity.getNiveau() + " | "
+		write("<" + entity.getId_combat() + "> ", PrintColor.PURPLE);
+		writeLine(entity.getNom() + " | Niveau : " + entity.getNiveau() + " | "
 				+ entity.getClasse().getNom());
 		String life = "::::::::::::::::::::::::::::::::::::";
 		String notlife = "                                    ";
@@ -731,7 +751,7 @@ public class MenuCombat extends Menu
 		while (i.hasNext())
 		{
 			Effet e = i.next();
-			writeLine(" - " + e.toString());
+			writeLine(" - " + e.toString(), PrintColor.YELLOW);
 		}
 	}
 }

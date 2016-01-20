@@ -76,6 +76,7 @@ public class Game implements Runnable
 	
 	public void returnToStory()
 	{
+		getHero().restaureHp();
 		// check all perso levels
 		if(getHero().getPointsToAssing() > 0)
 			this.setCurrentMenu(new MenuLevelUpScreen(this, getHero()));

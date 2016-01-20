@@ -4,7 +4,6 @@ import test.rpg.engine.Game;
 import test.rpg.engine.interfaces.Menu;
 import test.rpg.perso.Personnage;
 import test.rpg.perso.equipement.Arme;
-import test.rpg.perso.equipement.Inventaire;
 import test.rpg.perso.equipement.Item;
 
 public class MenuEquipArme extends Menu {

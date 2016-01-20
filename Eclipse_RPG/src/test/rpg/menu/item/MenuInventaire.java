@@ -14,10 +14,8 @@ import test.rpg.perso.equipement.Item;
 public class MenuInventaire extends Menu{
 	
 	private Inventaire inventaire;
-	private Command retour;
 	private Command equipeArme;
 	private Command equipeArmure;
-	private Command utiliserPotion;
 	private Command jeterItem;
 	
 	private Personnage perso;
@@ -35,7 +33,7 @@ public class MenuInventaire extends Menu{
 	@Override
 	protected void initMenu() 
 	{
-		Command back = new Command("Retour a l'histoire", "back");
+		Command back = new Command("Retour a l'histoire", "retour");
 		back.addObserver(new EventObserver()
 		{
 			@Override

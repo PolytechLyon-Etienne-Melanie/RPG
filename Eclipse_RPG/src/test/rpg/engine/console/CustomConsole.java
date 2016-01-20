@@ -2,20 +2,12 @@ package test.rpg.engine.console;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.PrintStream;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import test.rpg.engine.console.printer.CapturePane;
 import test.rpg.engine.console.printer.JConsole;
-import test.rpg.engine.console.printer.PrintColorWriter;
 
 public class CustomConsole extends JFrame
 {

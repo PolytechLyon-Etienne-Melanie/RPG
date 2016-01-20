@@ -2,7 +2,6 @@ package test.rpg.menu;
 
 import test.rpg.engine.Game;
 import test.rpg.engine.console.event.Command;
-import test.rpg.engine.console.event.Dialogue;
 import test.rpg.engine.interfaces.Menu;
 import test.rpg.engine.story.StoryEvent;
 import test.rpg.engine.story.event.EventObserver;
@@ -33,7 +32,7 @@ public class MenuDescriptionClasse extends Menu{
 			@Override
 			public void actionPerformed(String p)
 			{
-				hero = new Personnage(game, nom, 1, classe);
+				hero = new Personnage(nom, 1, classe);
 				game.setHero(hero);
 				game.setMenuStory(event);
 			}

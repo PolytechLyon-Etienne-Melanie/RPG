@@ -4,7 +4,6 @@ import java.util.Iterator;
 
 import test.rpg.engine.Game;
 import test.rpg.engine.console.event.Command;
-import test.rpg.engine.console.printer.Log;
 import test.rpg.engine.console.printer.PrintColor;
 import test.rpg.engine.interfaces.Menu;
 import test.rpg.engine.story.event.EventObserver;
@@ -35,31 +34,37 @@ public class MenuPerso extends Menu
 				game.returnToStory();
 			}
 		});
+		this.addCommand(key);
 	}
 
 	@Override
 	protected void renderMenu()
 	{
-		renderEntity(perso);
+		renderPerso(perso);
 	}
 	
-	private void renderEntity(Entity entity)
+	private void renderPerso(Personnage entity)
 	{
-		writeLine("<" + entity.getId_combat() + "> " + entity.getNom() + " | Niveau : " + entity.getNiveau() + " | "
+		write("<" + entity.getId_combat() + "> ", PrintColor.PURPLE);
+		writeLine(entity.getNom() + " | Niveau : " + entity.getNiveau() + " | "
 				+ entity.getClasse().getNom());
 		String life = "::::::::::::::::::::::::::::::::::::";
 		String notlife = "                                    ";
-		float ratio = (float) (entity.getSante()) / (float) (entity.getSanteMax());
-		Log.d(ratio);
+		
+		float ratio = (float) (entity.getXp()) / (float) (entity.getXpToNextLevel());
 		int l = (int) (life.length() * ratio);
-		Log.d(l);
+		writeLine("XP : |" + life.substring(0, l) + notlife.substring(l) + "| " + entity.getXp() + "/"
+				+ entity.getXpToNextLevel(), PrintColor.YELLOW);
+		
+		ratio = (float) (entity.getSante()) / (float) (entity.getSanteMax());
+		l = (int) (life.length() * ratio);
 		PrintColor color = PrintColor.GREEN;
 		if (ratio < 0.2)
 			color = PrintColor.RED;
 		else if (ratio < 0.5)
 			color = PrintColor.YELLOW;
-
-		writeLine("|" + life.substring(0, l) + notlife.substring(l) + "| " + entity.getSante() + "/"
+		
+		writeLine("PV : |" + life.substring(0, l) + notlife.substring(l) + "| " + entity.getSante() + "/"
 				+ entity.getSanteMax(), color);
 		renderEffets(entity);
 	}
@@ -70,7 +75,7 @@ public class MenuPerso extends Menu
 		while (i.hasNext())
 		{
 			Effet e = i.next();
-			writeLine(" - " + e.toString());
+			writeLine(" - " + e.toString(), PrintColor.YELLOW);
 		}
 	}
 }

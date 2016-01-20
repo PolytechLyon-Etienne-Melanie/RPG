@@ -7,14 +7,8 @@ import java.util.Iterator;
 import javax.swing.JOptionPane;
 
 import test.rpg.engine.Game;
-import test.rpg.engine.console.event.Command;
-import test.rpg.engine.console.event.Dialogue;
 import test.rpg.engine.console.printer.Log;
 import test.rpg.engine.exception.StoryEventNotFoundException;
-import test.rpg.engine.interfaces.CommandSender;
-import test.rpg.engine.story.event.Event;
-import test.rpg.engine.story.event.EventDialogue;
-import test.rpg.engine.story.event.EventObserver;
 import test.rpg.menu.MenuMain;
 
 public class StoryManager

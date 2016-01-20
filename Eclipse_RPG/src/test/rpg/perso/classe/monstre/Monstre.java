@@ -1,7 +1,6 @@
 package test.rpg.perso.classe.monstre;
 
 import test.rpg.perso.classe.Classe;
-import test.rpg.perso.competence.Attaque;
 
 
 public class Monstre extends Classe
