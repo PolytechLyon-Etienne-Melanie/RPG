@@ -15,7 +15,8 @@ public class Consommable extends Item
 	{
 		super("Consommable", name, caract, poids);
 		listConsommable.add(this);
-		effet.setName(ef);
+		if(effet != null)
+			effet.setName(ef);
 	}
 
 	public static Consommable getRandomConso()
