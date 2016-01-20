@@ -18,6 +18,7 @@ public class MenuEnd extends Menu
 	@Override
 	protected void initMenu()
 	{
+		game.setHero(null);
 		Command menu = new Command("Appuyezsur <Entrer> pour retourner au menu principale.", "");
 		menu.addObserver(new EventObserver()
 		{

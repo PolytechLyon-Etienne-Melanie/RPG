@@ -19,7 +19,7 @@ public class MenuMain extends Menu
 	@Override
 	protected void initMenu()
 	{
-		loadStory = new Command("Charger une histoire", "load");
+		loadStory = new Command("Charger une histoire", "charger");
 		loadStory.addObserver(new EventObserver(){
 			@Override
 			public void actionPerformed(String p)
@@ -35,7 +35,7 @@ public class MenuMain extends Menu
 				System.exit(0);
 			}
 		});
-		param = new Command("Parametres", "settings");
+		param = new Command("Parametres", "param");
 		param.addObserver(new EventObserver(){
 			EventObserver setMenu(Menu menu)
 			{
