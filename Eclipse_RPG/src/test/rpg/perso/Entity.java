@@ -41,11 +41,39 @@ public class Entity
 		effets = new ArrayList<Effet>();
 		
 		id_combat = -1;
+		
+		assignStats();
 	}
-	
+
 	public Entity()
 	{
 		this("Default Entity", 1, new Rodeur());
+	}
+	
+	
+	private void assignStats()
+	{
+		Random rand = new Random();
+		int r = rand.nextInt(5);
+		
+		switch(r)
+		{
+		case 0:
+			this.getCaracteristique().setDefense(this.getCaracteristique().getDefense() + 3);
+			break;
+		case 1:
+			this.getCaracteristique().setDexterite(this.getCaracteristique().getDexterite() + 3);
+			break;
+		case 2:
+			this.getCaracteristique().setForce(this.getCaracteristique().getForce() + 3);
+			break;
+		case 3:
+			this.getCaracteristique().setMagie(this.getCaracteristique().getMagie() + 3);
+			break;
+		case 4:
+			this.getCaracteristique().setSante(this.getCaracteristique().getSante() + 3);
+			break;
+		}
 	}
 	
 	public boolean isAlive()

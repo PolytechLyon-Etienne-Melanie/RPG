@@ -49,7 +49,7 @@ public abstract class Menu extends CommandSender
 	{
 		if (retour != null)
 		{
-			Command back = new Command("Retour au menu précédent", "back");
+			Command back = new Command("Retour au menu précédent", "retour");
 			back.addObserver(new EventObserver()
 			{
 				@Override

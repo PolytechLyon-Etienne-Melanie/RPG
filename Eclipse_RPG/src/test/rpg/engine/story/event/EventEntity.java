@@ -2,7 +2,8 @@ package test.rpg.engine.story.event;
 
 import test.rpg.perso.Entity;
 import test.rpg.perso.classe.Classe;
-import test.rpg.perso.classe.Guerrier;
+import test.rpg.perso.classe.monstre.GuerrierBoss;
+import test.rpg.perso.classe.monstre.Liberis;
 import test.rpg.perso.classe.monstre.Rodeur;
 
 public class EventEntity extends Event
@@ -14,6 +15,7 @@ public class EventEntity extends Event
 
 	public enum ClasseE {
 		RODEUR,
+		LIBERIS,
 		GUERRIER
 	};
 	protected String nom;
@@ -75,8 +77,11 @@ public class EventEntity extends Event
 			case RODEUR:
 				c = new Rodeur();
 				break;
+			case LIBERIS:
+				c = new Liberis();
+				break;
 			case GUERRIER:
-				c = new Guerrier();
+				c = new GuerrierBoss();
 				break;
 		default:
 			break;

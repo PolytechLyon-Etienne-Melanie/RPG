@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Random;
 
 import test.rpg.perso.classe.Caracteristique;
+import test.rpg.perso.competence.Attaque;
 import test.rpg.perso.effet.Effet;
 import test.rpg.perso.effet.EffetSoin;
 
@@ -44,7 +45,9 @@ public class Item
 	public static Armure capeDeVoleur;
 	public static Armure robeDeSorcier;
 
-
+	public static LivreCompetence skillGuerrier;
+	public static LivreCompetence skillMage;
+	public static LivreCompetence skillVoleur;
 	
 	protected static Random rand = new Random();
 
@@ -193,7 +196,8 @@ public class Item
 		potionMagie = new Consommable("Potion de magie", new Effet().setMagie(20).setDuree(3), 1, "Magie");
 		potionDex = new Consommable("Potion de dexterité", new Effet().setDex(20).setDuree(3), 1, "Dextérité");
 
-		armeDebut = new Arme("Noob", new Effet(1,1,0,0,1), 2);
+		armeDebut = new Arme("Baton cassé", new Effet(1,1,0,0,1), 2);
+		armeDebut.setNotLootable();
 		epeeBase = new Arme("Adria", new Effet().setForce(2), 2);
 		epeeMoyenne = new Arme("Asmodan", new Effet().setForce(5), 6);
 		epeeAvancee = new Arme("Diablo", new Effet().setForce(10), 18);
@@ -206,13 +210,17 @@ public class Item
 		dagueMoyenne = new Arme("Dague des sept étoiles", new Effet(4, 6, 0, 0, 0), 2);
 		dagueAvancee = new Arme("L'appel du Dragon", new Effet(8, 12, 0, 0, 0), 2);
 		
-		armureDebut = new Armure("BodyNoob", new Effet(0, 0, 1, 1, 0), 2);
+		armureDebut = new Armure("Guenille", new Effet(0, 0, 1, 1, 0), 2);
+		armureDebut.setNotLootable();
 		armureBase = new Armure("Le Serment du Sage", new Effet(0, 0, 2, 3, 0), 2);
 		armureMoyenne = new Armure("Le Péril du Gardien", new Effet(0, 0, 6, 9, 0), 5);
 		armureAvancee = new Armure("La Fatalité de Sol", new Effet(0, 0, 18, 27, 0), 10);
 		capeDeVoleur = new Armure("La Fatalité de Sol", new Effet(0, 0, 18, 27, 0), 3);
 		robeDeSorcier = new Armure("Les Atours de l'oiseau de Feu", new Effet(0, 0, 9, 10, 5), 3);
-
+		
+		skillGuerrier = new LivreCompetence("Livre de compétence pour Guerrier", new Attaque("Baston", 2, 1, 0));
+		skillMage = new LivreCompetence("Livre de compétence pour Mage", new Attaque("Explosion", 1, 0, 2));
+		skillVoleur = new LivreCompetence("Livre de compétence pour Voleur", new Attaque("Deluge de lames", 0.5f, 2, 0.5f));
 	}
 
 	public static Item[] getItems()
