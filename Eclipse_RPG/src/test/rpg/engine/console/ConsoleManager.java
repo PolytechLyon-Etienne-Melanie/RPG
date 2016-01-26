@@ -18,8 +18,19 @@ public class ConsoleManager
 	 */
 
 	// private enum State{writing, reading};
-
-	public ConsoleManager()
+	private static ConsoleManager instance;
+	
+	public static ConsoleManager getInstance()
+	{
+		if(instance == null)
+		{
+			instance = new ConsoleManager();
+		}
+		
+		return instance;
+	}
+	
+	private ConsoleManager()
 	{
 		commands = new ArrayList<Command>();
 

@@ -1,31 +1,5 @@
 package test.rpg.engine.console.printer;
 
-/*****************************************************************************
- * Licensed to the Apache Software Foundation (ASF) under one                *
- * or more contributor license agreements.  See the NOTICE file              *
- * distributed with this work for additional information                     *
- * regarding copyright ownership.  The ASF licenses this file                *
- * to you under the Apache License, Version 2.0 (the                         *
- * "License"); you may not use this file except in compliance                *
- * with the License.  You may obtain a copy of the License at                *
- *                                                                           *
- *     http://www.apache.org/licenses/LICENSE-2.0                            *
- *                                                                           *
- * Unless required by applicable law or agreed to in writing,                *
- * software distributed under the License is distributed on an               *
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY                    *
- * KIND, either express or implied.  See the License for the                 *
- * specific language governing permissions and limitations                   *
- * under the License.                                                        *
- *                                                                           *
- *                                                                           *
- * This file is part of the BeanShell Java Scripting distribution.           *
- * Documentation and updates may be found at http://www.beanshell.org/       *
- * Patrick Niemeyer (pat@pat.net)                                            *
- * Author of Learning Java, O'Reilly & Associates                            *
- *                                                                           *
- *****************************************************************************/
-
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.Color;
@@ -39,12 +13,6 @@ import java.awt.Cursor;
 import javax.swing.text.*;
 import javax.swing.*;
 
-/**
- * A JFC/Swing based console for the BeanShell desktop. This is a descendant of
- * the old AWTConsole. Improvements by: Mark Donszelmann
- * <Mark.Donszelmann@cern.ch> including Cut & Paste Improvements by: Daniel
- * Leuck including Color and Image support, key press bug workaround
- */
 public class JConsole extends JScrollPane
 		implements Runnable, KeyListener, MouseListener, ActionListener, PropertyChangeListener
 {
@@ -102,8 +70,6 @@ public class JConsole extends JScrollPane
 	{
 		super();
 
-		// Special TextPane which catches for cut and paste, both L&F keys and
-		// programmatic behaviour
 		text = new JTextPane(doc = new DefaultStyledDocument())
 		{
 			public void cut()
@@ -144,17 +110,6 @@ public class JConsole extends JScrollPane
 		// make sure popup menu follows Look & Feel
 		UIManager.addPropertyChangeListener(this);
 
-		/*
-		 * outPipe = cout; if (outPipe == null) { outPipe = new
-		 * PipedOutputStream(); try { in = new
-		 * PipedInputStream((PipedOutputStream) outPipe); } catch (IOException
-		 * e) { print("Console internal	error (1)...", Color.red); } }
-		 * 
-		 * inPipe = cin; if (inPipe == null) { PipedOutputStream pout = new
-		 * PipedOutputStream(); out = new PrintStream(pout); try { inPipe = new
-		 * BlockingPipedInputStream(pout); } catch (IOException e) { print(
-		 * "Console internal error: " + e); } }
-		 */
 
 		outPipe = cout;
 		if (outPipe == null)
@@ -251,8 +206,6 @@ public class JConsole extends JScrollPane
 		case (KeyEvent.VK_DELETE):
 			if (text.getCaretPosition() <= cmdStart)
 			{
-				// This doesn't work for backspace.
-				// See default case for workaround
 				e.consume();
 			}
 			break;
@@ -266,7 +219,7 @@ public class JConsole extends JScrollPane
 			e.consume();
 			break;
 
-		case (KeyEvent.VK_U): // clear line
+		case (KeyEvent.VK_U): 
 			if ((e.getModifiers() & InputEvent.CTRL_MASK) > 0)
 			{
 				replaceRange("", cmdStart, textLength());
@@ -298,10 +251,8 @@ public class JConsole extends JScrollPane
 		case (KeyEvent.VK_F12):
 		case (KeyEvent.VK_ESCAPE):
 
-			// only modifier pressed
 			break;
 
-		// Control-C
 		case (KeyEvent.VK_C):
 			if (text.getSelectedText() == null)
 			{
@@ -324,14 +275,9 @@ public class JConsole extends JScrollPane
 		default:
 			if ((e.getModifiers() & (InputEvent.CTRL_MASK | InputEvent.ALT_MASK | InputEvent.META_MASK)) == 0)
 			{
-				// plain character
 				forceCaretMoveToEnd();
 			}
 
-			/*
-			 * The getKeyCode function always returns VK_UNDEFINED for keyTyped
-			 * events, so backspace is not fully consumed.
-			 */
 			if (e.paramString().indexOf("Backspace") != -1)
 			{
 				if (text.getCaretPosition() <= cmdStart)
@@ -414,7 +360,7 @@ public class JConsole extends JScrollPane
 	{
 		String s = getCmd();
 
-		if (s.length() == 0) // special hack for empty return!
+		if (s.length() == 0)
 			s = "\n";
 		else
 		{
@@ -436,7 +382,6 @@ public class JConsole extends JScrollPane
 			s = text.getText(cmdStart, textLength() - cmdStart);
 		} catch (BadLocationException e)
 		{
-			// should not happen
 			System.out.println("Internal JConsole Error: " + e);
 		}
 		return s;
@@ -446,7 +391,7 @@ public class JConsole extends JScrollPane
 	{
 		if (history.size() == 0)
 			return;
-		if (histLine == 0) // save current line
+		if (histLine == 0) 
 			startedLine = getCmd();
 		if (histLine < history.size())
 		{
@@ -481,8 +426,6 @@ public class JConsole extends JScrollPane
 
 	private void acceptLine(String line)
 	{
-		// Patch to handle Unicode characters
-		// Submitted by Daniel Leuck
 		StringBuffer buf = new StringBuffer();
 		int lineLength = line.length();
 		for (int i = 0; i < lineLength; i++)
@@ -499,7 +442,6 @@ public class JConsole extends JScrollPane
 			}
 		}
 		line = buf.toString();
-		// End unicode patch
 
 		if (outPipe == null)
 			print("Console internal	error: cannot output ...", Color.red);
@@ -543,19 +485,6 @@ public class JConsole extends JScrollPane
 		text.replaceSelection("");
 	}
 
-	/*
-	 * public void print(final Object o) { invokeAndWait(new Runnable() { public
-	 * void run() { String l = String.valueOf(o); System.out.println("1");
-	 * String[] parts = l.split(PrintColor.getHash()); System.out.println("2");
-	 * for(int i = 0; i < parts.length; i++) { Color color =
-	 * PrintColor.getColor((parts[0]).charAt(0)); String t = parts[0]; print(t,
-	 * color); } System.out.println("zaeaz"); append(l); resetCommandStart();
-	 * text.setCaretPosition(cmdStart); } }); }
-	 */
-
-	/**
-	 * Prints "\\n" (i.e. newline)
-	 */
 	public void println()
 	{
 		print("\n");
@@ -758,7 +687,6 @@ public class JConsole extends JScrollPane
 		return "BeanShell console";
 	}
 
-	// MouseListener Interface
 	public void mouseClicked(MouseEvent event)
 	{
 	}
@@ -788,7 +716,6 @@ public class JConsole extends JScrollPane
 	{
 	}
 
-	// property change
 	public void propertyChange(PropertyChangeEvent event)
 	{
 		if (event.getPropertyName().equals("lookAndFeel"))
@@ -797,7 +724,6 @@ public class JConsole extends JScrollPane
 		}
 	}
 
-	// handle cut, copy and paste
 	public void actionPerformed(ActionEvent event)
 	{
 		String cmd = event.getActionCommand();
@@ -813,9 +739,7 @@ public class JConsole extends JScrollPane
 		}
 	}
 
-	/**
-	 * If not in the event thread run via SwingUtilities.invokeAndWait()
-	 */
+
 	private void invokeAndWait(Runnable run)
 	{
 		if (!SwingUtilities.isEventDispatchThread())
@@ -834,15 +758,6 @@ public class JConsole extends JScrollPane
 		}
 	}
 
-	/**
-	 * The overridden read method in this class will not throw "Broken pipe"
-	 * IOExceptions; It will simply wait for new writers and data. This is used
-	 * by the JConsole internal read thread to allow writers in different (and
-	 * in particular ephemeral) threads to write to the pipe. It also checks a
-	 * little more frequently than the original read(). Warning: read() will not
-	 * even error on a read to an explicitly closed pipe (override closed to for
-	 * that).
-	 */
 	public static class BlockingPipedInputStream extends PipedInputStream
 	{
 		boolean closed;
@@ -862,18 +777,18 @@ public class JConsole extends JScrollPane
 				notifyAll(); // Notify any writers to wake up
 				try
 				{
-					wait(750);
+					wait(100);
 				} catch (InterruptedException e)
 				{
 					throw new InterruptedIOException();
 				}
 			}
-			// This is what the superclass does.
+			
 			int ret = buffer[super.out++] & 0xFF;
 			if (super.out >= buffer.length)
 				super.out = 0;
 			if (super.in == super.out)
-				super.in = -1; /* now empty */
+				super.in = -1;
 			return ret;
 		}
 

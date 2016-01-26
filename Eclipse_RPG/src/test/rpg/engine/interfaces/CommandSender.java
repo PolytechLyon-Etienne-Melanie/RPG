@@ -13,7 +13,7 @@ public abstract class CommandSender
 	
 	public CommandSender()
 	{
-		console = new ConsoleManager();
+		console = ConsoleManager.getInstance();
 	}
 	
 	protected final void resetCommands()
