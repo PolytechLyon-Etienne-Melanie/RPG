@@ -9,7 +9,7 @@ public class Rodeur extends Monstre
 {
 	public Rodeur()
 	{
-		super("Rodeur", 35, 5, 20, 15, 10);
+		super("Rodeur", 28, 5, 20, 15, 10);
 		this.addCapacite(new Attaque("Griffe", 2,1,1));
 		this.addCapacite(new Buff("Camouflage", new Effet().setDef(100).setDuree(1), false));
 		this.addCapacite(new AttaqueBuff("Rugissement", 0.9f, 0.5f, 0.5f, "Peur", new Effet().setForce(-10).setMagie(-10).setDex(-10).setDuree(3)).setHimself(false));
