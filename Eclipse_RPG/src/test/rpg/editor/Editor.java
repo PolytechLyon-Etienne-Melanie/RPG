@@ -1,6 +1,4 @@
-package test.rpg;
-
-import test.rpg.editor.EditorFrame;
+package test.rpg.editor;
 
 public class Editor
 {
